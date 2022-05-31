@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Dashboard\DashboardController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +22,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// dashboard
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/home', [DashboardController::class, 'index'])->name('beranda');
+});
