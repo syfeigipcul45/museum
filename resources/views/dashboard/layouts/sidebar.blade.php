@@ -29,7 +29,7 @@
     </a>
 </li>
 
-<li class="nav-item {{ Request::is('management-posts*') ? 'active' : '' }}">
+<li class="nav-item {{ Request::is('management-berita*') ? 'active' : '' }}">
     <a class="nav-link" href="">
         <i class="fas fa-fw fa-newspaper"></i>
         <span>Berita</span>
@@ -37,10 +37,24 @@
 </li>
 
 
-<li class="nav-item {{ Request::is('management-facility*') ? 'active' : '' }}">
-    <a class="nav-link" href="">
-        <i class="fas fa-fw fa-building"></i>
+<li class="nav-item {{ Request::is('management-layanan*') ? 'active' : '' }}">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayanan" aria-expanded="true" aria-controls="collapseMedia">
+        <i class="fas fa-fw fa-landmark"></i>
         <span>Layanan</span>
+    </a>
+    <div id="collapseLayanan" class="collapse {{ Request::is('management-layanan*') ? 'show' : '' }}" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="">Publikasi</a>
+            <a class="collapse-item" href="">Fasilitas</a>
+            <a class="collapse-item" href="{{ route('dashboard.ruang_pamer.index') }}">Ruang Pamer</a>
+        </div>
+    </div>
+</li>
+
+<li class="nav-item {{ Request::is('management-hubungi*') ? 'active' : '' }}">
+    <a class="nav-link" href="">
+        <i class="fas fa-fw fa-address-book"></i>
+        <span>Hubungi</span>
     </a>
 </li>
 
