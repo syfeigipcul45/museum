@@ -1,0 +1,11 @@
+
+
+
+.navbar-default .navbar-brand{color:#fed136;}.navbar-default .navbar-brand:hover,.navbar-default .navbar-brand:focus,.navbar-default .navbar-brand:active,.navbar-default .navbar-brand.active{}.navbar-default .navbar-collapse{border-color:rgba(255,255,255,.02)}.navbar-default .navbar-toggle{background-color:#333;border-color:#333}.navbar-default .navbar-toggle .icon-bar{background-color:#fff}.navbar-default .navbar-toggle:hover,.navbar-default .navbar-toggle:focus{background-color:#333;border-color:#333}
+
+.navbar-default .nav li a{text-transform:uppercase;font-weight:400;letter-spacing:1px;color:#fff}
+
+.navbar-default .nav li a:hover,.navbar-default .nav li a:focus{outline:0}.navbar-default .navbar-nav>.active>a{border-radius:0;color:#fff;background-color:#fed136}.navbar-default .navbar-nav>.active>a:hover,.navbar-default .navbar-nav>.active>a:focus{}
+
+@media (min-width:768px){.navbar-default{background:none;-webkit-transition:padding .3s;-moz-transition:padding .3s;transition:padding .3s;border:0}.navbar-default .navbar-brand{font-size:2em;-webkit-transition:all .3s;-moz-transition:all .3s;transition:all .3s}.navbar-default .navbar-nav>.active>a{border-radius:3px}.navbar-default.navbar-shrink{background-color:#fff!important;padding:10px 0}.navbar-default.navbar-shrink .navbar-brand{font-size:30px!important}  .navbar-default.navbar-shrink .navbar-brand span{font-size:12px!important}}
+

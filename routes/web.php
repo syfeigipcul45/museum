@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\Dashboard\DashboardController;
-use App\Http\Controllers\Layanan\RuangPamerController;
+use App\Http\Controllers\Dashboard\RuangPamerController;
+use App\Http\Controllers\Homepage\HomepageController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -16,13 +17,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [HomepageController::class, 'index'])->name('home');
+
+Route::prefix('layanan')->group(function(){
+    Route::get('ruang-pamer', [HomepageController::class, 'ruangPamer'])->name('homepage.layanan.ruang_pamer');
+});
 
 // dashboard
 Route::group(['middleware' => ['auth']], function () {
