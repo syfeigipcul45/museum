@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Homepage;
 
 use App\Http\Controllers\Controller;
+use App\Models\Profil;
 use App\Models\RuangPamer;
 use Illuminate\Http\Request;
 
@@ -16,5 +17,11 @@ class HomepageController extends Controller
     {
         $data['ruang_pamers'] = RuangPamer::orderBy('name', 'asc')->get();
         return view('homepage.layanan.ruang_pamer', $data);
+    }
+
+    public function getProfil($slug)
+    {
+        $data['profil'] = Profil::where('slug', $slug)->first();
+        return view('homepage.profil.detail', $data);
     }
 }

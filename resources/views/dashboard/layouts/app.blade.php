@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>@yield('title') | SI-KRC</title>
+    <title>@yield('title') | Museum Mulawarman</title>
 
     <link href="{{ asset('img/favicon.png') }}" rel="icon">
 

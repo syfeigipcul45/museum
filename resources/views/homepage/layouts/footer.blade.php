@@ -4,128 +4,18 @@
             <div class="footer clearfix">
                 <div class="col-sm-2">
                     <div class="footer_1">
-                        <h5><a href="blog.html"><i class="fa fa-joomla"></i></a></h5>
-                        <div class="footer_1_inner">
-                            <select class="form_1 form-control" id="subject" name="subject">
-                                <option selected="" class="option_1" value="na">
-                                    $ DOLLOR
-                                </option>
-
-                                <option class="option_2" value="service">
-                                    General Customer Service
-                                </option>
-
-                                <option class="option_2" value="suggestions">
-                                    Suggestions
-                                </option>
-
-                                <option class="option_2" value="product">
-                                    Product Support
-                                </option>
-                                <option class="option_2" value="service">
-                                    General Customer Service
-                                </option>
-
-                                <option class="option_2" value="suggestions">
-                                    Suggestions
-                                </option>
-
-                                <option class="option_2" value="product">
-                                    Product Support
-                                </option>
-                            </select>
-                        </div>
-                        <div class="footer_1_inner">
-                            <select class="form_1 form-control" id="subject" name="subject">
-                                <option selected="" class="option_1" value="na">
-                                    Language (US)
-                                </option>
-
-                                <option class="option_2" value="service">
-                                    Hindi
-                                </option>
-
-                                <option class="option_2" value="suggestions">
-                                    English
-                                </option>
-
-                                <option class="option_2" value="product">
-                                    French
-                                </option>
-                                <option class="option_2" value="service">
-                                    Latin
-                                </option>
-
-                                <option class="option_2" value="suggestions">
-                                    Chinese
-                                </option>
-
-                                <option class="option_2" value="product">
-                                    Common
-                                </option>
-                            </select>
-                        </div>
+                        <img src="{{ asset('_homepage/img/logo_footer.png') }}" width="100%" height="100%">
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="footer_2">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.7145421476966!2d116.98817421521285!3d-0.413252099698494!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dbefd754ca7a261%3A0xcba79091a2b622bd!2sMuseum%20Mulawarman!5e0!3m2!1sid!2sid!4v1654261313069!5m2!1sid!2sid" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </div>
                 <div class="col-sm-2">
                     <div class="footer_2">
-                        <h4>OUR PRODUCTS</h4>
-                        <p><a href="blog.html">Templates</a></p>
-                        <p><a href="blog.html">Our Website</a></p>
-                        <p><a href="blog.html">Online Shops</a></p>
-                        <p><a href="blog.html">Android Apps</a></p>
-                        <p><a href="blog.html">Gallery</a></p>
-                        <p><a href="blog.html">Paypal</a></p>
-                        <p><a href="blog.html">Featured Apps</a></p>
-                        <p><a href="blog.html">Signin</a></p>
-                    </div>
-                </div>
-                <div class="col-sm-2">
-                    <div class="footer_2">
-                        <h4>TRIPS</h4>
-                        <p><a href="blog.html">Online Shops</a></p>
-                        <p><a href="blog.html">Photography</a></p>
-                        <p><a href="blog.html">Blogs</a></p>
-                        <p><a href="blog.html">Actors</a></p>
-                        <p><a href="blog.html">Hotels</a></p>
-                        <p><a href="blog.html">Albums</a></p>
-                        <p><a href="blog.html">Brides</a></p>
-                        <p><a href="blog.html">Own Businesses</a></p>
-                        <p><a href="blog.html">Consumers</a></p>
-                    </div>
-                </div>
-                <div class="col-sm-2">
-                    <div class="footer_2">
-                        <h4>OUR COMPANY</h4>
-                        <p><a href="blog.html">About Us</a></p>
-                        <p><a href="blog.html">Education</a></p>
-                        <p><a href="blog.html">Support & Media</a></p>
-                        <p><a href="blog.html">Terms & Condition</a></p>
-                        <p><a href="blog.html">Our Policy</a></p>
-                        <p><a href="blog.html">Contact Us</a></p>
-                    </div>
-                </div>
-                <div class="col-sm-2">
-                    <div class="footer_2">
-                        <h4>OUR COMMUNITY</h4>
-                        <p><a href="blog.html">Help & Requirements</a></p>
-                        <p><a href="blog.html">Questions</a></p>
-                        <p><a href="blog.html">Work & Progress</a></p>
-                        <p><a href="blog.html">Qualities</a></p>
-                        <p><a href="blog.html">Designers</a></p>
-                        <p><a href="blog.html">Area</a></p>
-                    </div>
-                </div>
-                <div class="col-sm-2">
-                    <div class="footer_2">
-                        <h4>FOLLOW US</h4>
-                        <p><a href="blog.html"> Blogs & Posts</a></p>
-                        <p><a href="blog.html">English Blogs</a></p>
-                        <p><a href="blog.html">Our Services </a></p>
-                        <p><a href="blog.html">Facebook</a></p>
-                        <p><a href="blog.html">Twitter</a></p>
-                        <p><a href="blog.html">Linkedin</a></p>
-                        <p><a href="blog.html">Google Plus</a></p>
+                        <h4>Alamat:</h4>
+                        <p style="color: white;">Jl. Tepian Pandan, Panji, Kec. Tenggarong, Kabupaten Kutai Kartanegara, Kalimantan Timur 75513</p>
                     </div>
                 </div>
             </div>
@@ -137,7 +27,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <p> © <?php date('Y') ?> Museum Mulawarman. All Rights Reserved</p>
+                <p> © <?php echo date('Y') ?> Museum Mulawarman. All Rights Reserved</p>
             </div>
         </div>
     </div>

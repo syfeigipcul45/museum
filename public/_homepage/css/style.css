@@ -57,6 +57,9 @@ padding-bottom:20px;
   margin:0;
   margin-right:120px;
   }
+#header .navbar-logo{
+  margin-right: 120px;
+}
 #header .navbar-brand span{
 display:block;
 margin-top:5px;
@@ -374,14 +377,15 @@ overflow: hidden;
   }
 
 #about_middle{
-   background-image: url(../img/4.jpg);
+   /* background-image: url(../img/4.jpg); */
    padding-top:120px;
    padding-bottom:120px;
    background-attachment:fixed;
+   background-color: #e6c552;
    }
 .about_middle h1{
    color:#fff;
-   font-size:80px;
+   font-size:40px;
    letter-spacing:1px;
    line-height:1.4em;
    }

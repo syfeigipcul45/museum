@@ -23,7 +23,7 @@
 </div>
 
 <li class="nav-item {{ Request::is('management-profil*') ? 'active' : '' }}">
-    <a class="nav-link" href="">
+    <a class="nav-link" href="{{ route('dashboard.profil.index') }}">
         <i class="fas fa-fw fa-clipboard"></i>
         <span>Profil</span>
     </a>

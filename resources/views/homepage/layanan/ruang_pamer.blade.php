@@ -27,7 +27,7 @@ Ruang Pamer
             <div class="about_middle clearfix text-center">
                 <div class="box">
                     <!-- <iframe width="1024" height="640" allowfullscreen src="https://v3d.net/7ue"></iframe> -->
-                    <model-viewer camera-controls alt="Model" src="{{ asset('_homepage/model/Keris2.glb')}}"></model-viewer>
+                    <model-viewer camera-controls alt="Model" src="{{ asset('_homepage/model/cloth_internal_air_pressure.glb')}}"></model-viewer>
                 </div>
             </div>
         </div>

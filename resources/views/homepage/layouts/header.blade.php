@@ -9,25 +9,22 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">MUSEUM <span> MULAWARMAN</span></a>
+                <a class="navbar-brand" href="{{ route('home')}}"><img src="{{ asset('_homepage/img/logo.png') }}" width="100%" height="100%"></a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a class="tag_menu active_tab" href="index.html">Beranda</a>
+                        <a class="tag_menu active_tab" href="{{ route('home')}}">Beranda</a>
                     </li>
 
                     <li class="dropdown">
-                        <a class="tag_menu" href="blog.html" data-toggle="dropdown" role="button" aria-expanded="false">Profil<span class="caret"></span></a>
+                        <a class="tag_menu" href="" data-toggle="dropdown" role="button" aria-expanded="false">Profil<span class="caret"></span></a>
                         <ul class="dropdown-menu drop_1" role="menu">
-                            <li><a href="blog.html">Sekilas</a></li>
-                            <li><a href="blog.html">Sejarah</a></li>
-                            <li><a href="blog.html">Visi Misi</a></li>
-                            <li><a href="blog.html">Benda Koleksi</a></li>
-                            <li><a href="blog.html">Sumber Daya Manusia</a></li>
-                            <li><a href="blog.html">Struktur Pegawai</a></li>
+                            @foreach(getProfil() as $profil)
+                            <li><a href="{{ route('homepage.profil.detail', $profil->slug)}}">{{ $profil->submenu }}</a></li>
+                            @endforeach
                         </ul>
                     </li>
 
@@ -38,15 +35,7 @@
                         <a class="tag_menu" href="blog.html" data-toggle="dropdown" role="button" aria-expanded="false">Layanan<span class="caret"></span></a>
                         <ul class="dropdown-menu drop_1" role="menu">
                             <li><a href="blog.html">Publikasi</a></li>
-                            <li class="dropdown">
-                                <a class="tag_menu" href="blog.html" data-toggle="dropdown" role="button" aria-expanded="false">Fasilitas<span class="caret"></span></a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="blog.html">Souvenir</a></li>
-                                    <li><a href="blog.html">Kuliner</a></li>
-                                    <li><a href="blog.html">Sewa Tempat</a></li>
-                                    <li><a href="blog.html">Pemandu</a></li>
-                                </ul>
-                            </li>
+                            <li><a href="blog.html">Fasilitas</a></li>
                             <li><a href="{{ route('homepage.layanan.ruang_pamer') }}">Ruang Pamer</a></li>
                         </ul>
                     </li>
