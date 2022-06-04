@@ -30,7 +30,7 @@
 </li>
 
 <li class="nav-item {{ Request::is('management-berita*') ? 'active' : '' }}">
-    <a class="nav-link" href="">
+    <a class="nav-link" href="{{ route('dashboard.berita.index') }}">
         <i class="fas fa-fw fa-newspaper"></i>
         <span>Berita</span>
     </a>

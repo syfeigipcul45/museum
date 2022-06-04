@@ -147,7 +147,7 @@ class ProfilController extends Controller
                 $file = $request->file('link_media');
                 $path = Storage::disk('public')->putFileAs('profil', $file, time()."_".$file->getClientOriginalName());
 
-                Storage::disk('public')->delete('/profil/' . basename($request->old_link_media));
+                Storage::disk('public')->delete('/profil/' . basename($profil->link_media));
                 $updateData['link_media'] = url('/') . '/storage/' . $path;;
             } else {
                 $updateData['link_media'] = $request->old_link_media;

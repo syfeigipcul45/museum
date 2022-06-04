@@ -29,7 +29,7 @@
                     </li>
 
                     <li>
-                        <a class="tag_menu" href="detail.html">Berita</a>
+                        <a class="tag_menu" href="{{ route('homepage.berita.index') }}">Berita</a>
                     </li>
                     <li class="dropdown">
                         <a class="tag_menu" href="blog.html" data-toggle="dropdown" role="button" aria-expanded="false">Layanan<span class="caret"></span></a>

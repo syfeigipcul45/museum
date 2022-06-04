@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Homepage;
 
 use App\Http\Controllers\Controller;
+use App\Models\Berita;
 use App\Models\Profil;
 use App\Models\RuangPamer;
 use Illuminate\Http\Request;
@@ -23,5 +24,17 @@ class HomepageController extends Controller
     {
         $data['profil'] = Profil::where('slug', $slug)->first();
         return view('homepage.profil.detail', $data);
+    }
+
+    public function getBerita()
+    {
+        $data['berita'] = Berita::orderBy('created_at', 'asc')->paginate(3);
+        return view('homepage.berita.index', $data);
+    }
+
+    public function getDetailBerita($slug)
+    {
+        $data['berita'] = Berita::where('slug', $slug)->first();
+        return view('homepage.berita.detail', $data);
     }
 }
