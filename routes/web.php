@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\Dashboard\BeritaController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\PengaturanController;
 use App\Http\Controllers\Dashboard\ProfilController;
 use App\Http\Controllers\Dashboard\RuangPamerController;
 use App\Http\Controllers\Homepage\HomepageController;
+use App\Models\Pengaturan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -28,7 +30,10 @@ Auth::routes();
 Route::get('/', [HomepageController::class, 'index'])->name('home');
 
 Route::prefix('layanan')->group(function () {
-    Route::get('ruang-pamer', [HomepageController::class, 'ruangPamer'])->name('homepage.layanan.ruang_pamer');
+    Route::get('ruang-pamer', [HomepageController::class, 'getRuangPamer'])->name('homepage.layanan.ruang_pamer');
+    Route::get('ruang-pamer/{slug}', [HomepageController::class, 'getDetailRuangPamer'])->name('homepage.layanan.detail_ruang_pamer');
+
+    Route::get('fasilitas', [HomepageController::class, 'getFasilitas'])->name('homepage.layanan.fasilitas');
 });
 
 Route::get('profil/{slug}', [HomepageController::class, 'getProfil'])->name('homepage.profil.detail');
@@ -41,7 +46,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', [DashboardController::class, 'index'])->name('beranda');
 
     Route::prefix('management-layanan')->group(function () {
-        Route::get('ruang-pamer', [RuangPamerController::class, 'index'])->name('dashboard.ruang_pamer.index');
+        Route::get('ruang-pamer', [RuangPamerController::class, 'index'])->name('dashboard.ruang_pamer.index');        
+        Route::get('ruang-pamer/create', [RuangPamerController::class, 'create'])->name('dashboard.ruang_pamer.create');
+        Route::post('ruang-pamer', [RuangPamerController::class, 'store'])->name('dashboard.ruang_pamer.store');
+        Route::get('{id}/edit', [RuangPamerController::class, 'edit'])->name('dashboard.ruang_pamer.edit');
+        Route::get('{id}/show', [RuangPamerController::class, 'show'])->name('dashboard.ruang_pamer.show');
+        Route::post('{id}/update', [RuangPamerController::class, 'update'])->name('dashboard.ruang_pamer.update');
         Route::post('ruang-pamer/{id}', [RuangPamerController::class, 'destroy'])->name('dashboard.ruang_pamer.destroy');
     });
 
@@ -66,4 +76,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('{id}/update', [BeritaController::class, 'update'])->name('dashboard.berita.update');
         Route::post('{id}', [BeritaController::class, 'destroy'])->name('dashboard.berita.destroy');
     });
+
+    Route::get('/management-pengaturan', [PengaturanController::class, 'index'])->name('dashboard.pengaturan.index');
+    Route::post('/management-pengaturan', [PengaturanController::class, 'store'])->name('dashboard.pengaturan.store');
 });

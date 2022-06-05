@@ -14,7 +14,7 @@ Management Ruang Pamer
 <div class="card shadow mb-4">
     <div class="card-header d-flex align-items-center justify-content-between py-3">
         <h6 class="m-0 font-weight-bold text-primary">Daftar Ruang Pamer</h6>
-        <a href="" class="btn btn-primary btn-icon-split">
+        <a href="{{ route('dashboard.ruang_pamer.create') }}" class="btn btn-primary btn-icon-split">
             <span class="icon text-white-50">
                 <i class="fas fa-plus"></i>
             </span>
@@ -33,7 +33,7 @@ Management Ruang Pamer
                     <tr>
                         <th>No</th>
                         <th>Nama Gambar 3D</th>
-                        <th>Link Media</th>
+                        <th>Deskripsi</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -41,7 +41,7 @@ Management Ruang Pamer
                     <tr>
                     <th>No</th>
                         <th>Nama Gambar 3D</th>
-                        <th>Link Media</th>
+                        <th>Deskripsi</th>
                         <th>Aksi</th>
                     </tr>
                 </tfoot>
@@ -50,12 +50,12 @@ Management Ruang Pamer
                     <tr>
                         <td>{{ ++$key }}.</td>
                         <td>{{ $item->name }}</td>
-                        <td>{{ $item->link_media }}</td>
+                        <td>{!! shrinkText($item->deskripsi) !!}</td>
                         <td class="text-center">
-                            <a href="" class="btn btn-info btn-circle btn-sm">
+                            <a href="{{ route('dashboard.ruang_pamer.show', $item->id) }}" class="btn btn-info btn-circle btn-sm">
                                 <i class="fas fa-eye"></i>
                             </a>
-                            <a href="" class="btn btn-warning btn-circle btn-sm">
+                            <a href="{{ route('dashboard.ruang_pamer.edit', $item->id) }}" class="btn btn-warning btn-circle btn-sm">
                                 <i class="fas fa-pencil-alt"></i>
                             </a>
                             <a href="#" class="btn btn-danger btn-circle btn-sm remove-pamer" data-toggle="modal" data-target="#deleteModal" data-href="{{ route('dashboard.ruang_pamer.destroy', $item->id) }}">

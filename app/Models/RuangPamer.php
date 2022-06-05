@@ -11,6 +11,8 @@ class RuangPamer extends Model
 
     protected $fillable = [
         'name',
+        'slug',
+        'deskripsi',
         'link_media'
     ];
 }

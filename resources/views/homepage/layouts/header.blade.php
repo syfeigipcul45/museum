@@ -9,18 +9,18 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ route('home')}}"><img src="{{ asset('_homepage/img/logo.png') }}" width="100%" height="100%"></a>
+                <a class="navbar-brand" href="{{ route('home')}}"><img src="{{ getPengaturan()->logo ?? '' }}" width="100%" height="100%"></a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a class="tag_menu active_tab" href="{{ route('home')}}">Beranda</a>
+                        <a class="tag_menu {{ Request::is('/') ? 'active_tab' : '' }}" href="{{ route('home')}}">Beranda</a>
                     </li>
 
                     <li class="dropdown">
-                        <a class="tag_menu" href="" data-toggle="dropdown" role="button" aria-expanded="false">Profil<span class="caret"></span></a>
+                        <a class="tag_menu {{ Request::is('profil*') ? 'active_tab' : '' }}" href="" data-toggle="dropdown" role="button" aria-expanded="false">Profil<span class="caret"></span></a>
                         <ul class="dropdown-menu drop_1" role="menu">
                             @foreach(getProfil() as $profil)
                             <li><a href="{{ route('homepage.profil.detail', $profil->slug)}}">{{ $profil->submenu }}</a></li>
@@ -29,24 +29,24 @@
                     </li>
 
                     <li>
-                        <a class="tag_menu" href="{{ route('homepage.berita.index') }}">Berita</a>
+                        <a class="tag_menu {{ Request::is('berita*') ? 'active_tab' : '' }}" href="{{ route('homepage.berita.index') }}">Berita</a>
                     </li>
                     <li class="dropdown">
-                        <a class="tag_menu" href="blog.html" data-toggle="dropdown" role="button" aria-expanded="false">Layanan<span class="caret"></span></a>
+                        <a class="tag_menu {{ Request::is('layanan*') ? 'active_tab' : '' }}" href="blog.html" data-toggle="dropdown" role="button" aria-expanded="false">Layanan<span class="caret"></span></a>
                         <ul class="dropdown-menu drop_1" role="menu">
-                            <li><a href="blog.html">Publikasi</a></li>
-                            <li><a href="blog.html">Fasilitas</a></li>
+                            <li><a href="">Publikasi</a></li>
+                            <li><a href="{{ route('homepage.layanan.fasilitas') }}">Fasilitas</a></li>
                             <li><a href="{{ route('homepage.layanan.ruang_pamer') }}">Ruang Pamer</a></li>
                         </ul>
                     </li>
 
                     <li>
-                        <a class="tag_menu" href="contact.html">Kontak</a>
+                        <a class="tag_menu" href="">Kontak</a>
                     </li>
 
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown"><a href="blog.html" class="tag_menu_1" data-toggle="dropdown"><span class="glyphicon glyphicon-search"></span></a>
+                    <li class="dropdown"><a href="" class="tag_menu_1" data-toggle="dropdown"><span class="glyphicon glyphicon-search"></span></a>
                         <ul class="dropdown-menu drop_2" style="min-width: 300px;">
                             <li>
                                 <div class="row_1">

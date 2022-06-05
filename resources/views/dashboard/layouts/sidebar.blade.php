@@ -65,15 +65,15 @@
     Pengaturan
 </div>
 
-<li class="nav-item {{ Request::is('management-users*') ? 'active' : '' }}">
+<!-- <li class="nav-item {{ Request::is('management-users*') ? 'active' : '' }}">
     <a class="nav-link" href="">
         <i class="fas fa-fw fa-users"></i>
         <span>Users</span>
     </a>
-</li>
+</li> -->
 
-<li class="nav-item {{ Request::is('management-setting*') ? 'active' : '' }}">
-    <a class="nav-link" href="">
+<li class="nav-item {{ Request::is('management-pengaturan*') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ route('dashboard.pengaturan.index') }}">
         <i class="fas fa-fw fa-cog"></i>
         <span>Pengaturan</span>
     </a>

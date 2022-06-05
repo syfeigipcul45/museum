@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title') | Museum Mulawarman</title>
+    <link href="{{ getPengaturan()->favicon ?? '' }}" rel="icon">
     <link href="{{ asset('_homepage/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('_homepage/css/style.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ asset('_homepage/css/font-awesome.min.css') }}" />

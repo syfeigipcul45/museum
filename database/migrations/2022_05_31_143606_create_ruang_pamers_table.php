@@ -16,6 +16,8 @@ class CreateRuangPamersTable extends Migration
         Schema::create('ruang_pamers', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
+            $table->string('slug')->nullable();
+            $table->text('deskripsi')->nullable();
             $table->text('link_media')->nullable();
             $table->timestamps();
         });

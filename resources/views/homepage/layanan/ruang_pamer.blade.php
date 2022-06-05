@@ -11,8 +11,6 @@ Ruang Pamer
     }
 
     model-viewer {
-        width: 800px;
-        height: 500px;
         margin-left: auto;
         margin-right: auto;
     }
@@ -21,13 +19,35 @@ Ruang Pamer
 @endsection
 
 @section('content')
-<section id="about_middle">
+<section id="gallery">
     <div class="container">
         <div class="row">
-            <div class="about_middle clearfix text-center">
-                <div class="box">
-                    <!-- <iframe width="1024" height="640" allowfullscreen src="https://v3d.net/7ue"></iframe> -->
-                    <model-viewer camera-controls alt="Model" src="{{ asset('_homepage/model/cloth_internal_air_pressure.glb')}}"></model-viewer>
+            <div class="gallery clearfix">
+                <h1 class="text-center">Ruang Pamer</h1>
+                <div class="gallery_inner clearfix">
+                    @foreach($ruang_pamer as $item)
+                    <div class="col-sm-4">
+                        <div class="gallery_inner_1">
+                            <div class="grid clearfix">
+                                <figure class="effect-sadie">
+                                    <model-viewer camera-controls alt="Model" src="{{ $item->link_media }}"></model-viewer>
+                                    <figcaption>
+                                        <h2>{{ $item->name }}</h2>
+                                        <p>
+                                            {!! getDeskripsi($item->deskripsi) !!}
+                                        </p>
+                                        <a href="{{ route('homepage.layanan.detail_ruang_pamer', $item->slug) }}" target="__blank">View more</a>
+                                    </figcaption>
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+                <div class="paginate clearfix text-center">
+                    <ul class="pagination">
+                        {{ $ruang_pamer->links('pagination::bootstrap-4') }}
+                    </ul>
                 </div>
             </div>
         </div>

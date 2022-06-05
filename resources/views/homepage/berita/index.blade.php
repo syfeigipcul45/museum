@@ -18,7 +18,7 @@ Berita
                     @forelse($berita as $item)
                     <div class="blog_home_inner_main clearfix">
                         <div class="blog_home_inner clearfix aos-init aos-animate" data-aos="zoom-in-up">
-                            <img src="{{ $item->link_media }}" />
+                            <img src="{{ $item->link_media }}" width="80%" height="40%" />
                         </div>
                         <div class="blog_home_inner_1 clearfix">
                             <h4>
