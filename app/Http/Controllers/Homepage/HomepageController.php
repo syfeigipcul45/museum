@@ -22,7 +22,7 @@ class HomepageController extends Controller
 
     public function getBerita()
     {
-        $data['berita'] = Berita::orderBy('created_at', 'asc')->paginate(2);
+        $data['berita'] = Berita::orderBy('created_at', 'asc')->paginate(3);
         return view('homepage.berita.index', $data);
     }
 
@@ -47,6 +47,11 @@ class HomepageController extends Controller
     public function getFasilitas()
     {
         return view('homepage.layanan.fasilitas');
+    }
+
+    public function getKontak()
+    {
+        return view('homepage.kontak.index');
     }
     
 }

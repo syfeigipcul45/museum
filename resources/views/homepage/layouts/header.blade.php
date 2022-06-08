@@ -20,7 +20,7 @@
                     </li>
 
                     <li class="dropdown">
-                        <a class="tag_menu {{ Request::is('profil*') ? 'active_tab' : '' }}" href="" data-toggle="dropdown" role="button" aria-expanded="false">Profil<span class="caret"></span></a>
+                        <a class="tag_menu {{ Request::is('profil*') ? 'active_tab' : '' }}" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Profil<span class="caret"></span></a>
                         <ul class="dropdown-menu drop_1" role="menu">
                             @foreach(getProfil() as $profil)
                             <li><a href="{{ route('homepage.profil.detail', $profil->slug)}}">{{ $profil->submenu }}</a></li>
@@ -32,7 +32,7 @@
                         <a class="tag_menu {{ Request::is('berita*') ? 'active_tab' : '' }}" href="{{ route('homepage.berita.index') }}">Berita</a>
                     </li>
                     <li class="dropdown">
-                        <a class="tag_menu {{ Request::is('layanan*') ? 'active_tab' : '' }}" href="blog.html" data-toggle="dropdown" role="button" aria-expanded="false">Layanan<span class="caret"></span></a>
+                        <a class="tag_menu {{ Request::is('layanan*') ? 'active_tab' : '' }}" href="" data-toggle="dropdown" role="button" aria-expanded="false">Layanan<span class="caret"></span></a>
                         <ul class="dropdown-menu drop_1" role="menu">
                             <li><a href="">Publikasi</a></li>
                             <li><a href="{{ route('homepage.layanan.fasilitas') }}">Fasilitas</a></li>
@@ -41,7 +41,7 @@
                     </li>
 
                     <li>
-                        <a class="tag_menu" href="">Kontak</a>
+                        <a class="tag_menu {{ Request::is('kontak*') ? 'active_tab' : '' }}" href="{{ route('homepage.kontak.index') }}">Kontak</a>
                     </li>
 
                 </ul>

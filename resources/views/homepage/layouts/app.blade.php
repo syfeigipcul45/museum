@@ -16,6 +16,23 @@
     <script src="{{ asset('_homepage/js/jquery-2.1.1.min.js') }}"></script>
     <script src="{{ asset('_homepage/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('_homepage/js/aos.js') }}"></script>
+    <script src="{{ asset('_homepage/js/jquery-3.5.1.min.js') }}"></script>
+
+    <style>
+        @media (min-width: 768px) {
+            .dropdown:hover .dropdown-menu {
+                display: block;
+                margin-top: 0;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .dropdown:hover .dropdown-menu {
+                display: none;
+                margin-top: auto;
+            }
+        }
+    </style>
 
     @yield('extra-css')
 

@@ -42,7 +42,7 @@
 <section id="footer_bottom">
     <div class="container">
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-12 text-center">
                 <p> © <?php echo date('Y') ?> Museum Mulawarman. All Rights Reserved</p>
             </div>
         </div>

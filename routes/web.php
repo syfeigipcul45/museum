@@ -41,6 +41,8 @@ Route::get('profil/{slug}', [HomepageController::class, 'getProfil'])->name('hom
 Route::get('berita', [HomepageController::class, 'getBerita'])->name('homepage.berita.index');
 Route::get('berita/{slug}', [HomepageController::class, 'getDetailBerita'])->name('homepage.berita.detail');
 
+Route::get('kontak', [HomepageController::class, 'getKontak'])->name('homepage.kontak.index');
+
 // dashboard
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', [DashboardController::class, 'index'])->name('beranda');

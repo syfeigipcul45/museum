@@ -33,9 +33,9 @@ Ruang Pamer
                                     <model-viewer camera-controls alt="Model" src="{{ $item->link_media }}"></model-viewer>
                                     <figcaption>
                                         <h2>{{ $item->name }}</h2>
-                                        <p>
+                                        <!-- <p>
                                             {!! getDeskripsi($item->deskripsi) !!}
-                                        </p>
+                                        </p> -->
                                         <a href="{{ route('homepage.layanan.detail_ruang_pamer', $item->slug) }}" target="__blank">View more</a>
                                     </figcaption>
                                 </figure>
