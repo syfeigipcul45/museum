@@ -151,6 +151,7 @@
                     <div class="col-lg-12">
                         <h1 class="text-center">{{ strtoupper($profil->submenu) }}</h1>
                         <br>
+                        @if(!@empty($profil->link_media))
                         <div class="carousel-container">
                             <div class="mySlides animate">
                                 <img src="{{ $profil->link_media }}" height="80%" width="80%">
@@ -175,6 +176,8 @@
                                 <span class="dots" onclick="currentSlide(3)"></span>
                             </div>
                         </div>
+                        @else
+                        @endif
                         <br>
                         <p style="margin-top: 20px">
                             {!! $profil->deskripsi !!}

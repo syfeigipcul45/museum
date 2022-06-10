@@ -46,22 +46,21 @@ class ProfilController extends Controller
      */
     public function store(Request $request)
     {
+        $images = [];
         $count = Profil::latest()->first();
         if ($count == null) {
             $urutan = 1;
         } else {
-            $urutan = ($count->id + 1);
+            $urutan = ($count->urutan + 1);
         }
 
         try {
             $validator = Validator::make($request->all(), [
                 'submenu' => 'required',
-                'link_media' => 'required',
                 'deskripsi' => 'required'
             ], [
                 'submenu.required' => 'Nama submenu harus diisi!',
                 'deskripsi.required' => 'Deskripsi harus diisi!',
-                'link_media.required' => 'Gambar harus diisi!'
             ]);
 
             if ($validator->fails()) {
@@ -75,18 +74,28 @@ class ProfilController extends Controller
                 "urutan" => $urutan
             ];
 
+            // if ($request->hasFile('link_media')) {
+            //     $file = $request->file('link_media');
+            //     $path = Storage::disk('public')->putFileAs('profil', $file, time()."_".$file->getClientOriginalName());
+            //     $data['link_media'] = url('/') . '/storage/' . $path;
+            // }
+
             if ($request->hasFile('link_media')) {
-                $file = $request->file('link_media');
-                $path = Storage::disk('public')->putFileAs('profil', $file, time()."_".$file->getClientOriginalName());
-                $data['link_media'] = url('/') . '/storage/' . $path;
+                for ($i = 0; $i < count($request->link_media); $i++) {
+                    $file = $request->file('link_media')[$i];
+                    $path = Storage::disk('public')->putFileAs('profil', $file, time() . "_" . $file->getClientOriginalName());
+                    $image = url('/') . '/storage/' . $path;
+                    array_push($images, $image);
+                }
             }
+            $data['link_media'] = json_encode($images);
 
             Profil::create($data);
             Session::flash('success', 'Data Berhasil Tersimpan');
 
             return redirect()->route('dashboard.profil.index');
         } catch (\Exception $exception) {
-            return redirect()->back()->with('error', 'Ada sesuatu yang salah di server!'.' '.$exception->getMessage());
+            return redirect()->back()->with('error', 'Ada sesuatu yang salah di server!' . ' ' . $exception->getMessage());
         }
     }
 
@@ -123,8 +132,10 @@ class ProfilController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $profil = Profil::find($id);
         try {
+            $images = [];
             $validator = Validator::make($request->all(), [
                 'submenu' => 'required',
                 'deskripsi' => 'required'
@@ -143,22 +154,39 @@ class ProfilController extends Controller
                 "slug" => Str::slug($request->submenu)
             ];
 
-            if ($request->hasFile('link_media')) {
-                $file = $request->file('link_media');
-                $path = Storage::disk('public')->putFileAs('profil', $file, time()."_".$file->getClientOriginalName());
+            // if ($request->hasFile('link_media')) {
+            //     $file = $request->file('link_media');
+            //     $path = Storage::disk('public')->putFileAs('profil', $file, time() . "_" . $file->getClientOriginalName());
 
-                Storage::disk('public')->delete('/profil/' . basename($profil->link_media));
-                $updateData['link_media'] = url('/') . '/storage/' . $path;;
-            } else {
-                $updateData['link_media'] = $request->old_link_media;
+            //     Storage::disk('public')->delete('/profil/' . basename($profil->link_media));
+            //     $updateData['link_media'] = url('/') . '/storage/' . $path;;
+            // } else {
+            //     $updateData['link_media'] = $request->old_link_media;
+            // }
+
+            if ($request->hasFile('link_media')) {
+                for ($i = 0; $i < count($request->link_media); $i++) {
+                    $file = $request->file('link_media')[$i];
+                    $path = Storage::disk('public')->putFileAs('profil', $file, time() . "_" . $file->getClientOriginalName());
+                    Storage::disk('public')->delete('/profil/' . basename($profil->link_media));
+                    $image = url('/') . '/storage/' . $path;
+                    array_push($images, $image);
+                }
+            } 
+            for ($i = 0; $i < count($request->old_link_media); $i++) {
+                $file = $request->old_link_media[$i];
+                $image = $file;
+                array_push($images, $image);
             }
+            // dd($images);
+            $updateData['link_media'] = json_encode($images);
 
             $profil->update($updateData);
             Session::flash('success', 'Data Berhasil Diubah');
 
             return redirect()->route('dashboard.profil.index');
         } catch (\Exception $exception) {
-            return redirect()->back()->with('error', 'Ada sesuatu yang salah di server!'.' '.$exception->getMessage());
+            return redirect()->back()->with('error', 'Ada sesuatu yang salah di server!' . ' ' . $exception->getMessage());
         }
     }
 

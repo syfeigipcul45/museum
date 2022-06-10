@@ -1,7 +1,7 @@
 @extends('dashboard.layouts.app')
 
 @section('title')
-Management Ruang Pamer
+Management Profil
 @endsection
 
 @section('extra-css')
@@ -38,7 +38,7 @@ Management Ruang Pamer
                     <tr>
                         <th>No</th>
                         <th>Submenu</th>
-                        <th>Gambar</th>
+                        <!-- <th>Gambar</th> -->
                         <th>Deskripsi</th>
                         <th>Urutan</th>
                         <th>Ubah Urutan</th>
@@ -49,7 +49,7 @@ Management Ruang Pamer
                     <tr>
                         <th>No</th>
                         <th>Submenu</th>
-                        <th>Gambar</th>
+                        <!-- <th>Gambar</th> -->
                         <th>Deskripsi</th>
                         <th>Urutan</th>
                         <th>Ubah Urutan</th>
@@ -61,7 +61,7 @@ Management Ruang Pamer
                     <tr>
                         <td>{{ ++$key }}.</td>
                         <td>{{ $item->submenu }}</td>
-                        <td><img src="{{ $item->link_media }}" width="20%" height="20%"></td>
+                        <!-- <td><img src="{{ $item->link_media }}" width="20%" height="20%"></td> -->
                         <td>{{ Str::limit(strip_tags($item->deskripsi,'/<([a-z][a-z0-9]*)[^>]*?(\/?)>/si'), 50) }}</td>
                         <td>{{ $item->urutan }}</td>
                         <td>

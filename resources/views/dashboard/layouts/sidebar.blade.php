@@ -1,6 +1,6 @@
 <!-- Sidebar - Brand -->
 <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{url('')}}">
-    <div class="sidebar-brand-text mx-3">KPHP Kendilo</div>
+    <div class="sidebar-brand-text mx-3">Museum Mulawarman</div>
 </a>
 
 <!-- Divider -->

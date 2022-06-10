@@ -11,6 +11,56 @@ Buat Submenu Profil
     .error-input {
         color: #d44950;
     }
+
+    .imagePreview {
+        width: 100%;
+        height: 170px;
+        text-align: center;
+        background-position: center center;
+        background: url(http://cliquecities.com/assets/no-image-e3699ae23f866f6cbdf8ba2443ee5c4e.jpg);
+        background-color: #fff;
+        background-size: cover;
+        background-repeat: no-repeat;
+        display: inline-block;
+        box-shadow: 0px -3px 6px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-primary {
+        display: block;
+        border-radius: 0px;
+        box-shadow: 0px 4px 6px 2px rgba(0, 0, 0, 0.2);
+        margin-top: -5px;
+    }
+
+    .imgUp {
+        margin-bottom: 15px;
+    }
+
+    .del {
+        position: absolute;
+        top: 0px;
+        right: 15px;
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        line-height: 30px;
+        background-color: rgba(255, 255, 255, 0.6);
+        cursor: pointer;
+    }
+
+    .imgAdd {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: #4bd7ef;
+        color: #fff;
+        box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        line-height: 30px;
+        margin-top: 0px;
+        cursor: pointer;
+        font-size: 15px;
+    }
 </style>
 @endsection
 
@@ -18,11 +68,17 @@ Buat Submenu Profil
 
 <form action="{{ route('dashboard.profil.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
+    
+    @if(session('error'))
+        <div class="alert alert-danger" role="alert">
+            {{ session('error') }}
+        </div>
+        @endif
 
     <!-- Content Row -->
     <div class="row">
         <div class="col-xl-8 col-lg-7">
-    
+
             <!-- Area Chart -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
@@ -37,7 +93,27 @@ Buat Submenu Profil
                     </div>
                 </div>
             </div>
-    
+
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Upload Thumbnail</h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-3 imgUp">
+                            <div class="imagePreview"></div>
+                            <label class="btn btn-primary">
+                                Pilih<input type="file" class="uploadFile img" name="link_media[]" value="Upload Photo" style="width: 0px;height: 0px;overflow: hidden;" accept=".png, .jpg, .jpeg" />
+                            </label>
+                        </div>
+                        <i class="fa fa-plus imgAdd"></i>
+                    </div>
+                    @error('link_media')
+                    <small class="form-text error-input">{{ $message }}</small>
+                    @enderror
+                </div>
+            </div>
+
             <!-- Bar Chart -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
@@ -50,9 +126,9 @@ Buat Submenu Profil
                     @enderror
                 </div>
             </div>
-    
+
         </div>
-    
+
         <!-- Donut Chart -->
         <div class="col-xl-4 col-lg-5">
             <div class="card shadow mb-4">
@@ -70,19 +146,6 @@ Buat Submenu Profil
                         <a href="" class="btn btn-warning" onclick="location.href = document.referrer; return false;">
                             Kembali
                         </a>
-                    </div>
-                    <hr>
-                    <div>
-                        <strong>Upload Thumbnail</strong>
-                        <div class="card my-2">
-                            <label for="imageUpload" class="mb-0 cursor-pointer">
-                                <img id="image-preview" class="card-img-top" src="https://www.pngkey.com/png/detail/233-2332677_image-500580-placeholder-transparent.png" alt="Card image cap">
-                            </label>
-                            <input type='file' id="imageUpload" name="link_media" accept=".png, .jpg, .jpeg" hidden />
-                        </div>
-                        @error('link_media')
-                        <small class="form-text error-input">{{ $message }}</small>
-                        @enderror
                     </div>
                     <hr>
                 </div>
@@ -188,6 +251,7 @@ Buat Submenu Profil
         content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
     });
 
+
     $("#imageUpload").change(function() {
         readURL(this);
     });
@@ -203,5 +267,39 @@ Buat Submenu Profil
             reader.readAsDataURL(input.files[0]);
         }
     }
+
+    $(".imgAdd").click(function() {
+        $(this).closest(".row").find('.imgAdd').before(`
+            <div class="col-sm-3 imgUp">
+                <div class="imagePreview"></div>
+                <label class="btn btn-primary">Upload
+                    <input type="file" class="uploadFile img" name="link_media[]" value="Upload Photo" style="width:0px;height:0px;overflow:hidden;" accept=".png, .jpg, .jpeg"/>
+                </label>
+                <i class="fa fa-times del"></i>
+            </div>
+        `);
+    });
+
+    $(document).on("click", "i.del", function() {
+        $(this).parent().remove();
+    });
+
+    $(function() {
+        $(document).on("change", ".uploadFile", function() {
+            var uploadFile = $(this);
+            var files = !!this.files ? this.files : [];
+            if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+
+            if (/^image/.test(files[0].type)) { // only image file
+                var reader = new FileReader(); // instance of the FileReader
+                reader.readAsDataURL(files[0]); // read the local file
+
+                reader.onloadend = function() { // set image data as background of div
+                    //alert(uploadFile.closest(".upimage").find('.imagePreview').length);
+                    uploadFile.closest(".imgUp").find('.imagePreview').css("background-image", "url(" + this.result + ")");
+                }
+            }
+        });
+    });
 </script>
 @endsection
