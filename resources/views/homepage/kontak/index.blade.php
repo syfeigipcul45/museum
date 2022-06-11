@@ -15,27 +15,33 @@ Kontak
             <div class="col-sm-12">
                 <div class="contact">
                     <h2 class="heading_1 text-center">Kontak Kami</h2>
-                    <form role="form" action="#" method="post">
+                    <form role="form" action="{{ route('homepage.kontak.store') }}" method="post">
+                        @csrf
                         <div class="col-sm-6">
+                            @if (session('success'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session('success') }}
+                            </div>
+                            @endif
                             <div class="well well-sm"><strong><i class="glyphicon glyphicon-ok form-control-feedback"></i> Required Field</strong></div>
                             <div class="form-group">
                                 <label for="InputName">Masukkan Nama</label>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" name="InputName" id="InputName" placeholder="Masukkan Nama" required="">
+                                    <input type="text" class="form-control" name="nama" placeholder="Masukkan Nama" required="">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-ok form-control-feedback"></i></span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="InputEmail">Masukkan Email</label>
                                 <div class="input-group">
-                                    <input type="email" class="form-control" id="InputEmail" name="InputEmail" placeholder="Masukkan Email" required="">
+                                    <input type="email" class="form-control" name="email" placeholder="Masukkan Email" required="">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-ok form-control-feedback"></i></span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="InputMessage">Isi Pesan</label>
                                 <div class="input-group">
-                                    <textarea name="InputMessage" id="InputMessage" class="form-control" rows="6" style="overflow:auto;resize:none" required="" placeholder="Isi Pesan"></textarea>
+                                    <textarea name="isi_pesan" class="form-control" rows="6" style="overflow:auto;resize:none" required="" placeholder="Isi Pesan"></textarea>
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-ok form-control-feedback"></i></span>
                                 </div>
                             </div>
@@ -43,7 +49,7 @@ Kontak
                         </div>
                     </form>
 
-                    <div class="col-sm-5 col-sm-push-1">
+                    <div class="col-sm-6 col-sm-push-1">
                         <address>
                             <!-- <h3 class="heading_2">Lokasi Kami</h3> -->
                             <p class="lead">

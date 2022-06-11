@@ -42,6 +42,7 @@ Route::get('berita', [HomepageController::class, 'getBerita'])->name('homepage.b
 Route::get('berita/{slug}', [HomepageController::class, 'getDetailBerita'])->name('homepage.berita.detail');
 
 Route::get('kontak', [HomepageController::class, 'getKontak'])->name('homepage.kontak.index');
+Route::post('storeForm', [HomepageController::class, 'storeForm'])->name('homepage.kontak.store');
 
 // dashboard
 Route::group(['middleware' => ['auth']], function () {

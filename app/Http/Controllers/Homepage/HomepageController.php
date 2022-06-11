@@ -4,13 +4,16 @@ namespace App\Http\Controllers\Homepage;
 
 use App\Http\Controllers\Controller;
 use App\Models\Berita;
+use App\Models\FormKontak;
 use App\Models\Profil;
 use App\Models\RuangPamer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class HomepageController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         return view('homepage.index');
     }
 
@@ -53,5 +56,18 @@ class HomepageController extends Controller
     {
         return view('homepage.kontak.index');
     }
-    
+
+    public function storeForm(Request $request)
+    {
+        $data = [
+            'nama' => $request->nama,
+            'email' => $request->email,
+            'isi_pesan' => $request->isi_pesan
+        ];
+
+        FormKontak::create($data);
+        Session::flash('success', 'Pesan Telah Terkirim');
+
+        return redirect()->route('homepage.kontak.index');
+    }
 }
