@@ -13,6 +13,7 @@ class RuangPamer extends Model
         'name',
         'slug',
         'deskripsi',
+        'link_gambar',
         'link_media'
     ];
 }

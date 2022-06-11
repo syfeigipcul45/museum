@@ -164,6 +164,14 @@ class ProfilController extends Controller
             //     $updateData['link_media'] = $request->old_link_media;
             // }
 
+            if (!empty($request->old_link_media)) {
+                for ($i = 0; $i < count($request->old_link_media); $i++) {
+                    $file = $request->old_link_media[$i];
+                    $image = $file;
+                    array_push($images, $image);
+                }
+            }
+
             if ($request->hasFile('link_media')) {
                 for ($i = 0; $i < count($request->link_media); $i++) {
                     $file = $request->file('link_media')[$i];
@@ -172,11 +180,6 @@ class ProfilController extends Controller
                     $image = url('/') . '/storage/' . $path;
                     array_push($images, $image);
                 }
-            } 
-            for ($i = 0; $i < count($request->old_link_media); $i++) {
-                $file = $request->old_link_media[$i];
-                $image = $file;
-                array_push($images, $image);
             }
             // dd($images);
             $updateData['link_media'] = json_encode($images);

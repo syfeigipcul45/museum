@@ -18,6 +18,7 @@ class CreateRuangPamersTable extends Migration
             $table->string('name')->nullable();
             $table->string('slug')->nullable();
             $table->text('deskripsi')->nullable();
+            $table->text('link_gambar')->nullable();
             $table->text('link_media')->nullable();
             $table->timestamps();
         });

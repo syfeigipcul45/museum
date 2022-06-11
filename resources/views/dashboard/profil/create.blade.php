@@ -68,12 +68,12 @@ Buat Submenu Profil
 
 <form action="{{ route('dashboard.profil.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
-    
+
     @if(session('error'))
-        <div class="alert alert-danger" role="alert">
-            {{ session('error') }}
-        </div>
-        @endif
+    <div class="alert alert-danger" role="alert">
+        {{ session('error') }}
+    </div>
+    @endif
 
     <!-- Content Row -->
     <div class="row">
@@ -99,6 +99,9 @@ Buat Submenu Profil
                     <h6 class="m-0 font-weight-bold text-primary">Upload Thumbnail</h6>
                 </div>
                 <div class="card-body">
+                    <div class="row">
+                        <span style="color: red; font-size: smaller;">*Gambar lebih baik berukuran 2400x1200, 1600x800, 800x400 pixels</span>
+                    </div>
                     <div class="row">
                         <div class="col-sm-3 imgUp">
                             <div class="imagePreview"></div>

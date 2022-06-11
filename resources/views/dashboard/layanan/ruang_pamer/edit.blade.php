@@ -6,6 +6,7 @@ Edit Gambar 3D
 
 @section('extra-css')
 <script src="https://cdn.tiny.cloud/1/mgnx3lcm1bg1v85bmqfw3ogmz9vjtdxolbcs3pmx800uia9e/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
 <style>
     .error-input {
@@ -13,8 +14,59 @@ Edit Gambar 3D
     }
 
     model-viewer {
+        width: 100%;
+        height: 400px;
         margin-left: auto;
         margin-right: auto;
+    }
+
+    .imagePreview {
+        width: 100%;
+        height: 170px;
+        background-position: center center;
+        background: url(http://cliquecities.com/assets/no-image-e3699ae23f866f6cbdf8ba2443ee5c4e.jpg);
+        background-color: #fff;
+        background-size: cover;
+        background-repeat: no-repeat;
+        display: inline-block;
+        box-shadow: 0px -3px 6px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-primary {
+        display: block;
+        border-radius: 0px;
+        box-shadow: 0px 4px 6px 2px rgba(0, 0, 0, 0.2);
+        margin-top: -5px;
+    }
+
+    .imgUp {
+        margin-bottom: 15px;
+    }
+
+    .del {
+        position: absolute;
+        top: 0px;
+        right: 15px;
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        line-height: 30px;
+        background-color: rgba(255, 255, 255, 0.6);
+        cursor: pointer;
+    }
+
+    .imgAdd {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: #4bd7ef;
+        color: #fff;
+        box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        line-height: 30px;
+        margin-top: 0px;
+        cursor: pointer;
+        font-size: 15px;
     }
 </style>
 @endsection
@@ -31,7 +83,7 @@ Edit Gambar 3D
             <!-- Area Chart -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Nama Gambar 3D</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Nama Model 3D</h6>
                 </div>
                 <div class="card-body">
                     <div class="form-group">
@@ -43,10 +95,46 @@ Edit Gambar 3D
                 </div>
             </div>
 
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Upload Foto</h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <!-- <span style="color: red; font-size: smaller;">*Gambar lebih baik berukuran 2400x1200, 1600x800, 800x400 pixels</span> -->
+                    </div>
+                    <div id="imageWrapper" class="row">
+                        @foreach(json_decode($ruang_pamer->link_gambar) as $key => $item)
+                        <div class="col-sm-3">
+                            <img src="{{ $item }}" alt="" class="img-fluid" />
+                            <input type="hidden" class="uploadFile img" name="old_link_gambar[]" value="{{ $item }}" />
+                            <i class="fa fa-times del"></i>
+                        </div>
+                        @endforeach
+                        <i class="fa fa-plus imgAdd"></i>
+                        <!-- <button id="changeImage" class="btn btn-primary mt-3 h-25" type="button">
+                            <span class="text">Ubah Gambar</span>
+                        </button> -->
+                    </div>
+                    <div id="changeImageWrapper" class="row" hidden disabled>
+                        <div class="col-sm-3 imgUp">
+                            <div class="imagePreview"></div>
+                            <label class="btn btn-primary">
+                                Pilih<input type="file" class="uploadFile img" name="link_gambar[]" value="Upload Photo" style="width: 0px;height: 0px;overflow: hidden;" />
+                            </label>
+                        </div>
+                        <i class="fa fa-plus imgAdd"></i>
+                    </div>
+                    @error('link_media')
+                    <small class="form-text error-input">{{ $message }}</small>
+                    @enderror
+                </div>
+            </div>
+
             <!-- Bar Chart -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Deskripsi</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Deskripsi Model 3D</h6>
                 </div>
                 <div class="card-body">
                     <textarea id="content-news" name="deskripsi">{{ old('deskripsi', $ruang_pamer->deskripsi) }}</textarea>
@@ -77,10 +165,10 @@ Edit Gambar 3D
                     </div>
                     <hr>
                     <div>
-                        <strong>Upload File</strong>
+                        <strong>Upload File 3D</strong>
+                        <model-viewer camera-controls alt="Model" src="{{ $ruang_pamer->link_media }}"></model-viewer>
                         <div class="card my-2">
                             <label for="imageUpload" class="mb-0 cursor-pointer">
-                                <input class="form-control" type="text" value="{{ $ruang_pamer->link_media }}" readonly>
                                 <input type="hidden" name="old_link_media" value="{{ $ruang_pamer->link_media }}" />
                             </label>
                         </div>
@@ -193,20 +281,44 @@ Edit Gambar 3D
         content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
     });
 
-    $("#imageUpload").change(function() {
-        readURL(this);
+    $('#changeImage').click(function() {
+        $('#changeImageWrapper').removeAttr('hidden');
+        $('#changeImageWrapper').prop('disabled', true);
+        $('#imageWrapper').hide();
     });
 
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                $('#image-preview').attr('src', e.target.result);
-                $('#image-preview').hide();
-                $('#image-preview').fadeIn(650);
+    $(".imgAdd").click(function() {
+        $(this).closest(".row").find('.imgAdd').before(`
+            <div class="col-sm-3 imgUp">
+                <div class="imagePreview"></div>
+                <label class="btn btn-primary">Pilih
+                    <input type="file" class="uploadFile img" name="link_gambar[]" value="Upload Photo" style="width:0px;height:0px;overflow:hidden;" />
+                </label>
+                <i class="fa fa-times del"></i>
+            </div>
+        `);
+    });
+
+    $(document).on("click", "i.del", function() {
+        $(this).parent().remove();
+    });
+
+    $(function() {
+        $(document).on("change", ".uploadFile", function() {
+            var uploadFile = $(this);
+            var files = !!this.files ? this.files : [];
+            if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+
+            if (/^image/.test(files[0].type)) { // only image file
+                var reader = new FileReader(); // instance of the FileReader
+                reader.readAsDataURL(files[0]); // read the local file
+
+                reader.onloadend = function() { // set image data as background of div
+                    //alert(uploadFile.closest(".upimage").find('.imagePreview').length);
+                    uploadFile.closest(".imgUp").find('.imagePreview').css("background-image", "url(" + this.result + ")");
+                }
             }
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
+        });
+    });
 </script>
 @endsection

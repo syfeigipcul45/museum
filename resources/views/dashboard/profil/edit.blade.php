@@ -97,11 +97,14 @@ Edit Submenu {{ $profil->submenu }}
                     <h6 class="m-0 font-weight-bold text-primary">Upload Thumbnail</h6>
                 </div>
                 <div class="card-body">
+                    <div class="row">
+                        <span style="color: red; font-size: smaller;">*Gambar lebih baik berukuran 2400x1200, 1600x800, 800x400 pixels</span>
+                    </div>
                     <div id="imageWrapper" class="row">
                         @foreach(json_decode($profil->link_media) as $key => $item)
                         <div class="col-sm-3">
                             <img src="{{ $item }}" alt="" class="img-fluid" />
-                                <input type="hidden" class="uploadFile img" name="old_link_media[]" value="{{ $item }}"/>                            
+                            <input type="hidden" class="uploadFile img" name="old_link_media[]" value="{{ $item }}" />
                             <i class="fa fa-times del"></i>
                         </div>
                         @endforeach
@@ -271,7 +274,7 @@ Edit Submenu {{ $profil->submenu }}
         $(this).closest(".row").find('.imgAdd').before(`
             <div class="col-sm-3 imgUp">
                 <div class="imagePreview"></div>
-                <label class="btn btn-primary">Upload
+                <label class="btn btn-primary">Pilih
                     <input type="file" class="uploadFile img" name="link_media[]" value="Upload Photo" style="width:0px;height:0px;overflow:hidden;" />
                 </label>
                 <i class="fa fa-times del"></i>

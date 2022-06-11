@@ -33,14 +33,13 @@ Detail {{ $ruang_pamer->name }}
                 <div class="row">
                     <div class="col-md-6">
                         <div class="xzoom-container">
-                            <img class="xzoom" id="xzoom-default" width="400" src="{{ asset('_homepage/img/Keris Buritkang Depan.png') }}" xoriginal="{{ asset('_homepage/img/Keris Buritkang Depan.png') }}" />
+                            <img class="xzoom" id="xzoom-default" width="400" src="{{ json_decode($ruang_pamer->link_gambar)[0] }}" xoriginal="{{ json_decode($ruang_pamer->link_gambar)[0] }}" />
                             <div class="xzoom-thumbs" style="margin-top: 10px;">
-                                <a href="{{ asset('_homepage/img/Keris Buritkang Depan.png') }}">
-                                    <img class="xzoom-gallery" width="80" src="{{ asset('_homepage/img/Keris Buritkang Depan.png') }}" xpreview="{{ asset('_homepage/img/Keris Buritkang Depan.png') }}">
+                                @foreach(json_decode($ruang_pamer->link_gambar) as $key => $item)
+                                <a href="{{ $item }}">
+                                    <img class="xzoom-gallery" width="80" src="{{ $item }}" xpreview="{{ $item }}">
                                 </a>
-                                <a href="{{ asset('_homepage/img/Keris Buritkang Belakang.png') }}">
-                                    <img class="xzoom-gallery" width="80" src="{{ asset('_homepage/img/Keris Buritkang Belakang.png') }}" xpreview="{{ asset('_homepage/img/Keris Buritkang Belakang.png') }}">
-                                </a>
+                                @endforeach
                             </div>
                             <hr>
                         </div>

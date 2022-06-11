@@ -6,6 +6,7 @@ Lihat Gambar 3D
 
 @section('extra-css')
 <script src="https://cdn.tiny.cloud/1/mgnx3lcm1bg1v85bmqfw3ogmz9vjtdxolbcs3pmx800uia9e/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
 <style>
     .error-input {
@@ -13,6 +14,8 @@ Lihat Gambar 3D
     }
 
     model-viewer {
+        width: 100%;
+        height: 400px;
         margin-left: auto;
         margin-right: auto;
     }
@@ -31,7 +34,7 @@ Lihat Gambar 3D
             <!-- Area Chart -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Nama Gambar 3D</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Nama Model 3D</h6>
                 </div>
                 <div class="card-body">
                     <div class="form-group">
@@ -43,10 +46,34 @@ Lihat Gambar 3D
                 </div>
             </div>
 
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Upload Foto</h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <!-- <span style="color: red; font-size: smaller;">*Gambar lebih baik berukuran 2400x1200, 1600x800, 800x400 pixels</span> -->
+                    </div>
+                    <div id="imageWrapper" class="row">
+                        @foreach(json_decode($ruang_pamer->link_gambar) as $key => $item)
+                        <div class="col-sm-3">
+                            <img src="{{ $item }}" alt="" class="img-fluid" />
+                            <input type="hidden" class="uploadFile img" name="old_link_gambar[]" value="{{ $item }}" />
+                            <!-- <i class="fa fa-times del"></i> -->
+                        </div>
+                        @endforeach
+                        <!-- <i class="fa fa-plus imgAdd"></i> -->
+                        <!-- <button id="changeImage" class="btn btn-primary mt-3 h-25" type="button">
+                            <span class="text">Ubah Gambar</span>
+                        </button> -->
+                    </div>
+                </div>
+            </div>
+
             <!-- Bar Chart -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Deskripsi</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Deskripsi Model 3D</h6>
                 </div>
                 <div class="card-body">
                     <textarea id="content-news" name="deskripsi">{{ old('deskripsi', $ruang_pamer->deskripsi) }}</textarea>
@@ -73,10 +100,10 @@ Lihat Gambar 3D
                     </div>
                     <hr>
                     <div>
-                        <strong>Upload File</strong>
+                        <!-- <strong>Upload File</strong> -->
+                        <model-viewer camera-controls alt="Model" src="{{ $ruang_pamer->link_media }}"></model-viewer>
                         <div class="card my-2">
                             <label for="imageUpload" class="mb-0 cursor-pointer">
-                                <input class="form-control" type="text" value="{{ $ruang_pamer->link_media }}" readonly>
                                 <input type="hidden" name="old_link_media" value="{{ $ruang_pamer->link_media }}" />
                             </label>
                         </div>

@@ -45,15 +45,18 @@ class RuangPamerController extends Controller
      */
     public function store(Request $request)
     {
+        $images = [];
         try {
             $validator = Validator::make($request->all(), [
                 'name' => 'required',
                 'deskripsi' => 'required',
+                'link_gambar' => 'required',
                 'link_media' => 'required'
             ], [
-                'name.required' => 'Nama gambar harus diisi!',
-                'deskripsi.required' => 'Deskripsi gambar harus diisi!',
-                'link_media.required' => 'File gambar harus diisi!'
+                'name.required' => 'Nama Model 3D harus diisi!',
+                'deskripsi.required' => 'Deskripsi Model 3D harus diisi!',
+                'link_gambar.required' => 'File foto harus diisi!',
+                'link_media.required' => 'File 3D harus diisi!'
             ]);
 
             if ($validator->fails()) {
@@ -64,14 +67,26 @@ class RuangPamerController extends Controller
                 "name" => $request->name,
                 'slug' => Str::slug($request->name, '-'),
                 "deskripsi" => $request->deskripsi,
-                "link_media" => $request->link_media,
+                // "link_media" => $request->link_media,
             ];
+
+            if ($request->hasFile('link_gambar')) {
+                for ($i = 0; $i < count($request->link_gambar); $i++) {
+                    $file = $request->file('link_gambar')[$i];
+                    $path = Storage::disk('public')->putFileAs('ruang-pamer/img', $file, time() . "_" . $file->getClientOriginalName());
+                    $image = url('/') . '/storage/' . $path;
+                    array_push($images, $image);
+                }
+            }
+
+            $data['link_gambar'] = json_encode($images);
 
             if ($request->hasFile('link_media')) {
                 $file = $request->file('link_media');
                 $path = Storage::disk('public')->putFileAs('ruang-pamer', $file, time() . "_" . $file->getClientOriginalName());
                 $data['link_media'] = url('/') . '/storage/' . $path;
             }
+            // dd($data);
 
             RuangPamer::create($data);
             Session::flash('success', 'Data Berhasil Tersimpan');
@@ -115,6 +130,7 @@ class RuangPamerController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $images = [];
         $ruang_pamer = RuangPamer::find($id);
 
         $updateData = [
@@ -122,6 +138,26 @@ class RuangPamerController extends Controller
             'slug' => Str::slug($request->name, '-'),
             "deskripsi" => $request->deskripsi,
         ];
+
+        if (!empty($request->old_link_gambar)) {
+            for ($i = 0; $i < count($request->old_link_gambar); $i++) {
+                $file = $request->old_link_gambar[$i];
+                $image = $file;
+                array_push($images, $image);
+            }
+        }
+
+        if ($request->hasFile('link_gambar')) {
+            for ($i = 0; $i < count($request->link_gambar); $i++) {
+                $file = $request->file('link_gambar')[$i];
+                $path = Storage::disk('public')->putFileAs('ruang-pamer/img', $file, time() . "_" . $file->getClientOriginalName());
+                Storage::disk('public')->delete('/ruang-pamer/img/' . basename($ruang_pamer->link_gambar));
+                $image = url('/') . '/storage/' . $path;
+                array_push($images, $image);
+            }
+        }
+        // dd($images);
+        $updateData['link_gambar'] = json_encode($images);
 
         if ($request->hasFile('link_media')) {
             $file = $request->file('link_media');

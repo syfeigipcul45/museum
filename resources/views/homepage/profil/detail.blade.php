@@ -153,27 +153,21 @@
                         <br>
                         @if(!@empty($profil->link_media))
                         <div class="carousel-container">
+                            @foreach(json_decode($profil->link_media) as $key => $item)
                             <div class="mySlides animate">
-                                <img src="{{ $profil->link_media }}" height="80%" width="80%">
-                                <div class="number">1 / 3</div>
+                                <img src="{{ $item }}" height="40%" width="80%">
                             </div>
-                            <div class="mySlides animate">
-                                <img src="{{ $profil->link_media }}" height="80%" width="80%">
-                                <div class="number">2 / 3</div>
-                            </div>
-                            <div class="mySlides animate">
-                                <img src="{{ $profil->link_media }}" height="80%" width="80%">
-                                <div class="number">3 / 3</div>
-                            </div>
+                            @endforeach
                             <!-- Next and previous buttons -->
                             <a class="prev" onclick="prevSlide()">&#10094;</a>
                             <a class="next" onclick="nextSlide()">&#10095;</a>
 
                             <!-- The dots/circles -->
                             <div class="dots-container">
-                                <span class="dots" onclick="currentSlide(1)"></span>
-                                <span class="dots" onclick="currentSlide(2)"></span>
-                                <span class="dots" onclick="currentSlide(3)"></span>
+                            @php $no=1; @endphp
+                            @foreach(json_decode($profil->link_media) as $key => $item)
+                                <span class="dots" onclick="currentSlide($no++)"></span>
+                                @endforeach
                             </div>
                         </div>
                         @else

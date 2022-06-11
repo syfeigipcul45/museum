@@ -43,6 +43,39 @@ Show Submenu {{ $profil->submenu }}
                 </div>
             </div>
 
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Upload Thumbnail</h6>
+                </div>
+                <div class="card-body">
+                    <div id="imageWrapper" class="row">
+                        @foreach(json_decode($profil->link_media) as $key => $item)
+                        <div class="col-sm-3">
+                            <img src="{{ $item }}" alt="" class="img-fluid" />
+                            <input type="hidden" class="uploadFile img" name="old_link_media[]" value="{{ $item }}" />
+                            <!-- <i class="fa fa-times del"></i> -->
+                        </div>
+                        @endforeach
+                        <!-- <i class="fa fa-plus imgAdd"></i> -->
+                        <!-- <button id="changeImage" class="btn btn-primary mt-3 h-25" type="button">
+                            <span class="text">Ubah Gambar</span>
+                        </button> -->
+                    </div>
+                    <div id="changeImageWrapper" class="row" hidden disabled>
+                        <div class="col-sm-3 imgUp">
+                            <div class="imagePreview"></div>
+                            <label class="btn btn-primary">
+                                Pilih<input type="file" class="uploadFile img" name="link_media[]" value="Upload Photo" style="width: 0px;height: 0px;overflow: hidden;" />
+                            </label>
+                        </div>
+                        <i class="fa fa-plus imgAdd"></i>
+                    </div>
+                    @error('link_media')
+                    <small class="form-text error-input">{{ $message }}</small>
+                    @enderror
+                </div>
+            </div>
+
             <!-- Bar Chart -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
@@ -72,23 +105,6 @@ Show Submenu {{ $profil->submenu }}
                         <a href="" class="btn btn-warning" onclick="location.href = document.referrer; return false;">
                             Kembali
                         </a>
-                    </div>
-                    <hr>
-                    <div>
-                        <strong>Upload Thumbnail</strong>
-                        <div class="card my-2">
-                            <label for="imageUpload" class="mb-0 cursor-pointer">
-                                @if($profil->link_media)
-                                <img id="image-preview" class="card-img-top" src="{{ $profil->link_media }}" alt="Card image cap">
-                                <input type="hidden" name="old_link_media" value="{{ $profil->link_media }}" />
-                                @else
-                                <img id="image-preview" class="card-img-top" src="https://www.pngkey.com/png/detail/233-2332677_image-500580-placeholder-transparent.png" alt="Card image cap">
-                                @endif
-                            </label>
-                        </div>
-                        @error('link_media')
-                        <small class="form-text error-input">{{ $message }}</small>
-                        @enderror
                     </div>
                     <hr>
                 </div>
