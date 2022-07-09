@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Homepage;
 
 use App\Http\Controllers\Controller;
+use App\Models\Agenda;
 use App\Models\Berita;
 use App\Models\FormKontak;
 use App\Models\Profil;
 use App\Models\RuangPamer;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -14,7 +16,8 @@ class HomepageController extends Controller
 {
     public function index()
     {
-        return view('homepage.index');
+        $data['agenda'] = Agenda::where('tanggal_agenda', '>=', date('Y-m-d'))->orderBy('tanggal_agenda', 'desc')->get();
+        return view('homepage.index', $data);
     }
 
     public function getProfil($slug)
@@ -25,7 +28,7 @@ class HomepageController extends Controller
 
     public function getBerita()
     {
-        $data['berita'] = Berita::orderBy('created_at', 'asc')->paginate(3);
+        $data['berita'] = Berita::orderBy('created_at', 'desc')->paginate(3);
         return view('homepage.berita.index', $data);
     }
 

@@ -27,10 +27,9 @@
                     <div class="footer_2">
                         <h4>Media Sosial</h4>
                         <p style="font-size: 24pt;">
-                            <a href="{{ getPengaturan()->instagram ?? '' }}" target="_blank"><i class="fa fa-instagram"></i></a>
-                            <a href="{{ getPengaturan()->youtube ?? '' }}" target="_blank"><i class="fa fa-youtube"></i></a>
-                            <a href="https://wa.me/{{ convertWhatsappNumber(getPengaturan()->whatsapp) ?? '' }}" target="_blank"><i class="fa fa-whatsapp"></i></a>
-                            <a href="mailto:{{ getPengaturan()->email ?? '' }}" target="_blank"><i class="fa fa-envelope"></i></a>
+                            <a href="{{ getPengaturan()->instagram ?? '' }}" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="{{ getPengaturan()->youtube ?? '' }}" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                            <a href="mailto:{{ getPengaturan()->email ?? '' }}" target="_blank"><i class="fa-solid fa-envelope"></i></a>
                         </p>
                     </div>
                 </div>

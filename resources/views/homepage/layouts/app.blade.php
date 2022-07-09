@@ -9,7 +9,8 @@
     <link href="{{ getPengaturan()->favicon ?? '' }}" rel="icon">
     <link href="{{ asset('_homepage/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('_homepage/css/style.css') }}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{{ asset('_homepage/css/font-awesome.min.css') }}" />
+    <!-- <link rel="stylesheet" type="text/css" href="{{ asset('_homepage/css/font-awesome.min.css') }}" /> -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('_homepage/css/fontawesome/css/all.css') }}" />
     <link href="{{ asset('_homepage/css/aos.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
     <link href="{{ asset('_homepage/css/element.css') }}" rel="stylesheet">

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dashboard\AgendaController;
 use App\Http\Controllers\Dashboard\BeritaController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\PengaturanController;
@@ -47,6 +48,16 @@ Route::post('storeForm', [HomepageController::class, 'storeForm'])->name('homepa
 // dashboard
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', [DashboardController::class, 'index'])->name('beranda');
+
+    Route::prefix('management-event')->group(function (){
+        Route::get('', [AgendaController::class, 'index'])->name('dashboard.event.index');
+        Route::get('create', [AgendaController::class, 'create'])->name('dashboard.event.create');
+        Route::post('', [AgendaController::class, 'store'])->name('dashboard.event.store');
+        Route::get('{id}/edit', [AgendaController::class, 'edit'])->name('dashboard.event.edit');
+        Route::get('{id}/show', [AgendaController::class, 'show'])->name('dashboard.event.show');
+        Route::post('{id}/update', [AgendaController::class, 'update'])->name('dashboard.event.update');
+        Route::post('{id}', [AgendaController::class, 'destroy'])->name('dashboard.event.destroy');
+    });
 
     Route::prefix('management-layanan')->group(function () {
         Route::get('ruang-pamer', [RuangPamerController::class, 'index'])->name('dashboard.ruang_pamer.index');        

@@ -22,7 +22,7 @@ Berita
                         </div>
                         <div class="blog_home_inner_1 clearfix">
                             <h4>
-                                Dibuat oleh {{ $item->usersCreated->name }} pada {{ $item->created_at }}
+                                Dibuat oleh Admin pada {{ $item->created_at }}
                             </h4>
                             <h2>
                                 <a href="{{ route('homepage.berita.detail', $item->slug) }}" target="_blank">{{ $item->title }}</a>

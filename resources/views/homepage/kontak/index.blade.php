@@ -64,7 +64,7 @@ Kontak
     </div>
     </div>
 </section>
-<section id="box">
+<!-- <section id="box">
     <div class="col-sm-12 space_right">
         <div class="box_right text-right">
             <ul class="nav nav_box_1">
@@ -74,5 +74,5 @@ Kontak
             </ul>
         </div>
     </div>
-</section>
+</section> -->
 @endsection

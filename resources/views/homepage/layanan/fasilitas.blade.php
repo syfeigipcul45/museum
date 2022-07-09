@@ -9,6 +9,10 @@ Fasilitas
     .box {
         display: flex;
     }
+    .tengah {
+        margin: 0 -15px;
+        justify-content: center;
+    }
 
     
 </style>
@@ -19,39 +23,48 @@ Fasilitas
 <section id="service_home">
     <div class="container">
         <div class="row">
-            <div class="service_home clearfix">
+            <div class="service_home">
             <h1 class="text-center">Fasilitas</h1>
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                     <div class="service_home_1 text-center">
-                        <h2><i class="fa fa-cutlery"></i></h2>
-                        <h3>Kuliner</h3>
+                        <h2><i class="fa-solid fa-cutlery"></i></h2>
+                        <h4>Kuliner</h4>
                         <h4>
                             <a href="#">Read More <i class="fa fa-arrow-right"></i></a>
                         </h4>
                     </div>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                     <div class="service_home_1 text-center">
-                        <h2><i class="fa fa-gift"></i></h2>
-                        <h3>Souvenir</h3>
+                        <h2><i class="fa-solid fa-gift"></i></h2>
+                        <h4>Souvenir</h4>
                         <h4>
                             <a href="#">Read More <i class="fa fa-arrow-right"></i></a>
                         </h4>
                     </div>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                     <div class="service_home_1 text-center">
-                        <h2><i class="fa fa-building"></i></h2>
-                        <h3>Sewa Gedung</h3>
+                        <h2><i class="fa-solid fa-building"></i></h2>
+                        <h4>Sewa Gedung</h4>
                         <h4>
                             <a href="#">Read More <i class="fa fa-arrow-right"></i></a>
                         </h4>
                     </div>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                     <div class="service_home_1 text-center">
-                        <h2><i class="fa fa-users"></i></h2>
-                        <h3>Pemandu</h3>
+                        <h2><i class="fa-solid fa-users"></i></h2>
+                        <h4>Pemandu</h4>
+                        <h4>
+                            <a href="#">Read More <i class="fa fa-arrow-right"></i></a>
+                        </h4>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="service_home_1 text-center">
+                        <h2><i class="fa-solid fa-mosque"></i></h2>
+                        <h4>Musholla</h4>
                         <h4>
                             <a href="#">Read More <i class="fa fa-arrow-right"></i></a>
                         </h4>

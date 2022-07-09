@@ -5,7 +5,49 @@ Beranda
 @endsection
 
 @section('extra-css')
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script> -->
 <style>
+    p.header {
+        padding: 0 20px;
+        font-size: 18px;
+        font-weight: bold;
+        font-style: italic;
+    }
+
+    p.content {
+        padding: 0 20px;
+        font-size: 12px;
+        text-align: justify;
+    }
+
+    a .readmore {
+        height: 40px;
+        width: 100px;
+        float: right;
+        padding-left: 10px;
+        line-height: 40px;
+        background-color: #8bc34a;
+        margin: 20px;
+        font-size: 12px;
+        border-radius: 5px;
+    }
+
+    a .readmore:hover {
+        background-color: #9fdf55;
+    }
+
+    a .readmore i {
+        color: #fff;
+        margin-left: 5px;
+        transition: cubic-bezier(0.68, -0.55, 0.27, 01.55) 320ms;
+    }
+
+    a .readmore:hover i {
+        margin: 0 0 0 20px;
+    }
 </style>
 @endsection
 
@@ -91,6 +133,41 @@ Beranda
         <a class="carousel-control right" href="#bs-carousel" data-slide="next">
             <span class="glyphicon glyphicon-chevron-right"></span>
         </a>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="pages clearfix">
+                <div class="row">
+                    <div class="col-lg-7">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title text-center">BERITA TERKINI <a href=""><i class="fa fa-arrow-right"></i></a></h3>
+                            </div>
+                            <div class="panel-body">Panel content</div>
+                        </div>
+                    </div>
+                    <!-- /.col-sm-4 -->
+                    <div class="col-lg-5">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title text-center">AGENDA TERKINI <a href=""><i class="fa fa-arrow-right"></i></a></h3>
+                            </div>
+                            <div class="panel-body">
+                                @foreach($agenda as $item)
+                                <div class="row" style="margin-left: 10px; margin-right: 10px;">
+                                    <span style="font-weight: bold;">{{ date('d M Y', strtotime($item->tanggal_agenda)); }}</span><br>
+                                    <a href=""><i class="fa fa-arrow-right"></i> {{ $item->title }}</a>
+                                </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     </div>
 </section>
 

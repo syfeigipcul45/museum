@@ -9,7 +9,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ route('home')}}"><img src="{{ getPengaturan()->logo ?? '' }}" width="100%" height="100%"></a>
+                <a class="navbar-brand" href="{{ route('home')}}"><img src="{{ getPengaturan()->logo ?? '' }}" width="70px" height="50px"></a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -34,7 +34,6 @@
                     <li class="dropdown">
                         <a class="tag_menu {{ Request::is('layanan*') ? 'active_tab' : '' }}" href="" data-toggle="dropdown" role="button" aria-expanded="false">Layanan<span class="caret"></span></a>
                         <ul class="dropdown-menu drop_1" role="menu">
-                            <li><a href="">Publikasi</a></li>
                             <li><a href="{{ route('homepage.layanan.fasilitas') }}">Fasilitas</a></li>
                             <li><a href="{{ route('homepage.layanan.ruang_pamer') }}">Ruang Pamer</a></li>
                         </ul>
@@ -45,7 +44,7 @@
                     </li>
 
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
+                <!-- <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown"><a href="" class="tag_menu_1" data-toggle="dropdown"><span class="glyphicon glyphicon-search"></span></a>
                         <ul class="dropdown-menu drop_2" style="min-width: 300px;">
                             <li>
@@ -65,7 +64,7 @@
                             </li>
                         </ul>
                     </li>
-                </ul>
+                </ul> -->
             </div>
             <!-- /.navbar-collapse -->
         </div>

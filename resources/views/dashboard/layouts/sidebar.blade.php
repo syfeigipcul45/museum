@@ -22,6 +22,13 @@
     Main Menu
 </div>
 
+<li class="nav-item {{ Request::is('management-events*') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ route('dashboard.event.index') }}">
+        <i class="fas fa-calendar-alt"></i>
+        <span>Agenda</span>
+    </a>
+</li>
+
 <li class="nav-item {{ Request::is('management-profil*') ? 'active' : '' }}">
     <a class="nav-link" href="{{ route('dashboard.profil.index') }}">
         <i class="fas fa-fw fa-clipboard"></i>

@@ -138,6 +138,12 @@
             transform: scale(1) rotateY(0deg);
         }
     }
+
+    h1 {
+        padding-top: 80px;
+        font-size: 80px;
+        letter-spacing: 1px;
+    }
 </style>
 @endsection
 
@@ -164,8 +170,8 @@
 
                             <!-- The dots/circles -->
                             <div class="dots-container">
-                            @php $no=1; @endphp
-                            @foreach(json_decode($profil->link_media) as $key => $item)
+                                @php $no=1; @endphp
+                                @foreach(json_decode($profil->link_media) as $key => $item)
                                 <span class="dots" onclick="currentSlide($no++)"></span>
                                 @endforeach
                             </div>

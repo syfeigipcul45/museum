@@ -38,7 +38,7 @@ if (!function_exists('convertWhatsappNumber')) {
 if (!function_exists('shrinkText')) {
     function shrinkText($text)
     {
-        return Str::limit($text, 225, '...');
+        return Str::limit($text, 500, '...');
     }
 }
 

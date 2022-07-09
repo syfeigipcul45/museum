@@ -143,7 +143,7 @@ p {
 
 #header .drop_2 {
   background: #84a726;
-  margin-top: 21px;
+  /* margin-top: 21px; */
 }
 
 /*********************header_end****************/
@@ -464,10 +464,18 @@ p {
 
 /*********************middle_end****************/
 /*********************service_home****************/
+#event_home {
+  padding-top: 150px;
+  padding-bottom: 100px;
+  background-color: #ffffff;
+  justify-content: center;
+}
+
 #service_home {
   padding-top: 150px;
   padding-bottom: 100px;
   background-color: #ccddf6;
+  justify-content: center;
 }
 
 .service_home h1 {
@@ -483,8 +491,10 @@ p {
 .service_home_1 h2 i {
   background: #ffffff;
   color: #000000;
-  padding: 55px;
+  padding: 45px;
   border-radius: 100%;
+  width: 150px;
+  height: 150px;
 }
 
 .service_home_1 h3 {
@@ -510,7 +520,7 @@ p {
 .service_home_1 h4 a {
   background: #ffffff;
   color: rgb(0, 0, 0);
-  padding: 20px 30px;
+  padding: 10px 15px;
 }
 
 .service_home_1 h4 a i {
