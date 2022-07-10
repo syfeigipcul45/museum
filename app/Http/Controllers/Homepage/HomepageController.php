@@ -17,6 +17,7 @@ class HomepageController extends Controller
     public function index()
     {
         $data['agenda'] = Agenda::where('tanggal_agenda', '>=', date('Y-m-d'))->orderBy('tanggal_agenda', 'desc')->get();
+        $data['berita'] = Berita::orderBy('created_at', 'desc')->limit(5)->get();
         return view('homepage.index', $data);
     }
 

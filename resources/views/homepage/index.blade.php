@@ -143,9 +143,16 @@ Beranda
                     <div class="col-lg-7">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title text-center">BERITA TERKINI <a href=""><i class="fa fa-arrow-right"></i></a></h3>
+                                <h3 class="panel-title text-center">BERITA TERKINI <a href="{{ route('homepage.berita.index') }}" target="_blank"><i class="fa fa-arrow-right"></i></a></h3>
                             </div>
-                            <div class="panel-body">Panel content</div>
+                            <div class="panel-body">
+                                @foreach($berita as $item)
+                                <div class="row" style="margin-left: 10px; margin-right: 10px;">
+                                    <span style="font-weight: bold;">{{ date('d M Y', strtotime($item->created_at)); }}</span><br>
+                                    <a href="{{ route('homepage.berita.detail', $item->slug) }}" target="_blank"><i class="fa fa-arrow-right"></i> {{ $item->title }}</a>
+                                </div>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
                     <!-- /.col-sm-4 -->

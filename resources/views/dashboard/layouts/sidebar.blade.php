@@ -29,6 +29,19 @@
     </a>
 </li>
 
+<li class="nav-item {{ Request::is('management-koleksi*') ? 'active' : '' }}">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseKoleksi" aria-expanded="true" aria-controls="collapseMedia">
+        <i class="fas fa-fw fa-box"></i>
+        <span>Benda Koleksi</span>
+    </a>
+    <div id="collapseKoleksi" class="collapse {{ Request::is('management-koleksi*') ? 'show' : '' }}" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="{{ route('dashboard.kategori_koleksi.index') }}">Kategori</a>
+            <a class="collapse-item" href="">Koleksi</a>
+        </div>
+    </div>
+</li>
+
 <li class="nav-item {{ Request::is('management-profil*') ? 'active' : '' }}">
     <a class="nav-link" href="{{ route('dashboard.profil.index') }}">
         <i class="fas fa-fw fa-clipboard"></i>

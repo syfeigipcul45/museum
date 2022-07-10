@@ -20,7 +20,7 @@ class AgendaController extends Controller
      */
     public function index()
     {
-        $data['agenda'] = Agenda::latest()->get();
+        $data['agenda'] = Agenda::orderBy('tanggal_agenda', 'desc')->get();
         return view('dashboard.agenda.index', $data);
     }
 

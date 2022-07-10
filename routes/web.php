@@ -3,6 +3,7 @@
 use App\Http\Controllers\Dashboard\AgendaController;
 use App\Http\Controllers\Dashboard\BeritaController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\KategoriKoleksiController;
 use App\Http\Controllers\Dashboard\PengaturanController;
 use App\Http\Controllers\Dashboard\ProfilController;
 use App\Http\Controllers\Dashboard\RuangPamerController;
@@ -57,6 +58,15 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('{id}/show', [AgendaController::class, 'show'])->name('dashboard.event.show');
         Route::post('{id}/update', [AgendaController::class, 'update'])->name('dashboard.event.update');
         Route::post('{id}', [AgendaController::class, 'destroy'])->name('dashboard.event.destroy');
+    });
+
+    Route::prefix('management-koleksi')->group(function(){
+        Route::get('kategori', [KategoriKoleksiController::class, 'index'])->name('dashboard.kategori_koleksi.index');
+        Route::get('kategori/create', [KategoriKoleksiController::class, 'create'])->name('dashboard.kategori_koleksi.create');
+        Route::post('kategori', [KategoriKoleksiController::class, 'store'])->name('dashboard.kategori_koleksi.store');
+        Route::get('kategori/{id}/edit', [KategoriKoleksiController::class, 'edit'])->name('dashboard.kategori_koleksi.edit');
+        Route::post('kategori/{id}/update', [KategoriKoleksiController::class, 'update'])->name('dashboard.kategori_koleksi.update');
+        Route::post('kategori/{id}', [KategoriKoleksiController::class, 'destroy'])->name('dashboard.kategori_koleksi.destroy');
     });
 
     Route::prefix('management-layanan')->group(function () {

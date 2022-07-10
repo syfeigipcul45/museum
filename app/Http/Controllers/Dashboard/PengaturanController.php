@@ -54,7 +54,6 @@ class PengaturanController extends Controller
                 'instagram' => 'required',
                 'youtube' => 'required',
                 'profile_title' => 'required',
-                'profile_url' => 'required',
                 'profile_description' => 'required'
             ], [
                 'logo.required' => 'Logo harus diisi!',
@@ -69,7 +68,6 @@ class PengaturanController extends Controller
                 'instagram.required' => 'Instagram harus diisi!',
                 'youtube.required' => 'Youtube harus diisi!',
                 'profile_title.required' => 'Judul profil harus diisi',
-                'profile_url.required' => 'Gambar profil harus diisi',
                 'profile_description.required' => 'Deskripsi profil harus diisi'
             ]);
 
