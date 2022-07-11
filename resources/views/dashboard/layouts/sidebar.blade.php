@@ -37,7 +37,7 @@
     <div id="collapseKoleksi" class="collapse {{ Request::is('management-koleksi*') ? 'show' : '' }}" aria-labelledby="headingPages" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="{{ route('dashboard.kategori_koleksi.index') }}">Kategori</a>
-            <a class="collapse-item" href="">Koleksi</a>
+            <a class="collapse-item" href="{{ route('dashboard.koleksi.index') }}">Koleksi</a>
         </div>
     </div>
 </li>

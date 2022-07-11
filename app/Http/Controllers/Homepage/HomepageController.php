@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Homepage;
 
 use App\Http\Controllers\Controller;
 use App\Models\Agenda;
+use App\Models\BendaKoleksi;
 use App\Models\Berita;
 use App\Models\FormKontak;
+use App\Models\KategoriKoleksi;
 use App\Models\Profil;
 use App\Models\RuangPamer;
 use Carbon\Carbon;
@@ -19,6 +21,28 @@ class HomepageController extends Controller
         $data['agenda'] = Agenda::where('tanggal_agenda', '>=', date('Y-m-d'))->orderBy('tanggal_agenda', 'desc')->get();
         $data['berita'] = Berita::orderBy('created_at', 'desc')->limit(5)->get();
         return view('homepage.index', $data);
+    }
+
+    public function getBendaKoleksi()
+    {
+        $data['kategoris'] = KategoriKoleksi::orderBy('name', 'asc')->get();
+        $data['count'] = BendaKoleksi::join('kategori_koleksis', 'benda_koleksis.kategori_id', '=', 'kategori_koleksis.id')
+        ->orderBy('kategori_koleksi.name', 'asc')->count();
+        return view('homepage.benda_koleksi.index', $data);
+    }
+
+    public function getDetailKategoriKoleksi($slug)
+    {
+        $data['kategori'] = KategoriKoleksi::where('slug', '=', $slug)->first();
+        $data['koleksi'] = BendaKoleksi::join('kategori_koleksis', 'benda_koleksis.kategori_id', '=', 'kategori_koleksis.id')
+        ->where('kategori_koleksis.slug', '=', $slug)->orderBy('benda_koleksis.nama_benda', 'asc')->paginate(12);
+        return view('homepage.benda_koleksi.benda_koleksi', $data);
+    }
+
+    public function getDetailBendaKoleksi($slug)
+    {
+        $data['koleksi'] = BendaKoleksi::where('slug_koleksi', '=', $slug)->first();
+        return view('homepage.benda_koleksi.detail', $data);
     }
 
     public function getProfil($slug)

@@ -22,6 +22,7 @@
                     <li class="dropdown">
                         <a class="tag_menu {{ Request::is('profil*') ? 'active_tab' : '' }}" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Profil<span class="caret"></span></a>
                         <ul class="dropdown-menu drop_1" role="menu">
+                            <li><a href="{{ route('homepage.benda_koleksi.index') }}">Benda Koleksi</a></li>
                             @foreach(getProfil() as $profil)
                             <li><a href="{{ route('homepage.profil.detail', $profil->slug)}}">{{ $profil->submenu }}</a></li>
                             @endforeach

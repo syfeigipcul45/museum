@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\BendaKoleksi;
 use App\Models\Pengaturan;
 use App\Models\Profil;
 use Illuminate\Support\Str;
@@ -46,5 +47,15 @@ if (!function_exists('getDeskripsi')) {
     function getDeskripsi($text)
     {
         return Str::limit($text, 50, '...');
+    }
+}
+
+if (!function_exists('getCount')) {
+    function getCount($kategori_id)
+    {
+        $result = BendaKoleksi::join('kategori_koleksis', 'benda_koleksis.kategori_id', '=', 'kategori_koleksis.id')
+        ->where('benda_koleksis.kategori_id', '=', $kategori_id)
+        ->orderBy('kategori_koleksi.name', 'asc')->count();
+        return $result;
     }
 }

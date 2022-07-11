@@ -15,6 +15,12 @@ class CreateBendaKoleksisTable extends Migration
     {
         Schema::create('benda_koleksis', function (Blueprint $table) {
             $table->id();
+            $table->string('nama_benda')->nullable();
+            $table->string('slug_koleksi')->nullable();
+            $table->unsignedBigInteger('kategori_id')->nullable();
+            $table->foreign('kategori_id')->references('id')->on('kategori_koleksis')->onDelete('cascade');
+            $table->text('deskripsi')->nullable();
+            $table->text('link_media')->nullable();
             $table->timestamps();
         });
     }

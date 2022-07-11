@@ -1,14 +1,15 @@
 <?php
 
 use App\Http\Controllers\Dashboard\AgendaController;
+use App\Http\Controllers\Dashboard\BendaKoleksiController;
 use App\Http\Controllers\Dashboard\BeritaController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\KategoriKoleksiController;
 use App\Http\Controllers\Dashboard\PengaturanController;
 use App\Http\Controllers\Dashboard\ProfilController;
 use App\Http\Controllers\Dashboard\RuangPamerController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Homepage\HomepageController;
-use App\Models\Pengaturan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -37,6 +38,10 @@ Route::prefix('layanan')->group(function () {
 
     Route::get('fasilitas', [HomepageController::class, 'getFasilitas'])->name('homepage.layanan.fasilitas');
 });
+
+Route::get('profil/benda-koleksi', [HomepageController::class, 'getBendaKoleksi'])->name('homepage.benda_koleksi.index');
+Route::get('profil/benda-koleksi/{slug}', [HomepageController::class, 'getDetailKategoriKoleksi'])->name('homepage.benda_koleksi.koleksi');
+Route::get('profil/benda-koleksi/koleksi/{slug}/', [HomepageController::class, 'getDetailBendaKoleksi'])->name('homepage.benda_koleksi.detail');
 
 Route::get('profil/{slug}', [HomepageController::class, 'getProfil'])->name('homepage.profil.detail');
 
@@ -67,6 +72,14 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('kategori/{id}/edit', [KategoriKoleksiController::class, 'edit'])->name('dashboard.kategori_koleksi.edit');
         Route::post('kategori/{id}/update', [KategoriKoleksiController::class, 'update'])->name('dashboard.kategori_koleksi.update');
         Route::post('kategori/{id}', [KategoriKoleksiController::class, 'destroy'])->name('dashboard.kategori_koleksi.destroy');
+
+        Route::get('koleksi', [BendaKoleksiController::class, 'index'])->name('dashboard.koleksi.index');
+        Route::get('koleksi/create', [BendaKoleksiController::class, 'create'])->name('dashboard.koleksi.create');
+        Route::post('koleksi', [BendaKoleksiController::class, 'store'])->name('dashboard.koleksi.store');
+        Route::get('koleksi/{id}/edit', [BendaKoleksiController::class, 'edit'])->name('dashboard.koleksi.edit');
+        Route::get('koleksi/{id}/show', [BendaKoleksiController::class, 'show'])->name('dashboard.koleksi.show');
+        Route::post('koleksi/{id}/update', [BendaKoleksiController::class, 'update'])->name('dashboard.koleksi.update');
+        Route::post('koleksi/{id}', [BendaKoleksiController::class, 'destroy'])->name('dashboard.koleksi.destroy');
     });
 
     Route::prefix('management-layanan')->group(function () {
