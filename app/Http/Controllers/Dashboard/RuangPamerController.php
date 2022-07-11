@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\JenisRuang;
 use App\Models\RuangPamer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -24,7 +25,7 @@ class RuangPamerController extends Controller
     public function index()
     {
         $data['ruang_pamers'] = RuangPamer::orderBy('name', 'asc')->get();
-        return view('dashboard.layanan.ruang_pamer.index', $data);
+        return view('dashboard.ruang_pamer.ruang_pamer.index', $data);
     }
 
     /**
@@ -34,7 +35,8 @@ class RuangPamerController extends Controller
      */
     public function create()
     {
-        return view('dashboard.layanan.ruang_pamer.create');
+        $data['jenis_ruangs'] = JenisRuang::orderBy('nama_jenis', 'asc')->get();
+        return view('dashboard.ruang_pamer.ruang_pamer.create', $data);
     }
 
     /**
@@ -51,12 +53,14 @@ class RuangPamerController extends Controller
                 'name' => 'required',
                 'deskripsi' => 'required',
                 'link_gambar' => 'required',
-                'link_media' => 'required'
+                'link_media' => 'required',
+                'jenis_ruang' => 'required'
             ], [
                 'name.required' => 'Nama Model 3D harus diisi!',
                 'deskripsi.required' => 'Deskripsi Model 3D harus diisi!',
                 'link_gambar.required' => 'File foto harus diisi!',
-                'link_media.required' => 'File 3D harus diisi!'
+                'link_media.required' => 'File 3D harus diisi!',
+                'jenis_ruang.required' => 'Jenis ruang harus diisi!',
             ]);
 
             if ($validator->fails()) {
@@ -67,6 +71,7 @@ class RuangPamerController extends Controller
                 "name" => $request->name,
                 'slug' => Str::slug($request->name, '-'),
                 "deskripsi" => $request->deskripsi,
+                "jenis_id" => $request->jenis_ruang
                 // "link_media" => $request->link_media,
             ];
 
@@ -106,7 +111,8 @@ class RuangPamerController extends Controller
     public function show($id)
     {
         $data['ruang_pamer'] = RuangPamer::find($id);
-        return view('dashboard.layanan.ruang_pamer.show', $data);
+        $data['jenis_ruangs'] = JenisRuang::orderBy('nama_jenis', 'asc')->get();
+        return view('dashboard.ruang_pamer.ruang_pamer.show', $data);
     }
 
     /**
@@ -118,7 +124,8 @@ class RuangPamerController extends Controller
     public function edit($id)
     {
         $data['ruang_pamer'] = RuangPamer::find($id);
-        return view('dashboard.layanan.ruang_pamer.edit', $data);
+        $data['jenis_ruangs'] = JenisRuang::orderBy('nama_jenis', 'asc')->get();
+        return view('dashboard.ruang_pamer.ruang_pamer.edit', $data);
     }
 
     /**
@@ -137,6 +144,7 @@ class RuangPamerController extends Controller
             "name" => $request->name,
             'slug' => Str::slug($request->name, '-'),
             "deskripsi" => $request->deskripsi,
+            "jenis_id" => $request->jenis_ruang
         ];
 
         if (!empty($request->old_link_gambar)) {

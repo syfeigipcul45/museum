@@ -1,7 +1,7 @@
 @extends('homepage.layouts.app')
 
 @section('title')
-Ruang Pamer
+{{ $jenis_ruang->nama_jenis }}
 @endsection
 
 @section('extra-css')
@@ -23,7 +23,7 @@ Ruang Pamer
     <div class="container">
         <div class="row">
             <div class="gallery clearfix">
-                <h1 class="text-center">Ruang Pamer</h1>
+                <h1 class="text-center">{{ $jenis_ruang->nama_jenis }}</h1>
                 <div class="gallery_inner clearfix">
                     @foreach($ruang_pamer as $item)
                     <div class="col-sm-4">

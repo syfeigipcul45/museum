@@ -1,17 +1,25 @@
 @extends('dashboard.layouts.app')
 
 @section('title')
-Edit Benda Koleksi
+Edit Gambar 3D
 @endsection
 
 @section('extra-css')
 <script src="https://cdn.tiny.cloud/1/mgnx3lcm1bg1v85bmqfw3ogmz9vjtdxolbcs3pmx800uia9e/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 <style>
     .error-input {
         color: #d44950;
+    }
+
+    model-viewer {
+        width: 100%;
+        height: 400px;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .imagePreview {
@@ -67,7 +75,7 @@ Edit Benda Koleksi
 
 @section('content')
 
-<form action="{{ route('dashboard.koleksi.update', $koleksi->id) }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('dashboard.ruang_pamer.update', $ruang_pamer->id) }}" method="POST" enctype="multipart/form-data">
     @csrf
 
     <!-- Content Row -->
@@ -77,11 +85,11 @@ Edit Benda Koleksi
             <!-- Area Chart -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Nama Benda Koleksi</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Nama Model 3D</h6>
                 </div>
                 <div class="card-body">
                     <div class="form-group">
-                        <input type="text" class="form-control" name="nama_benda" value="{{ old('nama_benda', $koleksi->nama_benda) }}" />
+                        <input type="text" class="form-control" name="name" value="{{ old('name', $ruang_pamer->name) }}" />
                         @error('name')
                         <small class="form-text error-input">{{ $message }}</small>
                         @enderror
@@ -98,10 +106,10 @@ Edit Benda Koleksi
                         <!-- <span style="color: red; font-size: smaller;">*Gambar lebih baik berukuran 2400x1200, 1600x800, 800x400 pixels</span> -->
                     </div>
                     <div id="imageWrapper" class="row">
-                        @foreach(json_decode($koleksi->link_media) as $key => $item)
+                        @foreach(json_decode($ruang_pamer->link_gambar) as $key => $item)
                         <div class="col-sm-3">
                             <img src="{{ $item }}" alt="" class="img-fluid" />
-                            <input type="hidden" class="uploadFile img" name="old_link_media[]" value="{{ $item }}" />
+                            <input type="hidden" class="uploadFile img" name="old_link_gambar[]" value="{{ $item }}" />
                             <i class="fa fa-times del"></i>
                         </div>
                         @endforeach
@@ -114,7 +122,7 @@ Edit Benda Koleksi
                         <div class="col-sm-3 imgUp">
                             <div class="imagePreview"></div>
                             <label class="btn btn-primary">
-                                Pilih<input type="file" class="uploadFile img" name="link_media[]" value="Upload Photo" style="width: 0px;height: 0px;overflow: hidden;" />
+                                Pilih<input type="file" class="uploadFile img" name="link_gambar[]" value="Upload Photo" style="width: 0px;height: 0px;overflow: hidden;" />
                             </label>
                         </div>
                         <i class="fa fa-plus imgAdd"></i>
@@ -128,10 +136,10 @@ Edit Benda Koleksi
             <!-- Bar Chart -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Deskripsi</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Deskripsi Model 3D</h6>
                 </div>
                 <div class="card-body">
-                    <textarea id="content-news" name="deskripsi">{{ old('deskripsi', $koleksi->deskripsi) }}</textarea>
+                    <textarea id="content-news" name="deskripsi">{{ old('deskripsi', $ruang_pamer->deskripsi) }}</textarea>
                     @error('deskripsi')
                     <small class="form-text error-input">{{ $message }}</small>
                     @enderror
@@ -149,6 +157,7 @@ Edit Benda Koleksi
                 <!-- Card Body -->
                 <div class="card-body">
                     <div class="d-flex align-items-center justify-content-between mb-3">
+                        <span>{{ \Carbon\Carbon::now()->isoFormat('dddd, D MMMM Y') }}</span>
                         <button type="submit" class="btn btn-primary btn-icon-split">
                             <span class="text">Update</span>
                         </button>
@@ -158,15 +167,29 @@ Edit Benda Koleksi
                     </div>
                     <hr>
                     <div>
-                        <strong>Jenis Koleksi</strong>
+                        <strong>Jenis Ruang</strong>
                         <div class="card my-2">
-                            <select class="form-control js-example-basic-single" name="kategori_id">
-                                @foreach($kategoris as $kategori)
-                                <option value="{{ $kategori->id }}" @if($koleksi->kategori_id == $kategori->id) selected @endif>{{ $kategori->name }}</option>
+                            <select class="form-control js-example-basic-single" name="jenis_ruang">
+                                @foreach($jenis_ruangs as $jenis_ruang)
+                                <option value="{{ $jenis_ruang->id }}" @if($ruang_pamer->jenis_id == $jenis_ruang->id) selected @endif>{{ $jenis_ruang->nama_jenis }}</option>
                                 @endforeach
                             </select>
                         </div>
                         @error('kategori_id')
+                        <small class="form-text error-input">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <hr>
+                    <div>
+                        <strong>Upload File 3D</strong>
+                        <model-viewer camera-controls alt="Model" src="{{ $ruang_pamer->link_media }}"></model-viewer>
+                        <div class="card my-2">
+                            <label for="imageUpload" class="mb-0 cursor-pointer">
+                                <input type="hidden" name="old_link_media" value="{{ $ruang_pamer->link_media }}" />
+                            </label>
+                        </div>
+                        <input type='file' name="link_media" accept=".glb" />
+                        @error('link_media')
                         <small class="form-text error-input">{{ $message }}</small>
                         @enderror
                     </div>
@@ -183,7 +206,7 @@ Edit Benda Koleksi
     $(document).ready(function() {
         $('.js-example-basic-single').select2();
     });
-    
+
     var useDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
     tinymce.init({
         selector: 'textarea#content-news',
@@ -289,7 +312,7 @@ Edit Benda Koleksi
             <div class="col-sm-3 imgUp">
                 <div class="imagePreview"></div>
                 <label class="btn btn-primary">Pilih
-                    <input type="file" class="uploadFile img" name="link_media[]" value="Upload Photo" style="width:0px;height:0px;overflow:hidden;" />
+                    <input type="file" class="uploadFile img" name="link_gambar[]" value="Upload Photo" style="width:0px;height:0px;overflow:hidden;" />
                 </label>
                 <i class="fa fa-times del"></i>
             </div>

@@ -1,7 +1,7 @@
 @extends('dashboard.layouts.app')
 
 @section('title')
-Edit Kategori Benda Koleksi
+Lihat Submenu Profil
 @endsection
 
 @section('extra-css')
@@ -16,41 +16,43 @@ Edit Kategori Benda Koleksi
 
 @section('content')
 
-<form action="{{ route('dashboard.kategori_koleksi.update', $kategori->id) }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('dashboard.profil.update', $profil->id) }}" method="POST" enctype="multipart/form-data">
     @csrf
 
     <!-- Content Row -->
     <div class="row">
         <div class="col-xl-8 col-lg-7">
-
+    
             <!-- Area Chart -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Nama Kategori Benda Koleksi</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Nama Submenu</h6>
                 </div>
                 <div class="card-body">
                     <div class="form-group">
-                        <input type="text" class="form-control" name="name" value="{{ old('name', $kategori->name) }}" />
+                        <input type="text" class="form-control" name="name" value="{{ old('name', $profil->name) }}" readonly />
                         @error('name')
                         <small class="form-text error-input">{{ $message }}</small>
                         @enderror
                     </div>
                 </div>
             </div>
-
+    
+            <!-- Bar Chart -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Deskripsi</h6>
                 </div>
                 <div class="card-body">
-                    <textarea id="content-desc" name="deskripsi">{{ old('deskripsi', $kategori->deskripsi) }}</textarea>
-                    @error('deskripsi')
+                    <textarea id="content-profil" name="content">{{ old('content', $profil->content) }}</textarea>
+                    @error('content')
                     <small class="form-text error-input">{{ $message }}</small>
                     @enderror
                 </div>
-            </div> 
+            </div>
+    
         </div>
-
+    
         <!-- Donut Chart -->
         <div class="col-xl-4 col-lg-5">
             <div class="card shadow mb-4">
@@ -61,9 +63,7 @@ Edit Kategori Benda Koleksi
                 <!-- Card Body -->
                 <div class="card-body">
                     <div class="d-flex align-items-center justify-content-between mb-2">
-                        <button type="submit" class="btn btn-primary btn-icon-split">
-                            <span class="text">Update</span>
-                        </button>
+                        <span>{{ \Carbon\Carbon::now()->isoFormat('dddd, D MMMM Y') }}</span>
                         <a href="" class="btn btn-warning" onclick="location.href = document.referrer; return false;">
                             Kembali
                         </a>
@@ -75,11 +75,13 @@ Edit Kategori Benda Koleksi
     </div>
 </form>
 @endsection
+
 @section('extra-js')
 <script>
     var useDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
     tinymce.init({
-        selector: 'textarea#content-desc',
+        readonly: 1,
+        selector: 'textarea#content-profil',
         plugins: 'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
         imagetools_cors_hosts: ['picsum.photos'],
         menubar: 'file edit view insert format tools table help',

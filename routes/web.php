@@ -4,12 +4,14 @@ use App\Http\Controllers\Dashboard\AgendaController;
 use App\Http\Controllers\Dashboard\BendaKoleksiController;
 use App\Http\Controllers\Dashboard\BeritaController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\JenisRuangController;
 use App\Http\Controllers\Dashboard\KategoriKoleksiController;
 use App\Http\Controllers\Dashboard\PengaturanController;
 use App\Http\Controllers\Dashboard\ProfilController;
 use App\Http\Controllers\Dashboard\RuangPamerController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Homepage\HomepageController;
+use App\Models\JenisRuang;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -33,8 +35,9 @@ Auth::routes();
 Route::get('/', [HomepageController::class, 'index'])->name('home');
 
 Route::prefix('layanan')->group(function () {
-    Route::get('ruang-pamer', [HomepageController::class, 'getRuangPamer'])->name('homepage.layanan.ruang_pamer');
-    Route::get('ruang-pamer/{slug}', [HomepageController::class, 'getDetailRuangPamer'])->name('homepage.layanan.detail_ruang_pamer');
+    Route::get('ruang-pamer', [HomepageController::class, 'getJenisRuang'])->name('homepage.layanan.index');
+    Route::get('ruang-pamer/{slug}', [HomepageController::class, 'getRuangPamer'])->name('homepage.layanan.ruang_pamer');
+    Route::get('ruang-pamer/detail/{slug}', [HomepageController::class, 'getDetailRuangPamer'])->name('homepage.layanan.detail_ruang_pamer');
 
     Route::get('fasilitas', [HomepageController::class, 'getFasilitas'])->name('homepage.layanan.fasilitas');
 });
@@ -83,6 +86,17 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     Route::prefix('management-layanan')->group(function () {
+        
+    });
+
+    Route::prefix('management-ruang')->group(function () {
+        Route::get('jenis-ruang', [JenisRuangController::class, 'index'])->name('dashboard.jenis_ruang.index');
+        Route::get('jenis-ruang/create', [JenisRuangController::class, 'create'])->name('dashboard.jenis_ruang.create');
+        Route::post('jenis-ruang', [JenisRuangController::class, 'store'])->name('dashboard.jenis_ruang.store');
+        Route::get('jenis-ruang/{id}/edit', [JenisRuangController::class, 'edit'])->name('dashboard.jenis_ruang.edit');
+        Route::post('jenis-ruang/{id}/update', [JenisRuangController::class, 'update'])->name('dashboard.jenis_ruang.update');
+        Route::post('jenis-ruang/{id}', [JenisRuangController::class, 'destroy'])->name('dashboard.jenis_ruang.destroy');
+
         Route::get('ruang-pamer', [RuangPamerController::class, 'index'])->name('dashboard.ruang_pamer.index');        
         Route::get('ruang-pamer/create', [RuangPamerController::class, 'create'])->name('dashboard.ruang_pamer.create');
         Route::post('ruang-pamer', [RuangPamerController::class, 'store'])->name('dashboard.ruang_pamer.store');

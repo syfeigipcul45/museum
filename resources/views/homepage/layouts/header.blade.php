@@ -36,7 +36,7 @@
                         <a class="tag_menu {{ Request::is('layanan*') ? 'active_tab' : '' }}" href="" data-toggle="dropdown" role="button" aria-expanded="false">Layanan<span class="caret"></span></a>
                         <ul class="dropdown-menu drop_1" role="menu">
                             <li><a href="{{ route('homepage.layanan.fasilitas') }}">Fasilitas</a></li>
-                            <li><a href="{{ route('homepage.layanan.ruang_pamer') }}">Ruang Pamer</a></li>
+                            <li><a href="{{ route('homepage.layanan.index') }}">Ruang Pamer</a></li>
                         </ul>
                     </li>
 

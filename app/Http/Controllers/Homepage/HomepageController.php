@@ -7,6 +7,7 @@ use App\Models\Agenda;
 use App\Models\BendaKoleksi;
 use App\Models\Berita;
 use App\Models\FormKontak;
+use App\Models\JenisRuang;
 use App\Models\KategoriKoleksi;
 use App\Models\Profil;
 use App\Models\RuangPamer;
@@ -63,16 +64,24 @@ class HomepageController extends Controller
         return view('homepage.berita.detail', $data);
     }
 
-    public function getRuangPamer()
+    public function getJenisRuang()
     {
-        $data['ruang_pamer'] = RuangPamer::orderBy('name', 'asc')->paginate(6);
-        return view('homepage.layanan.ruang_pamer', $data);
+        $data['jenis_ruangs'] = JenisRuang::orderBy('nama_jenis', 'asc')->get();
+        return view('homepage.layanan.ruang_pamer.index', $data);
+    }
+
+    public function getRuangPamer($slug)
+    {
+        $data['jenis_ruang'] = JenisRuang::where('slug_jenis', '=', $slug)->first();
+        $data['ruang_pamer'] = RuangPamer::join('jenis_ruangs', 'ruang_pamers.jenis_id', '=', 'jenis_ruangs.id')
+        ->where('jenis_ruangs.slug_jenis', '=', $slug)->orderBy('ruang_pamers.name', 'asc')->paginate(12);
+        return view('homepage.layanan.ruang_pamer.ruang_pamer', $data);
     }
 
     public function getDetailRuangPamer($slug)
     {
         $data['ruang_pamer'] = RuangPamer::where('slug', $slug)->first();
-        return view('homepage.layanan.detail_ruang_pamer', $data);
+        return view('homepage.layanan.ruang_pamer.detail_ruang_pamer', $data);
     }
 
     public function getFasilitas()

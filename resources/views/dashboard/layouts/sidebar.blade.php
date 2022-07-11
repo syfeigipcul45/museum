@@ -66,6 +66,18 @@
         <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="">Publikasi</a>
             <a class="collapse-item" href="">Fasilitas</a>
+        </div>
+    </div>
+</li>
+
+<li class="nav-item {{ Request::is('management-ruang*') ? 'active' : '' }}">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePamer" aria-expanded="true" aria-controls="collapseMedia">
+        <i class="fas fa-fw fa-globe"></i>
+        <span>Ruang Pamer</span>
+    </a>
+    <div id="collapsePamer" class="collapse {{ Request::is('management-ruang*') ? 'show' : '' }}" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item" href="{{ route('dashboard.jenis_ruang.index') }}">Jenis Ruang</a>
             <a class="collapse-item" href="{{ route('dashboard.ruang_pamer.index') }}">Ruang Pamer</a>
         </div>
     </div>

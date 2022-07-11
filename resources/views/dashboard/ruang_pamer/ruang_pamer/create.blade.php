@@ -1,7 +1,7 @@
 @extends('dashboard.layouts.app')
 
 @section('title')
-Edit Benda Koleksi
+Tambah Gambar 3D
 @endsection
 
 @section('extra-css')
@@ -17,6 +17,7 @@ Edit Benda Koleksi
     .imagePreview {
         width: 100%;
         height: 170px;
+        text-align: center;
         background-position: center center;
         background: url(http://cliquecities.com/assets/no-image-e3699ae23f866f6cbdf8ba2443ee5c4e.jpg);
         background-color: #fff;
@@ -67,21 +68,21 @@ Edit Benda Koleksi
 
 @section('content')
 
-<form action="{{ route('dashboard.koleksi.update', $koleksi->id) }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('dashboard.ruang_pamer.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
 
     <!-- Content Row -->
     <div class="row">
         <div class="col-xl-8 col-lg-7">
-
+    
             <!-- Area Chart -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Nama Benda Koleksi</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Nama Gambar 3D</h6>
                 </div>
                 <div class="card-body">
                     <div class="form-group">
-                        <input type="text" class="form-control" name="nama_benda" value="{{ old('nama_benda', $koleksi->nama_benda) }}" />
+                        <input type="text" class="form-control" name="name" value="{{ old('name') }}" />
                         @error('name')
                         <small class="form-text error-input">{{ $message }}</small>
                         @enderror
@@ -97,48 +98,35 @@ Edit Benda Koleksi
                     <div class="row">
                         <!-- <span style="color: red; font-size: smaller;">*Gambar lebih baik berukuran 2400x1200, 1600x800, 800x400 pixels</span> -->
                     </div>
-                    <div id="imageWrapper" class="row">
-                        @foreach(json_decode($koleksi->link_media) as $key => $item)
-                        <div class="col-sm-3">
-                            <img src="{{ $item }}" alt="" class="img-fluid" />
-                            <input type="hidden" class="uploadFile img" name="old_link_media[]" value="{{ $item }}" />
-                            <i class="fa fa-times del"></i>
-                        </div>
-                        @endforeach
-                        <i class="fa fa-plus imgAdd"></i>
-                        <!-- <button id="changeImage" class="btn btn-primary mt-3 h-25" type="button">
-                            <span class="text">Ubah Gambar</span>
-                        </button> -->
-                    </div>
-                    <div id="changeImageWrapper" class="row" hidden disabled>
+                    <div class="row">
                         <div class="col-sm-3 imgUp">
                             <div class="imagePreview"></div>
                             <label class="btn btn-primary">
-                                Pilih<input type="file" class="uploadFile img" name="link_media[]" value="Upload Photo" style="width: 0px;height: 0px;overflow: hidden;" />
+                                Pilih<input type="file" class="uploadFile img" name="link_gambar[]" value="Upload Photo" style="width: 0px;height: 0px;overflow: hidden;" accept=".png, .jpg, .jpeg" />
                             </label>
                         </div>
                         <i class="fa fa-plus imgAdd"></i>
                     </div>
-                    @error('link_media')
+                    @error('link_gambar')
                     <small class="form-text error-input">{{ $message }}</small>
                     @enderror
                 </div>
             </div>
-
+    
             <!-- Bar Chart -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Deskripsi</h6>
                 </div>
                 <div class="card-body">
-                    <textarea id="content-news" name="deskripsi">{{ old('deskripsi', $koleksi->deskripsi) }}</textarea>
+                    <textarea id="content-news" name="deskripsi">{{ old('deskripsi') }}</textarea>
                     @error('deskripsi')
                     <small class="form-text error-input">{{ $message }}</small>
                     @enderror
                 </div>
-            </div>
+            </div>    
         </div>
-
+    
         <!-- Donut Chart -->
         <div class="col-xl-4 col-lg-5">
             <div class="card shadow mb-4">
@@ -149,8 +137,9 @@ Edit Benda Koleksi
                 <!-- Card Body -->
                 <div class="card-body">
                     <div class="d-flex align-items-center justify-content-between mb-3">
+                        <span>{{ \Carbon\Carbon::now()->isoFormat('dddd, D MMMM Y') }}</span>
                         <button type="submit" class="btn btn-primary btn-icon-split">
-                            <span class="text">Update</span>
+                            <span class="text">Posting</span>
                         </button>
                         <a href="" class="btn btn-warning" onclick="location.href = document.referrer; return false;">
                             Kembali
@@ -158,15 +147,26 @@ Edit Benda Koleksi
                     </div>
                     <hr>
                     <div>
-                        <strong>Jenis Koleksi</strong>
+                        <strong>Jenis Ruang</strong>
                         <div class="card my-2">
-                            <select class="form-control js-example-basic-single" name="kategori_id">
-                                @foreach($kategoris as $kategori)
-                                <option value="{{ $kategori->id }}" @if($koleksi->kategori_id == $kategori->id) selected @endif>{{ $kategori->name }}</option>
+                            <select class="form-control js-example-basic-single" name="jenis_ruang">
+                                <option value="" selected disabled>-- Pilih --</option>
+                                @foreach($jenis_ruangs as $jenis_ruang)
+                                <option value="{{ $jenis_ruang->id }}">{{ $jenis_ruang->nama_jenis }}</option>
                                 @endforeach
                             </select>
                         </div>
                         @error('kategori_id')
+                        <small class="form-text error-input">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <hr>
+                    <div>
+                        <strong>Upload File 3D</strong>
+                        <div class="card my-2">
+                            <input type='file' name="link_media" accept=".glb" />
+                        </div>
+                        @error('link_media')
                         <small class="form-text error-input">{{ $message }}</small>
                         @enderror
                     </div>
@@ -183,7 +183,7 @@ Edit Benda Koleksi
     $(document).ready(function() {
         $('.js-example-basic-single').select2();
     });
-    
+
     var useDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
     tinymce.init({
         selector: 'textarea#content-news',
@@ -278,18 +278,28 @@ Edit Benda Koleksi
         content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
     });
 
-    $('#changeImage').click(function() {
-        $('#changeImageWrapper').removeAttr('hidden');
-        $('#changeImageWrapper').prop('disabled', true);
-        $('#imageWrapper').hide();
+    $("#imageUpload").change(function() {
+        readURL(this);
     });
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#image-preview').attr('src', e.target.result);
+                $('#image-preview').hide();
+                $('#image-preview').fadeIn(650);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
 
     $(".imgAdd").click(function() {
         $(this).closest(".row").find('.imgAdd').before(`
             <div class="col-sm-3 imgUp">
                 <div class="imagePreview"></div>
                 <label class="btn btn-primary">Pilih
-                    <input type="file" class="uploadFile img" name="link_media[]" value="Upload Photo" style="width:0px;height:0px;overflow:hidden;" />
+                    <input type="file" class="uploadFile img" name="link_gambar[]" value="Upload Photo" style="width:0px;height:0px;overflow:hidden;" accept=".png, .jpg, .jpeg"/>
                 </label>
                 <i class="fa fa-times del"></i>
             </div>

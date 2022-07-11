@@ -14,6 +14,11 @@ class RuangPamer extends Model
         'slug',
         'deskripsi',
         'link_gambar',
-        'link_media'
-    ];
+        'link_media',
+        'jenis_id'
+    ];    
+
+    public function jenisId(){
+        return $this->belongsTo(JenisRuang::class, 'jenis_id');
+    }
 }

@@ -1,11 +1,12 @@
 @extends('dashboard.layouts.app')
 
 @section('title')
-Edit Benda Koleksi
+Lihat Gambar 3D
 @endsection
 
 @section('extra-css')
 <script src="https://cdn.tiny.cloud/1/mgnx3lcm1bg1v85bmqfw3ogmz9vjtdxolbcs3pmx800uia9e/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
@@ -14,60 +15,18 @@ Edit Benda Koleksi
         color: #d44950;
     }
 
-    .imagePreview {
+    model-viewer {
         width: 100%;
-        height: 170px;
-        background-position: center center;
-        background: url(http://cliquecities.com/assets/no-image-e3699ae23f866f6cbdf8ba2443ee5c4e.jpg);
-        background-color: #fff;
-        background-size: cover;
-        background-repeat: no-repeat;
-        display: inline-block;
-        box-shadow: 0px -3px 6px 2px rgba(0, 0, 0, 0.2);
-    }
-
-    .btn-primary {
-        display: block;
-        border-radius: 0px;
-        box-shadow: 0px 4px 6px 2px rgba(0, 0, 0, 0.2);
-        margin-top: -5px;
-    }
-
-    .imgUp {
-        margin-bottom: 15px;
-    }
-
-    .del {
-        position: absolute;
-        top: 0px;
-        right: 15px;
-        width: 30px;
-        height: 30px;
-        text-align: center;
-        line-height: 30px;
-        background-color: rgba(255, 255, 255, 0.6);
-        cursor: pointer;
-    }
-
-    .imgAdd {
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        background-color: #4bd7ef;
-        color: #fff;
-        box-shadow: 0px 0px 2px 1px rgba(0, 0, 0, 0.2);
-        text-align: center;
-        line-height: 30px;
-        margin-top: 0px;
-        cursor: pointer;
-        font-size: 15px;
+        height: 400px;
+        margin-left: auto;
+        margin-right: auto;
     }
 </style>
 @endsection
 
 @section('content')
 
-<form action="{{ route('dashboard.koleksi.update', $koleksi->id) }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('dashboard.ruang_pamer.update', $ruang_pamer->id) }}" method="POST" enctype="multipart/form-data">
     @csrf
 
     <!-- Content Row -->
@@ -77,11 +36,11 @@ Edit Benda Koleksi
             <!-- Area Chart -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Nama Benda Koleksi</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Nama Model 3D</h6>
                 </div>
                 <div class="card-body">
                     <div class="form-group">
-                        <input type="text" class="form-control" name="nama_benda" value="{{ old('nama_benda', $koleksi->nama_benda) }}" />
+                        <input type="text" class="form-control" name="name" value="{{ old('name', $ruang_pamer->name) }}" readonly/>
                         @error('name')
                         <small class="form-text error-input">{{ $message }}</small>
                         @enderror
@@ -98,40 +57,28 @@ Edit Benda Koleksi
                         <!-- <span style="color: red; font-size: smaller;">*Gambar lebih baik berukuran 2400x1200, 1600x800, 800x400 pixels</span> -->
                     </div>
                     <div id="imageWrapper" class="row">
-                        @foreach(json_decode($koleksi->link_media) as $key => $item)
+                        @foreach(json_decode($ruang_pamer->link_gambar) as $key => $item)
                         <div class="col-sm-3">
                             <img src="{{ $item }}" alt="" class="img-fluid" />
-                            <input type="hidden" class="uploadFile img" name="old_link_media[]" value="{{ $item }}" />
-                            <i class="fa fa-times del"></i>
+                            <input type="hidden" class="uploadFile img" name="old_link_gambar[]" value="{{ $item }}" />
+                            <!-- <i class="fa fa-times del"></i> -->
                         </div>
                         @endforeach
-                        <i class="fa fa-plus imgAdd"></i>
+                        <!-- <i class="fa fa-plus imgAdd"></i> -->
                         <!-- <button id="changeImage" class="btn btn-primary mt-3 h-25" type="button">
                             <span class="text">Ubah Gambar</span>
                         </button> -->
                     </div>
-                    <div id="changeImageWrapper" class="row" hidden disabled>
-                        <div class="col-sm-3 imgUp">
-                            <div class="imagePreview"></div>
-                            <label class="btn btn-primary">
-                                Pilih<input type="file" class="uploadFile img" name="link_media[]" value="Upload Photo" style="width: 0px;height: 0px;overflow: hidden;" />
-                            </label>
-                        </div>
-                        <i class="fa fa-plus imgAdd"></i>
-                    </div>
-                    @error('link_media')
-                    <small class="form-text error-input">{{ $message }}</small>
-                    @enderror
                 </div>
             </div>
 
             <!-- Bar Chart -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Deskripsi</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Deskripsi Model 3D</h6>
                 </div>
                 <div class="card-body">
-                    <textarea id="content-news" name="deskripsi">{{ old('deskripsi', $koleksi->deskripsi) }}</textarea>
+                    <textarea id="content-news" name="deskripsi">{{ old('deskripsi', $ruang_pamer->deskripsi) }}</textarea>
                     @error('deskripsi')
                     <small class="form-text error-input">{{ $message }}</small>
                     @enderror
@@ -149,24 +96,34 @@ Edit Benda Koleksi
                 <!-- Card Body -->
                 <div class="card-body">
                     <div class="d-flex align-items-center justify-content-between mb-3">
-                        <button type="submit" class="btn btn-primary btn-icon-split">
-                            <span class="text">Update</span>
-                        </button>
                         <a href="" class="btn btn-warning" onclick="location.href = document.referrer; return false;">
                             Kembali
                         </a>
                     </div>
                     <hr>
                     <div>
-                        <strong>Jenis Koleksi</strong>
+                        <strong>Jenis Ruang</strong>
                         <div class="card my-2">
-                            <select class="form-control js-example-basic-single" name="kategori_id">
-                                @foreach($kategoris as $kategori)
-                                <option value="{{ $kategori->id }}" @if($koleksi->kategori_id == $kategori->id) selected @endif>{{ $kategori->name }}</option>
+                            <select class="form-control js-example-basic-single" name="jenis_ruang" disabled>
+                                @foreach($jenis_ruangs as $jenis_ruang)
+                                <option value="{{ $jenis_ruang->id }}" @if($ruang_pamer->jenis_id == $jenis_ruang->id) selected @endif>{{ $jenis_ruang->nama_jenis }}</option>
                                 @endforeach
                             </select>
                         </div>
                         @error('kategori_id')
+                        <small class="form-text error-input">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <hr>
+                    <div>
+                        <!-- <strong>Upload File</strong> -->
+                        <model-viewer camera-controls alt="Model" src="{{ $ruang_pamer->link_media }}"></model-viewer>
+                        <div class="card my-2">
+                            <label for="imageUpload" class="mb-0 cursor-pointer">
+                                <input type="hidden" name="old_link_media" value="{{ $ruang_pamer->link_media }}" />
+                            </label>
+                        </div>
+                        @error('link_media')
                         <small class="form-text error-input">{{ $message }}</small>
                         @enderror
                     </div>
@@ -180,12 +137,9 @@ Edit Benda Koleksi
 
 @section('extra-js')
 <script>
-    $(document).ready(function() {
-        $('.js-example-basic-single').select2();
-    });
-    
     var useDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
     tinymce.init({
+        readonly: 1,
         selector: 'textarea#content-news',
         plugins: 'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons',
         imagetools_cors_hosts: ['picsum.photos'],
@@ -278,44 +232,20 @@ Edit Benda Koleksi
         content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
     });
 
-    $('#changeImage').click(function() {
-        $('#changeImageWrapper').removeAttr('hidden');
-        $('#changeImageWrapper').prop('disabled', true);
-        $('#imageWrapper').hide();
+    $("#imageUpload").change(function() {
+        readURL(this);
     });
 
-    $(".imgAdd").click(function() {
-        $(this).closest(".row").find('.imgAdd').before(`
-            <div class="col-sm-3 imgUp">
-                <div class="imagePreview"></div>
-                <label class="btn btn-primary">Pilih
-                    <input type="file" class="uploadFile img" name="link_media[]" value="Upload Photo" style="width:0px;height:0px;overflow:hidden;" />
-                </label>
-                <i class="fa fa-times del"></i>
-            </div>
-        `);
-    });
-
-    $(document).on("click", "i.del", function() {
-        $(this).parent().remove();
-    });
-
-    $(function() {
-        $(document).on("change", ".uploadFile", function() {
-            var uploadFile = $(this);
-            var files = !!this.files ? this.files : [];
-            if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
-
-            if (/^image/.test(files[0].type)) { // only image file
-                var reader = new FileReader(); // instance of the FileReader
-                reader.readAsDataURL(files[0]); // read the local file
-
-                reader.onloadend = function() { // set image data as background of div
-                    //alert(uploadFile.closest(".upimage").find('.imagePreview').length);
-                    uploadFile.closest(".imgUp").find('.imagePreview').css("background-image", "url(" + this.result + ")");
-                }
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#image-preview').attr('src', e.target.result);
+                $('#image-preview').hide();
+                $('#image-preview').fadeIn(650);
             }
-        });
-    });
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
 </script>
 @endsection

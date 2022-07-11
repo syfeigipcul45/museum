@@ -108,6 +108,7 @@ class PengaturanController extends Controller
                     $data['favicon'] = url('/') . '/storage/' . $path;
                 }
                 Pengaturan::create($data);
+                Session::flash('success', 'Data Berhasil Disimpan');
                 return redirect()->route('dashboard.pengaturan.index');
             } else {
                 $data = [
