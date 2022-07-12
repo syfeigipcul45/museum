@@ -51,6 +51,9 @@ Route::get('profil/{slug}', [HomepageController::class, 'getProfil'])->name('hom
 Route::get('berita', [HomepageController::class, 'getBerita'])->name('homepage.berita.index');
 Route::get('berita/{slug}', [HomepageController::class, 'getDetailBerita'])->name('homepage.berita.detail');
 
+Route::get('agenda', [HomepageController::class, 'getAgenda'])->name('homepage.agenda.index');
+Route::get('agenda/{slug}', [HomepageController::class, 'getDetailAgenda'])->name('homepage.agenda.detail');
+
 Route::get('kontak', [HomepageController::class, 'getKontak'])->name('homepage.kontak.index');
 Route::post('storeForm', [HomepageController::class, 'storeForm'])->name('homepage.kontak.store');
 

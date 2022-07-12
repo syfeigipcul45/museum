@@ -1,7 +1,7 @@
 @extends('homepage.layouts.app')
 
 @section('title')
-Berita
+Agenda
 @endsection
 
 @section('extra-css')
@@ -14,8 +14,8 @@ Berita
         <div class="row">
             <div class="col-sm-12">
                 <div class="blog_home clearfix">
-                    <h1 class="text-center">Berita</h1>
-                    @forelse($berita as $item)
+                    <h1 class="text-center">Agenda</h1>
+                    @forelse($agenda as $item)
                     <div class="blog_home_inner_main clearfix">
                         <div class="blog_home_inner clearfix aos-init aos-animate" data-aos="zoom-in-up">
                             <img src="{{ $item->link_media }}" width="50%" height="25%" />
@@ -25,13 +25,13 @@ Berita
                                 Dibuat oleh Admin pada {{ $item->created_at }}
                             </h4>
                             <h2>
-                                <a href="{{ route('homepage.berita.detail', $item->slug) }}" target="_blank">{{ $item->title }}</a>
+                                <a href="{{ route('homepage.agenda.detail', $item->slug) }}" target="_blank">{{ $item->title }}</a>
                             </h2>
                             <p>
                                 {!! shrinkText($item->content) !!}
                             </p>
                             <h4 class="heading_1">
-                                <a href="{{ route('homepage.berita.detail', $item->slug) }}" target="_blank">Read More <i class="fa fa-arrow-right"></i></a>
+                                <a href="{{ route('homepage.agenda.detail', $item->slug) }}" target="_blank">Read More <i class="fa fa-arrow-right"></i></a>
                             </h4>
                         </div>
                     </div>
@@ -45,7 +45,7 @@ Berita
 
                     <div class="paginate clearfix text-center">
                         <ul class="pagination">
-                            {{ $berita->links('pagination::bootstrap-4') }}
+                            {{ $agenda->links('pagination::bootstrap-4') }}
                         </ul>
                     </div>
                 </div>

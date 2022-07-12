@@ -11,7 +11,6 @@ use App\Models\JenisRuang;
 use App\Models\KategoriKoleksi;
 use App\Models\Profil;
 use App\Models\RuangPamer;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -62,6 +61,18 @@ class HomepageController extends Controller
     {
         $data['berita'] = Berita::where('slug', $slug)->first();
         return view('homepage.berita.detail', $data);
+    }
+
+    public function getAgenda()
+    {
+        $data['agenda'] = Agenda::orderBy('created_at', 'desc')->paginate(3);
+        return view('homepage.agenda.index', $data);
+    }
+
+    public function getDetailAgenda($slug)
+    {
+        $data['agenda'] = Agenda::where('slug', $slug)->first();
+        return view('homepage.agenda.detail', $data);
     }
 
     public function getJenisRuang()

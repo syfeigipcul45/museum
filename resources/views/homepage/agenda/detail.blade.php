@@ -1,7 +1,7 @@
 @extends('homepage.layouts.app')
 
 @section('title')
-{{ $berita->title }}
+{{ $agenda->title }}
 @endsection
 
 @section('extra-css')
@@ -24,14 +24,14 @@
                 <div class="blog_home clearfix">
                     <div class="blog_home_inner_main clearfix">
                         <div class="blog_home_inner clearfix aos-init aos-animate" data-aos="zoom-in-up">
-                            <img src="{{ $berita->link_media }}" class="gambar" width="60%" height="30%">
+                            <img src="{{ $agenda->link_media }}" class="gambar" width="60%" height="30%">
                         </div>
                         <div class="blog_home_inner_1 clearfix">
                             <h4>
-                                Dibuat oleh Admin pada {{ $berita->created_at }}
+                                Dibuat oleh Admin pada {{ $agenda->created_at }}
                             </h4>
-                            <h2>{{ $berita->title }}</h2>
-                            <p>{!! $berita->content !!}</p>
+                            <h2>{{ $agenda->title }}</h2>
+                            <p>{!! $agenda->content !!}</p>
                         </div>
                     </div>
                 </div>

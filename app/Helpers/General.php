@@ -21,6 +21,24 @@ if (!function_exists('getProfil')) {
     }
 }
 
+if (!function_exists('getBendaKoleksi')) {
+    function getBendaKoleksi($kategori_id)
+    {
+        $result = BendaKoleksi::where('kategori_id', '=', $kategori_id)->count();
+        return $result;
+    }
+}
+
+if (!function_exists('getPersentase')) {
+    function getPersentase($kategori_id)
+    {
+        $total = BendaKoleksi::count();
+        $koleksi = BendaKoleksi::where('kategori_id', '=', $kategori_id)->count();
+        $result = intval(($koleksi/$total)*100);
+        return $result;
+    }
+}
+
 if (!function_exists('convertWhatsappNumber')) {
     function convertWhatsappNumber($whatsapp)
     {

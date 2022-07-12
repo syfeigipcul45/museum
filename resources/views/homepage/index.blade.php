@@ -159,13 +159,13 @@ Beranda
                     <div class="col-lg-5">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h3 class="panel-title text-center">AGENDA TERKINI <a href=""><i class="fa fa-arrow-right"></i></a></h3>
+                                <h3 class="panel-title text-center">AGENDA TERKINI <a href="{{ route('homepage.agenda.index') }}"><i class="fa fa-arrow-right"></i></a></h3>
                             </div>
                             <div class="panel-body">
                                 @foreach($agenda as $item)
                                 <div class="row" style="margin-left: 10px; margin-right: 10px;">
                                     <span style="font-weight: bold;">{{ date('d M Y', strtotime($item->tanggal_agenda)); }}</span><br>
-                                    <a href=""><i class="fa fa-arrow-right"></i> {{ $item->title }}</a>
+                                    <a href="{{ route('homepage.agenda.detail', $item->slug) }}"><i class="fa fa-arrow-right"></i> {{ $item->title }}</a>
                                 </div>
                                 @endforeach
                             </div>

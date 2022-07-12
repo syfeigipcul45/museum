@@ -10,7 +10,7 @@
                 <div class="col-sm-3">
                     <div class="footer_2">
                         <h4>Kontak</h4>
-                        <p style="color: #666666; font-size: medium;">
+                        <p style="color: #666666; font-size: 10pt;">
                             <i class="fa fa-phone" aria-hidden="true"></i> {{ getPengaturan()->phone ?? '' }}<br>
                             <i class="fa fa-envelope" aria-hidden="true"></i> {{ getPengaturan()->email ?? '' }}
                         </p>
@@ -20,7 +20,7 @@
                 <div class="col-sm-3">
                     <div class="footer_2">
                         <h4>Alamat</h4>
-                        <p style="color: #666666;">{{ getPengaturan()->address ?? '' }}</p>
+                        <p style="color: #666666; font-size: 10pt;">{{ getPengaturan()->address ?? '' }}</p>
                     </div>
                 </div>
                 <div class="col-sm-3">
