@@ -7,6 +7,7 @@ use App\Models\Agenda;
 use App\Models\BendaKoleksi;
 use App\Models\Berita;
 use App\Models\FormKontak;
+use App\Models\HeroImage;
 use App\Models\JenisRuang;
 use App\Models\KategoriKoleksi;
 use App\Models\Profil;
@@ -18,6 +19,7 @@ class HomepageController extends Controller
 {
     public function index()
     {
+        $data['hero_images'] = HeroImage::orderBy('order', 'asc')->get();
         $data['agenda'] = Agenda::where('tanggal_agenda', '>=', date('Y-m-d'))->orderBy('tanggal_agenda', 'desc')->get();
         $data['berita'] = Berita::orderBy('created_at', 'desc')->limit(5)->get();
         return view('homepage.index', $data);

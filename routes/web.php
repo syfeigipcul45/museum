@@ -4,6 +4,7 @@ use App\Http\Controllers\Dashboard\AgendaController;
 use App\Http\Controllers\Dashboard\BendaKoleksiController;
 use App\Http\Controllers\Dashboard\BeritaController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\HeroImageController;
 use App\Http\Controllers\Dashboard\JenisRuangController;
 use App\Http\Controllers\Dashboard\KategoriKoleksiController;
 use App\Http\Controllers\Dashboard\PengaturanController;
@@ -133,4 +134,13 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/management-pengaturan', [PengaturanController::class, 'index'])->name('dashboard.pengaturan.index');
     Route::post('/management-pengaturan', [PengaturanController::class, 'store'])->name('dashboard.pengaturan.store');
+
+    Route::get('/management-images', [HeroImageController::class, 'index'])->name('dashboard.hero_images.index');
+    Route::get('/management-images/create', [HeroImageController::class, 'create'])->name('dashboard.hero_images.create');
+    Route::post('/management-images', [HeroImageController::class, 'store'])->name('dashboard.hero_images.store');
+    Route::get('/management-images/{id}/edit', [HeroImageController::class, 'edit'])->name('dashboard.hero_images.edit');
+    Route::post('/management-images/{id}/update', [HeroImageController::class, 'update'])->name('dashboard.hero_images.update');
+    Route::post('/management-images/{id}', [HeroImageController::class, 'destroy'])->name('dashboard.hero_images.destroy');
+    Route::post('/management-images/{id}/increase', [HeroImageController::class, 'increase'])->name('dashboard.hero_images.increase');
+    Route::post('/management-images/{id}/decrease', [HeroImageController::class, 'decrease'])->name('dashboard.hero_images.decrease');
 });

@@ -111,6 +111,13 @@
     </a>
 </li>
 
+<li class="nav-item {{ Request::is('management-images*') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ route('dashboard.hero_images.index') }}">
+        <i class="fas fa-fw fa-images"></i>
+        <span>Gambar Utama</span>
+    </a>
+</li>
+
 <!-- Sidebar Toggler (Sidebar) -->
 <div class="text-center d-none d-md-inline">
     <button class="rounded-circle border-0" id="sidebarToggle"></button>

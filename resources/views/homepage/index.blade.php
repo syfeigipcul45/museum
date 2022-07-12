@@ -59,31 +59,57 @@ Beranda
 
         <!-- Indicators -->
         <ol class="carousel-indicators">
-            <li data-target="#bs-carousel" data-slide-to="0" class=""></li>
-            <li data-target="#bs-carousel" data-slide-to="1" class=""></li>
-            <li data-target="#bs-carousel" data-slide-to="2" class="active"></li>
+            @php $no=0; $active = ''; @endphp
+            @foreach($hero_images as $key => $hero_image)
+                @if($no === $key)
+                    @php $active = 'active'; @endphp
+                @else
+                    @php $active = ''; @endphp
+                @endif                
+            <li data-target="#bs-carousel" data-slide-to="{{ $key }}" class="{{ $active }}"></li>
+            @endforeach
         </ol>
 
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
-            <div class="item slides">
-                <div class="slide-3"></div>
+            @php $no=0; $active = ''; @endphp
+            @foreach($hero_images as $key => $hero_image)
+                @if($no === $key)
+                    @php $active = 'active'; @endphp
+                @else
+                    @php $active = ''; @endphp
+                @endif
+            <div class="item slides {{ $active }}">
+                <div class="slide-3" style="background-image: url({{ $hero_image->link_hero }});"></div>
                 <div class="hero">
                     <div class="row">
+                        @if($hero_image->link_image)
                         <div class="col-lg-6">
-                            <h1>{{ getPengaturan()->profile_title ?? '' }}</h1>
+                            <h1>{{ $hero_image->judul }}</h1>
                             <p style="text-align: justify; font-size: large; margin-top: 20px; line-height: 30px;">
-                                {{ getPengaturan()->profile_description ?? ''}}
+                                {{ $hero_image->deskripsi }}
                             </p>
                         </div>
-                        <div class="col-lg-6"><img src="{{ getPengaturan()->profile_url ?? '' }}" height="80%" width="80%"> </div>
+                        <div class="col-lg-6"><img src="{{ $hero_image->link_image }}" height="80%" width="80%"> </div>
+                        @else
+                        <div class="col-lg-12">
+                            <h1>{{ $hero_image->judul }}</h1>
+                            <p style="text-align: justify; font-size: large; margin-top: 20px; line-height: 30px;">
+                                {{ $hero_image->deskripsi }}
+                            </p>
+                        </div>
+                        @endif
                     </div>
-                    <button class="btn btn-hero btn-lg" role="button">
+                    @if($hero_image->url)
+                    <a href="{{ $hero_image->url }}" class="btn btn-hero btn-lg" role="button" target="_blank">
                         Read more <i class="fa fa-arrow-right"></i>
-                    </button>
+                    </a>
+                    @else
+                    @endif
                 </div>
             </div>
-            <div class="item slides">
+            @endforeach
+            <!-- <div class="item slides">
                 <div class="slide-2"></div>
                 <div class="hero">
                     <hgroup>
@@ -123,16 +149,16 @@ Beranda
                         Read more <i class="fa fa-arrow-right"></i>
                     </button>
                 </div>
-            </div>
+            </div> -->
         </div>
 
         <!-- Carousel nav -->
-        <a class="carousel-control left" href="#bs-carousel" data-slide="prev">
+        <!-- <a class="carousel-control left" href="#bs-carousel" data-slide="prev">
             <span class="glyphicon glyphicon-chevron-left"></span>
         </a>
         <a class="carousel-control right" href="#bs-carousel" data-slide="next">
             <span class="glyphicon glyphicon-chevron-right"></span>
-        </a>
+        </a> -->
     </div>
 </section>
 <section>
