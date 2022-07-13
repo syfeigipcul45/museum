@@ -64,6 +64,7 @@ Tambah Hero Images
                             <div class="form-group">
                                 <label>Gambar</label>
                                 <br><span style="font-size: small; color:red">*direkomendasikan gambar dengan ratio 1:1. contoh: 400x400, 800x800, 1200x1200</span>
+                                <br><span style="font-size: small; color:red">*tidak wajib diisi</span>
                                 <div class="card my-2">
                                 <label for="imageUpload" class="mb-0 cursor-pointer">
                                     <img id="image-preview" class="card-img-top" src="https://www.pngkey.com/png/detail/233-2332677_image-500580-placeholder-transparent.png" alt="Card image cap">
@@ -89,6 +90,7 @@ Tambah Hero Images
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>URL</label>
+                                <br><span style="font-size: small; color:red">*tidak wajib diisi</span>
                                 <input type="text" class="form-control" name="url" value="{{ old('url') }}" />
                                 @error('url')
                                 <small class="form-text error-input">{{ $message }}</small>

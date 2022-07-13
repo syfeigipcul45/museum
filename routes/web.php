@@ -10,6 +10,7 @@ use App\Http\Controllers\Dashboard\KategoriKoleksiController;
 use App\Http\Controllers\Dashboard\PengaturanController;
 use App\Http\Controllers\Dashboard\ProfilController;
 use App\Http\Controllers\Dashboard\RuangPamerController;
+use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Homepage\HomepageController;
 use App\Models\JenisRuang;
@@ -143,4 +144,13 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/management-images/{id}', [HeroImageController::class, 'destroy'])->name('dashboard.hero_images.destroy');
     Route::post('/management-images/{id}/increase', [HeroImageController::class, 'increase'])->name('dashboard.hero_images.increase');
     Route::post('/management-images/{id}/decrease', [HeroImageController::class, 'decrease'])->name('dashboard.hero_images.decrease');
+
+    Route::prefix('management-users')->group(function () {
+        Route::get('/', [UserController::class, 'index'])->name('dashboard.users.index');
+        Route::get('/create', [UserController::class, 'create'])->name('dashboard.users.create');
+        Route::post('/', [UserController::class, 'store'])->name('dashboard.users.store');
+        Route::get('/{id}/edit', [UserController::class, 'edit'])->name('dashboard.users.edit');
+        Route::post('/{id}/update', [UserController::class, 'update'])->name('dashboard.users.update');
+        Route::post('/{id}', [UserController::class, 'destroy'])->name('dashboard.users.destroy');
+    });
 });

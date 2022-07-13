@@ -63,6 +63,7 @@ Edit Hero Images
                         <div class="col-md-6">
                             <strong>Gambar</strong>
                             <br><span style="font-size: small; color:red">*direkomendasikan gambar dengan ratio 1:1. contoh: 400x400, 800x800, 1200x1200</span>
+                            <br><span style="font-size: small; color:red">*tidak wajib diisi</span>
                             <div class="card my-2">
                                 <label for="imageUpload" class="mb-0 cursor-pointer">
                                     @if($hero_image->link_image)
@@ -95,6 +96,7 @@ Edit Hero Images
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>URL</label>
+                                <br><span style="font-size: small; color:red">*tidak wajib diisi</span>
                                 <input type="text" class="form-control" name="url" value="{{ old('url', $hero_image->url) }}" />
                                 @error('url')
                                 <small class="form-text error-input">{{ $message }}</small>
