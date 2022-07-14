@@ -64,15 +64,4 @@ Kontak
     </div>
     </div>
 </section>
-<!-- <section id="box">
-    <div class="col-sm-12 space_right">
-        <div class="box_right text-right">
-            <ul class="nav nav_box_1">
-                <li class="dropdown">
-                    <a href="https://wa.me/{{ convertWhatsappNumber(getPengaturan()->whatsapp) ?? '' }}" target="_blank"><i class="fa fa-whatsapp"> Hubungi Kami</i></a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</section> -->
 @endsection
