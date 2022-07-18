@@ -11,7 +11,7 @@ class BendaKoleksi extends Model
 
     protected $fillable = [
         'nama_benda',
-        'slug',
+        'slug_koleksi',
         'kategori_id',
         'deskripsi',
         'link_media'

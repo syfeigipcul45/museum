@@ -47,8 +47,7 @@ Kontak
                             </div>
                             <button type="submit" name="submit" id="submit" class="btn btn-info pull-right">Submit</button>
                         </div>
-                    </form>
-
+                    </form>               
                     <div class="col-sm-6 col-sm-push-1">
                         <address>
                             <!-- <h3 class="heading_2">Lokasi Kami</h3> -->
