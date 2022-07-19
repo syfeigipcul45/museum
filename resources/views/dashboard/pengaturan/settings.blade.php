@@ -22,12 +22,21 @@ Pengaturan Umum
 
 <form action="{{ route('dashboard.pengaturan.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
+    @if (session('success'))
+    <div class="alert alert-success" role="alert">
+        {{ session('success') }}
+    </div>
+    @endif
+    @if (session('error'))
+    <div class="alert alert-danger" role="alert">
+        {{ session('error') }}
+    </div>
+    @endif
 
-    <div class="row">
+    <!-- <div class="row">
 
         <div class="col-lg-12">
 
-            <!-- Circle Buttons -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Pengaturan Profil</h6>
@@ -70,7 +79,6 @@ Pengaturan Umum
                                 <div class="col-lg-12">
                                     <label for="profile-logo" class="btn btn-primary btn-file">
                                         <span>Upload</span>
-                                        <!-- The file is stored here. -->
                                         <input id="profile-logo" type="file" onchange="previewProfile(this);" name="profile_url" hidden />
                                     </label>
                                     @error('profile_url')
@@ -99,7 +107,7 @@ Pengaturan Umum
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="row">
 
         <div class="col-lg-6">

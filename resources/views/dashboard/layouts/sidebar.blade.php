@@ -56,18 +56,11 @@
     </a>
 </li>
 
-
-<li class="nav-item {{ Request::is('management-layanan*') ? 'active' : '' }}">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseLayanan" aria-expanded="true" aria-controls="collapseMedia">
+<li class="nav-item {{ Request::is('management-fasilitas*') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ route('dashboard.fasilitas.index') }}">
         <i class="fas fa-fw fa-landmark"></i>
-        <span>Layanan</span>
+        <span>Fasilitas</span>
     </a>
-    <div id="collapseLayanan" class="collapse {{ Request::is('management-layanan*') ? 'show' : '' }}" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="">Publikasi</a>
-            <a class="collapse-item" href="">Fasilitas</a>
-        </div>
-    </div>
 </li>
 
 <li class="nav-item {{ Request::is('management-ruang*') ? 'active' : '' }}">

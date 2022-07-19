@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Agenda;
 use App\Models\BendaKoleksi;
 use App\Models\Berita;
+use App\Models\Fasilitas;
 use App\Models\FormKontak;
 use App\Models\HeroImage;
 use App\Models\JenisRuang;
@@ -99,7 +100,14 @@ class HomepageController extends Controller
 
     public function getFasilitas()
     {
-        return view('homepage.layanan.fasilitas');
+        $data['fasilitas'] = Fasilitas::all();
+        return view('homepage.layanan.fasilitas.index', $data);
+    }
+
+    public function getDetailFasilitas($slug)
+    {
+        $data['fasilitas'] = Fasilitas::where('slug', $slug)->first();
+        return view('homepage.layanan.fasilitas.detail', $data);
     }
 
     public function getKontak()

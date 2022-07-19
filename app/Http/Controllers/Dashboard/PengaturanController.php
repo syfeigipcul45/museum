@@ -53,8 +53,6 @@ class PengaturanController extends Controller
                 'facebook' => 'required',
                 'instagram' => 'required',
                 'youtube' => 'required',
-                'profile_title' => 'required',
-                'profile_description' => 'required'
             ], [
                 'logo.required' => 'Logo harus diisi!',
                 'logo.max' => 'Logo harus di bawah atau sama dengan 2MB',
@@ -67,8 +65,6 @@ class PengaturanController extends Controller
                 'facebook.required' => 'Facebook harus diisi!',
                 'instagram.required' => 'Instagram harus diisi!',
                 'youtube.required' => 'Youtube harus diisi!',
-                'profile_title.required' => 'Judul profil harus diisi',
-                'profile_description.required' => 'Deskripsi profil harus diisi'
             ]);
 
             if($validator->fails()) {

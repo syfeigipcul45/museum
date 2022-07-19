@@ -4,6 +4,7 @@ use App\Http\Controllers\Dashboard\AgendaController;
 use App\Http\Controllers\Dashboard\BendaKoleksiController;
 use App\Http\Controllers\Dashboard\BeritaController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\FasilitasController;
 use App\Http\Controllers\Dashboard\HeroImageController;
 use App\Http\Controllers\Dashboard\JenisRuangController;
 use App\Http\Controllers\Dashboard\KategoriKoleksiController;
@@ -41,7 +42,8 @@ Route::prefix('layanan')->group(function () {
     Route::get('ruang-pamer/{slug}', [HomepageController::class, 'getRuangPamer'])->name('homepage.layanan.ruang_pamer');
     Route::get('ruang-pamer/detail/{slug}', [HomepageController::class, 'getDetailRuangPamer'])->name('homepage.layanan.detail_ruang_pamer');
 
-    Route::get('fasilitas', [HomepageController::class, 'getFasilitas'])->name('homepage.layanan.fasilitas');
+    Route::get('fasilitas', [HomepageController::class, 'getFasilitas'])->name('homepage.fasilitas.index');
+    Route::get('fasilitas/{slug}', [HomepageController::class, 'getDetailFasilitas'])->name('homepage.fasilitas.detail');
 });
 
 Route::get('profil/benda-koleksi', [HomepageController::class, 'getBendaKoleksi'])->name('homepage.benda_koleksi.index');
@@ -109,6 +111,16 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('{id}/show', [RuangPamerController::class, 'show'])->name('dashboard.ruang_pamer.show');
         Route::post('{id}/update', [RuangPamerController::class, 'update'])->name('dashboard.ruang_pamer.update');
         Route::post('ruang-pamer/{id}', [RuangPamerController::class, 'destroy'])->name('dashboard.ruang_pamer.destroy');
+    });
+
+    Route::prefix('management-fasilitas')->group(function () {
+        Route::get('', [FasilitasController::class, 'index'])->name('dashboard.fasilitas.index');
+        Route::get('create', [FasilitasController::class, 'create'])->name('dashboard.fasilitas.create');
+        Route::post('', [FasilitasController::class, 'store'])->name('dashboard.fasilitas.store');
+        Route::get('{id}/edit', [FasilitasController::class, 'edit'])->name('dashboard.fasilitas.edit');
+        Route::get('{id}/show', [FasilitasController::class, 'show'])->name('dashboard.fasilitas.show');
+        Route::post('{id}/update', [FasilitasController::class, 'update'])->name('dashboard.fasilitas.update');
+        Route::post('{id}', [FasilitasController::class, 'destroy'])->name('dashboard.fasilitas.destroy');
     });
 
     Route::prefix('management-profil')->group(function () {
