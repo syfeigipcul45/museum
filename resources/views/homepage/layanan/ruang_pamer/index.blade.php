@@ -7,14 +7,14 @@ Ruang Pamer
 @section('extra-css')
 <style>
     #back-profil {
-        padding-top: 120px;
+        padding-top: 100px;
         padding-bottom: 120px;
         background-attachment: fixed;
         background-color: #ffffff;
     }
 
     h1 {
-        padding-top: 80px;
+        padding-top: 30px;
         font-size: 80px;
         letter-spacing: 1px;
     }

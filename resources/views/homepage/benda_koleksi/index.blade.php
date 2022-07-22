@@ -14,7 +14,7 @@ Benda Koleksi
     }
 
     h1 {
-        padding-top: 80px;
+        padding-top: 30px;
         font-size: 80px;
         letter-spacing: 1px;
     }
