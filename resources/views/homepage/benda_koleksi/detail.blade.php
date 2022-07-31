@@ -144,6 +144,17 @@
         font-size: 80px;
         letter-spacing: 1px;
     }
+
+    .back-profil ul {
+        list-style: inherit;
+    }
+
+    .back-profil ul li::before  {
+        font-weight: bold;
+        display: inline-block;
+        width: 1em;
+        margin-left: 1em;
+    }
 </style>
 @endsection
 

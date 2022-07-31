@@ -144,6 +144,17 @@
         font-size: 80px;
         letter-spacing: 1px;
     }
+
+    .back-fasilitas ul {
+        list-style: inherit;
+    }
+
+    .back-fasilitas ul li::before  {
+        font-weight: bold;
+        display: inline-block;
+        width: 1em;
+        margin-left: 1em;
+    }
 </style>
 @endsection
 

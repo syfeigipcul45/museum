@@ -20,8 +20,8 @@ a:hover {
 }
 
 ul {
-  padding: 0;
-  margin: 0;
+  /* padding: 0;
+  margin: 0; */
   list-style: none;
 }
 
@@ -445,6 +445,17 @@ p {
 .middle h4 a:hover {
   color: #2d3a41;
   text-decoration: underline;
+}
+
+.middle ul {
+  list-style: inherit;
+}
+
+.middle ul li::before  {
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  margin-left: 1em;
 }
 
 #about_middle {
@@ -1070,6 +1081,17 @@ a.socialIcon:hover, .socialHoverClass {
   font-size: 16px;
 }
 
+.blog_home_inner_1 ul {
+  list-style: inherit;
+}
+
+.blog_home_inner_1 ul li::before  {
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  margin-left: 1em;
+}
+
 .blog_home_inner_1 .heading_1 {
   font-size: 18px;
   margin-top: 60px;
@@ -1421,7 +1443,7 @@ a.socialIcon:hover, .socialHoverClass {
 /*********************gallery****************/
 #gallery {
   margin-top: 100px;
-  padding-top: 100px;
+  padding-top: 30px;
   padding-bottom: 100px;
 }
 

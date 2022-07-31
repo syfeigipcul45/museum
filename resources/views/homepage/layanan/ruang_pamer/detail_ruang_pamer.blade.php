@@ -29,7 +29,7 @@ Detail {{ $ruang_pamer->name }}
 <section id="middle">
     <div class="container">
         <div class="row">
-            <div class="middle clearfix text-center">
+            <div class="middle clearfix">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="xzoom-container">
@@ -48,7 +48,7 @@ Detail {{ $ruang_pamer->name }}
                         <model-viewer camera-controls alt="Model" src="{{ $ruang_pamer->link_media }}"></model-viewer>
                     </div>
                 </div>
-                <h1>{{ $ruang_pamer->name }}</h1>
+                <h1 class="text-center">{{ $ruang_pamer->name }}</h1>
                 <p>
                     {!! $ruang_pamer->deskripsi !!}
                 </p>
