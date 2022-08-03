@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\Validator;
 
 class ProfilController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->middleware('auth');

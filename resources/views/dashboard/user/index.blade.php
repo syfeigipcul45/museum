@@ -39,6 +39,7 @@ Management Users
                         <th>No</th>
                         <th>Nama Lengkap</th>
                         <th>Email</th>
+                        <th>Level User</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -47,6 +48,7 @@ Management Users
                         <th>No</th>
                         <th>Nama Lengkap</th>
                         <th>Email</th>
+                        <th>Level User</th>
                         <th>Aksi</th>
                     </tr>
                 </tfoot>
@@ -56,6 +58,15 @@ Management Users
                         <td>{{ ++$key }}.</td>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
+                        <td>
+                            @if($user->roles[0]->name == 'superadmin')
+                            <button class="btn btn-success btn-sm">{{$user->roles[0]->name}}</button>
+                            @elseif($user->roles[0]->name == 'admin')
+                            <button class="btn btn-info btn-sm">{{$user->roles[0]->name}}</button>
+                            @else
+                            <button class="btn btn-warning btn-sm">{{$user->roles[0]->name}}</button>
+                            @endif
+                        </td>
                         <td class="text-center">
                             <a href="{{ route('dashboard.users.edit', $user->id) }}" class="btn btn-warning btn-circle btn-sm">
                                 <i class="fas fa-pencil-alt"></i>

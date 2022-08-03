@@ -14,6 +14,16 @@ use Spatie\Permission\Models\Role;
 class UserController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -31,8 +41,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        // $data['roles'] = Role::orderBy('id', 'asc')->get();
-        return view('dashboard.user.create');
+        $data['roles'] = Role::where('id', '!=', 3)->orderBy('id', 'asc')->get();
+        return view('dashboard.user.create', $data);
     }
 
     /**
@@ -49,6 +59,7 @@ class UserController extends Controller
                 'email' => 'required|email|unique:users',
                 'password' => 'required|min:8',
                 'password_confirmation' => 'required|min:8|same:password',
+                'role_id' => 'required'
             ], [
                 'name.required' => 'Nama lengkap harus diisi!',
                 'password.required' => 'Password harus diisi!',
@@ -58,6 +69,7 @@ class UserController extends Controller
                 'email.required' => 'Email harus diisi!',
                 'email.unique' => 'Email sudah terdaftar',
                 'email.email' => 'Format penulisan harus berupa email!',
+                'role_id.required' => 'Level user harus diisi'
             ]);
 
             if ($validator->fails()) {
@@ -71,7 +83,7 @@ class UserController extends Controller
             ];
 
             $saveData = User::create($data);
-            // $saveData->syncRoles($request->role_id);
+            $saveData->syncRoles($request->role_id);
 
             Session::flash('success', 'Data Berhasil Tersimpan');
             return redirect()->route('dashboard.users.index');
@@ -99,7 +111,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        // $data['roles'] = Role::orderBy('id', 'asc')->get();
+        $data['roles'] = Role::where('id', '!=', 3)->orderBy('id', 'asc')->get();
         $data['user'] = User::find($id);
         return view('dashboard.user.edit', $data);
     }
@@ -115,13 +127,28 @@ class UserController extends Controller
     {
         $user = User::find($id);
         try {
-            $validator = Validator::make($request->all(), [
-                'name' => 'required',
-                // 'role_id' => 'required',
-            ], [
-                'name.required' => 'Nama lengkap harus diisi!',
-                // 'role_id.required' => 'Level user harus diisi',
-            ]);
+            if (empty($request->password)) {
+                $validator = Validator::make($request->all(), [
+                    'name' => 'required',
+                ], [
+                    'name.required' => 'Nama lengkap harus diisi!',
+                ]);
+            } else {
+                $validator = Validator::make($request->all(), [
+                    'name' => 'required',
+                    'password' => 'min:8',
+                    'password_confirmation' => 'required|min:8|same:password',
+                    'role_id' => 'required',
+                ], [
+                    'name.required' => 'Nama lengkap harus diisi!',
+                    'password.required' => 'Password harus diisi!',
+                    'password.min' => 'Password minimal 8 karakter',
+                    'password.confirmed' => 'Konfirmasi password tidak cocok!',
+                    'password_confirmation.required' => 'Konfirmasi password harus diisi!',
+                    'password_confirmation.same' => 'Konfirmasi password tidak sama',
+                    'role_id.required' => 'Level user harus diisi',
+                ]);
+            }
 
             if ($validator->fails()) {
                 return redirect()->back()->withInput()->withErrors($validator);
@@ -136,10 +163,14 @@ class UserController extends Controller
             }
 
             $user->update($updateData);
-            // $user->syncRoles($request->role_id);
+            $user->syncRoles($request->role_id);
 
             Session::flash('success', 'Data Berhasil Diubah');
-            return redirect()->route('dashboard.users.index');
+            if (Auth::user()->roles[0]->name == 'superadmin')
+                return redirect()->route('dashboard.users.index');
+            else {
+                return redirect()->back()->with('success', 'Data Berhasil Diubah');
+            }
         } catch (\Exception $ex) {
             return redirect()->back()->with('error', 'Ada sesuatu yang salah di server!');
         }

@@ -104,6 +104,20 @@ Tambah Daftar User
                             Kembali
                         </a>
                     </div>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <span>Level User</span>
+                        <div class="custom-control custom-switch">
+                            <select name="role_id" class="costum-select custom-select-sm">
+                                <option value="" disabled selected>:: Pilih ::</option>
+                                @foreach($roles as $role)
+                                <option value="{{ $role->id }}">{{ $role->id.". ".$role->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('role_id')
+                            <small class="form-text error-input">{{ $message }}</small>
+                            @enderror
+                        </div>
+                    </div>
                     <hr>
                 </div>
             </div>

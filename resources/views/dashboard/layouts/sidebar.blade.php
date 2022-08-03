@@ -90,12 +90,14 @@
     Pengaturan
 </div>
 
+@hasrole('superadmin')
 <li class="nav-item {{ Request::is('management-users*') ? 'active' : '' }}">
     <a class="nav-link" href="{{ route('dashboard.users.index') }}">
         <i class="fas fa-fw fa-users"></i>
         <span>Users</span>
     </a>
 </li>
+@endhasrole
 
 <li class="nav-item {{ Request::is('management-pengaturan*') ? 'active' : '' }}">
     <a class="nav-link" href="{{ route('dashboard.pengaturan.index') }}">
