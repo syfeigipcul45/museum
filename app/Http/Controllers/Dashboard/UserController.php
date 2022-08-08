@@ -20,7 +20,7 @@ class UserController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('role:superadmin|admin');
     }
 
     /**
@@ -30,7 +30,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $data['users'] = User::where('id', '!=', Auth::user()->id)->orderBy('name')->get();
+        $data['users'] = User::where('id', '!=', Auth::user()->id)->where('is_admin', '=', 1)->orderBy('name')->get();
         return view('dashboard.user.index', $data);
     }
 
@@ -80,6 +80,8 @@ class UserController extends Controller
                 "name" => $request->name,
                 "email" => $request->email,
                 "password" => Hash::make($request->password),
+                'is_admin' => 1,
+                'is_active' => 1
             ];
 
             $saveData = User::create($data);

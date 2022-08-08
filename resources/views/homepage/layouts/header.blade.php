@@ -21,12 +21,12 @@
 
                     <li class="dropdown">
                         <a class="tag_menu {{ Request::is('profil*') ? 'active_tab' : '' }}" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Profil<span class="caret"></span></a>
-                        <ul class="dropdown-menu drop_1" role="menu">                            
+                        <ul class="dropdown-menu drop_1" role="menu">
                             @foreach(getProfil() as $key => $profil)
                             @if($key == 3)
                             <li><a href="{{ route('homepage.benda_koleksi.index') }}">Ruang Koleksi</a></li>
                             <li><a href="{{ route('homepage.profil.detail', $profil->slug)}}">{{ $profil->submenu }}</a></li>
-                            @else                            
+                            @else
                             <li><a href="{{ route('homepage.profil.detail', $profil->slug)}}">{{ $profil->submenu }}</a></li>
                             @endif
                             @endforeach
@@ -49,27 +49,65 @@
                     </li>
 
                 </ul>
-                <!-- <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown"><a href="" class="tag_menu_1" data-toggle="dropdown"><span class="glyphicon glyphicon-search"></span></a>
-                        <ul class="dropdown-menu drop_2" style="min-width: 300px;">
+                <ul class="nav navbar-nav navbar-right">
+                    @if(auth()->user())
+                    @hasanyrole('superadmin|admin')
+                    <a href="{{ route('beranda') }}"><span class="tag_menu_1">{{ auth()->user()->name }}</span></a>
+                    @else
+                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                        <span class="tag_menu_1">{{ auth()->user()->name }}</span>
+                    </a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                    @endhasanyrole
+                    @else
+                    <li class="dropdown"><a href="" class="tag_menu_1" data-toggle="dropdown"><i class="fa fa-user"></i></a>
+                        <ul class="dropdown-menu drop_box" style="padding: 15px; min-width: 250px">
                             <li>
-                                <div class="row_1">
+                                <div class="row">
                                     <div class="col-sm-12">
-                                        <form class="navbar-form navbar-left" role="search">
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" placeholder="Search">
-                                                <span class="input-group-btn">
-                                                    <button class="btn btn-primary" type="button">
-                                                        <i class="fa fa-search"></i></button>
+                                        <form class="form" role="form" method="post" action="{{ route('login.submit') }}" accept-charset="UTF-8" id="login-nav">
+                                            @csrf
+                                            <div class="form-group">
+                                                <label class="sr-only" for="exampleInputEmail2">Email address</label>
+                                                <input type="email" class="form-control form-control-user @error('email') is-invalid @enderror" name="email" id="exampleInputEmail" aria-describedby="emailHelp" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Enter Email Address..." required>
+                                                @error('email')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
                                                 </span>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="sr-only" for="exampleInputPassword2">Password</label>
+                                                <input type="password" class="form-control form-control-user @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" id="exampleInputPassword" placeholder="Password">
+                                                @error('password')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-success btn-block">
+                                                    Log In
+                                                </button>
                                             </div>
                                         </form>
                                     </div>
                                 </div>
                             </li>
+                            <li class="divider"></li>
+                            <li>
+                                <form method="get" action="">
+                                    <button type="submit" class="btn btn-primary btn-block">Register</button>
+                                </form>
+                            </li>
                         </ul>
                     </li>
-                </ul> -->
+                    @endif
+                </ul>
             </div>
             <!-- /.navbar-collapse -->
         </div>

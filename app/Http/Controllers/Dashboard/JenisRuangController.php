@@ -18,7 +18,7 @@ class JenisRuangController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('role:superadmin|admin');
     }
     
     /**

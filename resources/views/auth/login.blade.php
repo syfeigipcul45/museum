@@ -50,8 +50,18 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">{{ __('Login') }}</h1>
                                     </div>
-                                    <form class="user" method="POST" action="{{ route('login') }}">
+                                    <form class="user" method="POST" action="{{ route('login.submit') }}">
                                         @csrf
+                                        @if (session('success'))
+                                        <div class="alert alert-success" role="alert">
+                                            {{ session('success') }}
+                                        </div>
+                                        @endif
+                                        @if (session('error'))
+                                        <div class="alert alert-danger" role="alert">
+                                            {{ session('error') }}
+                                        </div>
+                                        @endif
                                         <div class="form-group">
                                             <input type="email" class="form-control form-control-user @error('email') is-invalid @enderror" name="email" id="exampleInputEmail" aria-describedby="emailHelp" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Enter Email Address...">
                                             @error('email')

@@ -99,6 +99,16 @@
 </li>
 @endhasrole
 
+@hasrole('superadmin|admin')
+<li class="nav-item {{ Request::is('management-guests*') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ route('dashboard.guests.index') }}">
+        <i class="fas fa-fw fa-users"></i>
+        <span>Guests</span>
+    </a>
+</li>
+@endhasrole
+
+
 <li class="nav-item {{ Request::is('management-pengaturan*') ? 'active' : '' }}">
     <a class="nav-link" href="{{ route('dashboard.pengaturan.index') }}">
         <i class="fas fa-fw fa-cog"></i>

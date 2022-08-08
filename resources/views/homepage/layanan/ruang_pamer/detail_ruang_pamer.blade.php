@@ -29,6 +29,7 @@ Detail {{ $ruang_pamer->name }}
 <section id="middle">
     <div class="container">
         <div class="row">
+            @if(Auth()->user())
             <div class="middle clearfix">
                 <div class="row">
                     <div class="col-md-6">
@@ -53,6 +54,9 @@ Detail {{ $ruang_pamer->name }}
                     {!! $ruang_pamer->deskripsi !!}
                 </p>
             </div>
+            @else
+            <span style="font-size: 12pt; font-weight: bold;">Anda harus login</span>
+            @endif
         </div>
     </div>
 </section>

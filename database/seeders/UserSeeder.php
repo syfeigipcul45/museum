@@ -24,6 +24,8 @@ class UserSeeder extends Seeder
             'name' => 'Syafei Karim',
             'email' => 'syfei.karim@' . env('APP_DOMAIN', 'gmail.com'),
             'password' => Hash::make('gipcul45'),
+            'is_admin' => 1,
+            'is_active' => 1
         ]);
         $roleSuperadmin->syncRoles([$superadmin]);
     }

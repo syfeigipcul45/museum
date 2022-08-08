@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -50,9 +52,20 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:8',
+            'password_confirmation' => 'required|min:8|same:password',
+        ], [
+            'name.required' => 'Nama lengkap harus diisi!',
+            'password.required' => 'Password harus diisi!',
+            'password.confirmed' => 'Konfirmasi password tidak cocok!',
+            'password.min' => 'Password minimal 8 karakter',
+            'password_confirmation.required' => 'Konfirmasi password harus diisi!',
+            'password_confirmation.same' => 'Konfirmasi password tidak sama',
+            'email.required' => 'Email harus diisi!',
+            'email.unique' => 'Email sudah terdaftar',
+            'email.email' => 'Format penulisan harus berupa email!',
         ]);
     }
 
@@ -64,10 +77,38 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+        $user->syncRoles(3);
+        return $user;
+    }
+
+    public function postRegistration(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:8',
+            'password_confirmation' => 'required|min:8|same:password',
+        ], [
+            'name.required' => 'Nama lengkap harus diisi!',
+            'password.required' => 'Password harus diisi!',
+            'password.confirmed' => 'Konfirmasi password tidak cocok!',
+            'password.min' => 'Password minimal 8 karakter',
+            'password_confirmation.required' => 'Konfirmasi password harus diisi!',
+            'password_confirmation.same' => 'Konfirmasi password tidak sama',
+            'email.required' => 'Email harus diisi!',
+            'email.unique' => 'Email sudah terdaftar',
+            'email.email' => 'Format penulisan harus berupa email!',
+        ]);
+
+        $data = $request->all();
+        $check = $this->create($data);
+
+        Session::flash('success', 'Akun anda telah dibuat. Tunggu konfirmasi admin untuk mengaktifkan akun anda.');
+        return redirect()->route('login');
     }
 }

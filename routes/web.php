@@ -1,10 +1,13 @@
 <?php
 
+use App\Http\Controllers\Auth\AdminLoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Dashboard\AgendaController;
 use App\Http\Controllers\Dashboard\BendaKoleksiController;
 use App\Http\Controllers\Dashboard\BeritaController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\FasilitasController;
+use App\Http\Controllers\Dashboard\GuestController;
 use App\Http\Controllers\Dashboard\HeroImageController;
 use App\Http\Controllers\Dashboard\JenisRuangController;
 use App\Http\Controllers\Dashboard\KategoriKoleksiController;
@@ -37,6 +40,9 @@ header('Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE');
 header('Access-Control-Allow-Headers: Content-Type, X-Auth-Token, Origin, Authorization');
 
 Auth::routes();
+Route::get('/login', [AdminLoginController::class, 'index'])->name('login');
+Route::post('/postLogin', [AdminLoginController::class, 'login'])->name('login.submit');
+Route::post('/register',[RegisterController::class, 'postRegistration'])->name('register.post');
 
 Route::get('/', [HomepageController::class, 'index'])->name('home');
 
@@ -167,5 +173,11 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/{id}/edit', [UserController::class, 'edit'])->name('dashboard.users.edit');
         Route::post('/{id}/update', [UserController::class, 'update'])->name('dashboard.users.update');
         Route::post('/{id}', [UserController::class, 'destroy'])->name('dashboard.users.destroy');
+    });
+
+    Route::prefix('management-guests')->group(function () {
+        Route::get('/', [GuestController::class, 'index'])->name('dashboard.guests.index');
+        Route::post('/{id}/update', [GuestController::class, 'update'])->name('dashboard.guests.update');
+        Route::post('/{id}', [GuestController::class, 'destroy'])->name('dashboard.guests.destroy');
     });
 });

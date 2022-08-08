@@ -23,6 +23,7 @@
     <div class="container">
         <div class="row">
             <div class="gallery clearfix">
+                @if(Auth()->user())
                 <h1 class="text-center">{{ $jenis_ruang->nama_jenis }}</h1>
                 <div class="gallery_inner clearfix">
                     @foreach($ruang_pamer as $item)
@@ -49,6 +50,9 @@
                         {{ $ruang_pamer->links('pagination::bootstrap-4') }}
                     </ul>
                 </div>
+                @else
+                <span style="font-size: 12pt; font-weight: bold;">Anda harus login</span>
+                @endif
             </div>
         </div>
     </div>
