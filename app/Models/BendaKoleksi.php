@@ -14,7 +14,8 @@ class BendaKoleksi extends Model
         'slug_koleksi',
         'kategori_id',
         'deskripsi',
-        'link_media'
+        'link_media',
+        'link_media3d'
     ];
 
     public function kategoriId()

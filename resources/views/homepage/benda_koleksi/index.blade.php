@@ -29,7 +29,7 @@ Ruang Koleksi
             <div class="back-profil clearfix">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="text-center">RUANG KOLEKSI</h1>
+                        <h1 class="text-center">BENDA KOLEKSI</h1>
                         <br>
                         <p style="margin-top: 20px;">
 

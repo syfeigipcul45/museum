@@ -1,266 +1,263 @@
 @extends('homepage.layouts.app')
 
 @section('title')
-{{ $koleksi->nama_benda }}
+Detail {{ $koleksi->nama_benda }}
 @endsection
 
 @section('extra-css')
+<!-- <link rel="stylesheet" href="{{ asset('_homepage/css/swiper.min.css') }}" />
+<link rel="stylesheet" href="{{ asset('_homepage/css/easyzoom.css') }}" />
+<link rel="stylesheet" href="{{ asset('_homepage/css/main.css') }}" /> -->
+
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/xzoom/dist/xzoom.css">
 <style>
-    #back-profil {
-        padding-top: 120px;
-        padding-bottom: 120px;
-        background-attachment: fixed;
-        background-color: #ffffff;
+    .box {
+        display: flex;
     }
 
-    .carousel-container {
-        border-radius: 30px;
-        overflow: hidden;
-        max-width: 800px;
-        position: relative;
-        box-shadow: 0 0 30px -20px #223344;
-        margin: auto;
-        z-index: 0;
-    }
-
-    /* Hide the images by default */
-    .mySlides {
-        display: none;
-    }
-
-    .mySlides img {
-        display: block;
+    model-viewer {
         width: 100%;
-    }
-
-    /* image gradient overlay [optional] */
-    /*  .mySlides::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-    background-image: linear-gradient(-45deg, rgba(110, 0, 255, .1), rgba(70, 0, 255, .2));
-} */
-
-    /* Next & previous buttons */
-    .prev,
-    .next {
-        cursor: pointer;
-        position: absolute;
-        top: 50%;
-        transform: translate(0, -50%);
-        width: auto;
-        padding: 20px;
-        color: white;
-        font-weight: bold;
-        font-size: 24px;
-        border-radius: 0 8px 8px 0;
-        background: rgba(173, 216, 230, 0.1);
-        user-select: none;
-    }
-
-    .next {
-        right: 0;
-        border-radius: 8px 0 0 8px;
-    }
-
-    .prev:hover,
-    .next:hover {
-        background-color: rgba(173, 216, 230, 0.3);
-    }
-
-    /* Caption text */
-    .text {
-        color: #f2f2f2;
-        background-color: rgba(10, 10, 20, 0.1);
-        backdrop-filter: blur(6px);
-        border-radius: 10px;
-        font-size: 20px;
-        padding: 8px 12px;
-        position: absolute;
-        bottom: 60px;
-        left: 50%;
-        transform: translate(-50%);
-        text-align: center;
-    }
-
-    /* Number text (1/3 etc) */
-    .number {
-        color: #f2f2f2;
-        font-size: 16px;
-        background-color: rgba(173, 216, 230, 0.15);
-        backdrop-filter: blur(6px);
-        border-radius: 10px;
-        padding: 8px 12px;
-        position: absolute;
-        top: 10px;
-        left: 10px;
-    }
-
-    .dots-container {
-        position: absolute;
-        bottom: 10px;
-        left: 50%;
-        transform: translate(-50%);
-    }
-
-    /* The dots/bullets/indicators */
-    .dots {
-        cursor: pointer;
-        height: 14px;
-        width: 14px;
-        margin: 0 4px;
-        background-color: rgba(173, 216, 230, 0.2);
-        backdrop-filter: blur(2px);
-        border-radius: 50%;
-        display: inline-block;
-        transition: background-color 0.3s ease;
-    }
-
-    .active,
-    .dots:hover {
-        background-color: white;
-    }
-
-    /* transition animation */
-    .animate {
-        -webkit-animation-name: animate;
-        -webkit-animation-duration: 1s;
-        animation-name: animate;
-        animation-duration: 2s;
-    }
-
-    @keyframes animate {
-        from {
-            transform: scale(1.1) rotateY(10deg);
-        }
-
-        to {
-            transform: scale(1) rotateY(0deg);
-        }
-    }
-
-    h1 {
-        padding-top: 80px;
-        font-size: 80px;
-        letter-spacing: 1px;
-    }
-
-    .back-profil ul {
-        list-style: inherit;
-    }
-
-    .back-profil ul li::before  {
-        font-weight: bold;
-        display: inline-block;
-        width: 1em;
-        margin-left: 1em;
+        height: 500px;
+        margin-left: auto;
+        margin-right: auto;
     }
 </style>
 @endsection
 
 @section('content')
-
-<section id="back-profil">
+<section id="middle">
     <div class="container">
         <div class="row">
-            <div class="back-profil clearfix">
+            @if(Auth()->user())
+            <div class="middle clearfix">
                 <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="text-center">{{ $koleksi->nama_benda }}</h1>
-                        <br>
-                        @if(!@empty($koleksi->link_media))
-                        <div class="carousel-container">
-                            @foreach(json_decode($koleksi->link_media) as $key => $item)
-                            <div class="mySlides animate">
-                                <img src="{{ $item }}" height="40%" width="80%">
-                            </div>
-                            @endforeach
-                            <!-- Next and previous buttons -->
-                            <a class="prev" onclick="prevSlide()">&#10094;</a>
-                            <a class="next" onclick="nextSlide()">&#10095;</a>
-
-                            <!-- The dots/circles -->
-                            <div class="dots-container">
-                                @php $no=1; @endphp
+                    <div class="col-md-6">
+                        <div class="xzoom-container">
+                            <img class="xzoom" id="xzoom-default" width="400" src="{{ json_decode($koleksi->link_media)[0] }}" xoriginal="{{ json_decode($koleksi->link_media)[0] }}" />
+                            <div class="xzoom-thumbs" style="margin-top: 10px;">
                                 @foreach(json_decode($koleksi->link_media) as $key => $item)
-                                <span class="dots" onclick="currentSlide($no++)"></span>
+                                <a href="{{ $item }}">
+                                    <img class="xzoom-gallery" width="80" src="{{ $item }}" xpreview="{{ $item }}">
+                                </a>
                                 @endforeach
                             </div>
+                            <hr>
                         </div>
-                        @else
-                        @endif
-                        <br>
-                        <p style="margin-top: 20px">
-                            {!! $koleksi->deskripsi !!}
-                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <model-viewer camera-controls alt="Model" src="{{ $koleksi->link_media3d }}"></model-viewer>
                     </div>
                 </div>
+                <h1 class="text-center">{{ $koleksi->nama_benda }}</h1>
+                <p>
+                    {!! $koleksi->deskripsi !!}
+                </p>
             </div>
+            @else
+            <span style="font-size: 12pt; font-weight: bold;">Anda harus login</span>
+            @endif
         </div>
     </div>
 </section>
-
 @endsection
 
 @section('extra-js')
+<script src="https://unpkg.com/xzoom/dist/xzoom.min.js"></script>
 <script>
-    let slideIndex = 0;
-    showSlides();
+    (function($) {
+        $(document).ready(function() {
+            $('.xzoom, .xzoom-gallery').xzoom({
+                zoomWidth: 400,
+                title: true,
+                tint: '#333',
+                Xoffset: 15
+            });
+            $('.xzoom2, .xzoom-gallery2').xzoom({
+                position: '#xzoom2-id',
+                tint: '#ffa200'
+            });
+            $('.xzoom3, .xzoom-gallery3').xzoom({
+                position: 'lens',
+                lensShape: 'circle',
+                sourceClass: 'xzoom-hidden'
+            });
+            $('.xzoom4, .xzoom-gallery4').xzoom({
+                tint: '#006699',
+                Xoffset: 15
+            });
+            $('.xzoom5, .xzoom-gallery5').xzoom({
+                tint: '#006699',
+                Xoffset: 15
+            });
 
-    // Next-previous control
-    function nextSlide() {
-        slideIndex++;
-        showSlides();
-        timer = _timer; // reset timer
-    }
+            //Integration with hammer.js
+            var isTouchSupported = 'ontouchstart' in window;
 
-    function prevSlide() {
-        slideIndex--;
-        showSlides();
-        timer = _timer;
-    }
+            if (isTouchSupported) {
+                //If touch device
+                $('.xzoom, .xzoom2, .xzoom3, .xzoom4, .xzoom5').each(function() {
+                    var xzoom = $(this).data('xzoom');
+                    xzoom.eventunbind();
+                });
 
-    // Thumbnail image controlls
-    function currentSlide(n) {
-        slideIndex = n - 1;
-        showSlides();
-        timer = _timer;
-    }
+                $('.xzoom, .xzoom2, .xzoom3').each(function() {
+                    var xzoom = $(this).data('xzoom');
+                    $(this).hammer().on("tap", function(event) {
+                        event.pageX = event.gesture.center.pageX;
+                        event.pageY = event.gesture.center.pageY;
+                        var s = 1,
+                            ls;
 
-    function showSlides() {
-        let slides = document.querySelectorAll(".mySlides");
-        let dots = document.querySelectorAll(".dots");
+                        xzoom.eventmove = function(element) {
+                            element.hammer().on('drag', function(event) {
+                                event.pageX = event.gesture.center.pageX;
+                                event.pageY = event.gesture.center.pageY;
+                                xzoom.movezoom(event);
+                                event.gesture.preventDefault();
+                            });
+                        }
 
-        if (slideIndex > slides.length - 1) slideIndex = 0;
-        if (slideIndex < 0) slideIndex = slides.length - 1;
+                        xzoom.eventleave = function(element) {
+                            element.hammer().on('tap', function(event) {
+                                xzoom.closezoom();
+                            });
+                        }
+                        xzoom.openzoom(event);
+                    });
+                });
 
-        // hide all slides
-        slides.forEach((slide) => {
-            slide.style.display = "none";
+                $('.xzoom4').each(function() {
+                    var xzoom = $(this).data('xzoom');
+                    $(this).hammer().on("tap", function(event) {
+                        event.pageX = event.gesture.center.pageX;
+                        event.pageY = event.gesture.center.pageY;
+                        var s = 1,
+                            ls;
+
+                        xzoom.eventmove = function(element) {
+                            element.hammer().on('drag', function(event) {
+                                event.pageX = event.gesture.center.pageX;
+                                event.pageY = event.gesture.center.pageY;
+                                xzoom.movezoom(event);
+                                event.gesture.preventDefault();
+                            });
+                        }
+
+                        var counter = 0;
+                        xzoom.eventclick = function(element) {
+                            element.hammer().on('tap', function() {
+                                counter++;
+                                if (counter == 1) setTimeout(openfancy, 300);
+                                event.gesture.preventDefault();
+                            });
+                        }
+
+                        function openfancy() {
+                            if (counter == 2) {
+                                xzoom.closezoom();
+                                $.fancybox.open(xzoom.gallery().cgallery);
+                            } else {
+                                xzoom.closezoom();
+                            }
+                            counter = 0;
+                        }
+                        xzoom.openzoom(event);
+                    });
+                });
+
+                $('.xzoom5').each(function() {
+                    var xzoom = $(this).data('xzoom');
+                    $(this).hammer().on("tap", function(event) {
+                        event.pageX = event.gesture.center.pageX;
+                        event.pageY = event.gesture.center.pageY;
+                        var s = 1,
+                            ls;
+
+                        xzoom.eventmove = function(element) {
+                            element.hammer().on('drag', function(event) {
+                                event.pageX = event.gesture.center.pageX;
+                                event.pageY = event.gesture.center.pageY;
+                                xzoom.movezoom(event);
+                                event.gesture.preventDefault();
+                            });
+                        }
+
+                        var counter = 0;
+                        xzoom.eventclick = function(element) {
+                            element.hammer().on('tap', function() {
+                                counter++;
+                                if (counter == 1) setTimeout(openmagnific, 300);
+                                event.gesture.preventDefault();
+                            });
+                        }
+
+                        function openmagnific() {
+                            if (counter == 2) {
+                                xzoom.closezoom();
+                                var gallery = xzoom.gallery().cgallery;
+                                var i, images = new Array();
+                                for (i in gallery) {
+                                    images[i] = {
+                                        src: gallery[i]
+                                    };
+                                }
+                                $.magnificPopup.open({
+                                    items: images,
+                                    type: 'image',
+                                    gallery: {
+                                        enabled: true
+                                    }
+                                });
+                            } else {
+                                xzoom.closezoom();
+                            }
+                            counter = 0;
+                        }
+                        xzoom.openzoom(event);
+                    });
+                });
+
+            } else {
+                //If not touch device
+
+                //Integration with fancybox plugin
+                $('#xzoom-fancy').bind('click', function(event) {
+                    var xzoom = $(this).data('xzoom');
+                    xzoom.closezoom();
+                    $.fancybox.open(xzoom.gallery().cgallery, {
+                        padding: 0,
+                        helpers: {
+                            overlay: {
+                                locked: false
+                            }
+                        }
+                    });
+                    event.preventDefault();
+                });
+
+                //Integration with magnific popup plugin
+                $('#xzoom-magnific').bind('click', function(event) {
+                    var xzoom = $(this).data('xzoom');
+                    xzoom.closezoom();
+                    var gallery = xzoom.gallery().cgallery;
+                    var i, images = new Array();
+                    for (i in gallery) {
+                        images[i] = {
+                            src: gallery[i]
+                        };
+                    }
+                    $.magnificPopup.open({
+                        items: images,
+                        type: 'image',
+                        gallery: {
+                            enabled: true
+                        }
+                    });
+                    event.preventDefault();
+                });
+            }
         });
-
-        // show one slide base on index number
-        slides[slideIndex].style.display = "block";
-
-        dots.forEach((dot) => {
-            dot.classList.remove("active");
-        });
-
-        dots[slideIndex].classList.add("active");
-    }
-
-    // autoplay slides --------
-    let timer = 7; // sec
-    const _timer = timer;
-
-    // this function runs every 1 second
-    setInterval(() => {
-        timer--;
-
-        if (timer < 1) {
-            nextSlide();
-            timer = _timer; // reset timer
-        }
-    }, 1000); // 1sec
+    })(jQuery);
 </script>
 @endsection

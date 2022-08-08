@@ -38,7 +38,7 @@ Management Benda Koleksi
                     <tr>
                         <th>No</th>
                         <th>Thumbnail</th>
-                        <th>Nama Benda</th>
+                        <th>Nama Gambar 3D</th>
                         <th>Jenis Koleksi</th>
                         <th>Deskripsi</th>
                         <th>Aksi</th>
@@ -48,7 +48,7 @@ Management Benda Koleksi
                     <tr>
                         <th>No</th>
                         <th>Thumbnail</th>
-                        <th>Nama Benda</th>
+                        <th>Nama Gambar 3D</th>
                         <th>Jenis Koleksi</th>
                         <th>Deskripsi</th>
                         <th>Aksi</th>
@@ -62,8 +62,8 @@ Management Benda Koleksi
                             <img src="{{ json_decode($item->link_media)[0] }} "/ width="120px" alt="" class="img-fluid h-40" />
                         </td>
                         <td>{{ $item->nama_benda }}</td>
-                        <td>{!! Str::limit($item->deskripsi, 100, '...') !!}</td>
                         <td>{{ $item->kategoriId->name}}</td>
+                        <td>{!! Str::limit($item->deskripsi, 100, '...') !!}</td>
                         <td class="text-center">
                             <a href="{{ route('dashboard.koleksi.show', $item->id) }}" class="btn btn-info btn-circle btn-sm">
                                 <i class="fas fa-eye"></i>

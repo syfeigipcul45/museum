@@ -7,7 +7,7 @@
 @section('extra-css')
 <style>
 
-    figure.effect-koleksi figcaption::before {
+    /* figure.effect-koleksi figcaption::before {
         position: absolute;
         top: 0;
         left: 0;
@@ -63,13 +63,24 @@
         opacity: 1;
         -webkit-transform: translate3d(0, 0, 0);
         transform: translate3d(0, 0, 0);
+    } */
+
+    .box {
+        display: flex;
     }
+
+    model-viewer {
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 </style>
 @endsection
 
 @section('content')
 
-<section id="gallery">
+<!-- <section id="gallery">
     <div class="container">
         <div class="row">
             <div class="gallery clearfix">
@@ -84,9 +95,6 @@
                                     <img src="{{ json_decode($item->link_media)[0]}}">
                                     <figcaption>
                                         <h2>{{ $item->nama_benda }}</h2>
-                                        <!-- <p>
-                                            {{ $item->deskripsi }}
-                                        </p> -->
                                         <a href="{{ route('homepage.benda_koleksi.detail', $item->slug_koleksi) }}" target="__blank">View more</a>
                                     </figcaption>
                                 </figure>
@@ -103,12 +111,52 @@
             </div>
         </div>
     </div>
+</section> -->
+
+<section id="gallery">
+    <div class="container">
+        <div class="row">
+            <div class="gallery clearfix">
+                @if(Auth()->user())
+                <h1 class="text-center">{{ $kategori->name }}</h1>
+                <div class="gallery_inner clearfix">
+                    @foreach($koleksi as $item)
+                    <div class="col-sm-4">
+                        <div class="gallery_inner_1">
+                            <div class="grid clearfix">
+                                <figure class="effect-sadie">
+                                    <model-viewer camera-controls alt="Model" src="{{ $item->link_media3d }}"></model-viewer>
+                                    <figcaption>
+                                        <h2>{{ $item->nama_benda }}</h2>
+                                        <!-- <p>
+                                            {!! getDeskripsi($item->deskripsi) !!}
+                                        </p> -->
+                                        <a href="{{ route('homepage.benda_koleksi.detail', $item->slug_koleksi) }}" target="__blank">View more</a>
+                                    </figcaption>
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+                <div class="paginate clearfix text-center">
+                    <ul class="pagination">
+                        {{ $koleksi->links('pagination::bootstrap-4') }}
+                    </ul>
+                </div>
+                @else
+                <span style="font-size: 12pt; font-weight: bold;">Anda harus login</span>
+                @endif
+            </div>
+        </div>
+    </div>
 </section>
+
 
 @endsection
 
 @section('extra-js')
-<script>
+<!-- <script>
     let slideIndex = 0;
     showSlides();
 
@@ -167,5 +215,5 @@
             timer = _timer; // reset timer
         }
     }, 1000); // 1sec
-</script>
+</script> -->
 @endsection

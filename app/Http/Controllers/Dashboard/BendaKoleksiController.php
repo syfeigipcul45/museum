@@ -59,11 +59,13 @@ class BendaKoleksiController extends Controller
                 'nama_benda' => 'required',
                 'deskripsi' => 'required',
                 'link_media' => 'required',
+                'link_media3d' => 'required',
                 'kategori_id' => 'required'
             ], [
                 'nama_benda.required' => 'Nama benda koleksi harus diisi!',
                 'deskripsi.required' => 'Deskripsi harus diisi!',
                 'link_media.required' => 'File foto harus diisi!',
+                'link_media3d.required' => 'File 3D harus diisi!',
                 'kategori_id' => 'Kategori harus diisi!'
             ]);
 
@@ -82,13 +84,19 @@ class BendaKoleksiController extends Controller
             if ($request->hasFile('link_media')) {
                 for ($i = 0; $i < count($request->link_media); $i++) {
                     $file = $request->file('link_media')[$i];
-                    $path = Storage::disk('public')->putFileAs('benda-koleksi', $file, time() . "_" . $file->getClientOriginalName());
+                    $path = Storage::disk('public')->putFileAs('benda-koleksi/img', $file, time() . "_" . $file->getClientOriginalName());
                     $image = url('/') . '/storage/' . $path;
                     array_push($images, $image);
                 }
             }
 
             $data['link_media'] = json_encode($images);
+
+            if ($request->hasFile('link_media3d')) {
+                $file = $request->file('link_media3d');
+                $path = Storage::disk('public')->putFileAs('benda-koleksi', $file, time() . "_" . $file->getClientOriginalName());
+                $data['link_media3d'] = url('/') . '/storage/' . $path;
+            }
 
             BendaKoleksi::create($data);
             Session::flash('success', 'Data Berhasil Tersimpan');
@@ -155,7 +163,7 @@ class BendaKoleksiController extends Controller
         if ($request->hasFile('link_media')) {
             for ($i = 0; $i < count($request->link_media); $i++) {
                 $file = $request->file('link_media')[$i];
-                $path = Storage::disk('public')->putFileAs('benda-koleksi', $file, time() . "_" . $file->getClientOriginalName());
+                $path = Storage::disk('public')->putFileAs('benda-koleksi/img', $file, time() . "_" . $file->getClientOriginalName());
                 Storage::disk('public')->delete('/benda-koleksi' . basename($koleksi->link_media));
                 $image = url('/') . '/storage/' . $path;
                 array_push($images, $image);
@@ -163,6 +171,16 @@ class BendaKoleksiController extends Controller
         }
         // dd($images);
         $updateData['link_media'] = json_encode($images);
+
+        if ($request->hasFile('link_media3d')) {
+            $file = $request->file('link_media3d');
+            $path = Storage::disk('public')->putFileAs('benda-koleksi', $file, time() . "_" . $file->getClientOriginalName());
+
+            Storage::disk('public')->delete('/benda-koleksi/' . basename($koleksi->link_media3d));
+            $updateData['link_media3d'] = url('/') . '/storage/' . $path;;
+        } else {
+            $updateData['link_media3d'] = $request->old_link_media3d;
+        }
 
         $koleksi->update($updateData);
         Session::flash('success', 'Data Berhasil Diubah');
@@ -180,8 +198,9 @@ class BendaKoleksiController extends Controller
     {
         $koleksi = BendaKoleksi::find($id);
         foreach(json_decode($koleksi->link_media) as $key) {
-            Storage::disk('public')->delete('/benda-koleksi' . basename($koleksi->link_media));
+            Storage::disk('public')->delete('/benda-koleksi/img' . basename($koleksi->link_media));
         }
+        Storage::disk('public')->delete('/benda-koleksi/' . basename($koleksi->link_media3d));
         $koleksi->delete();
         return redirect()->back();
     }

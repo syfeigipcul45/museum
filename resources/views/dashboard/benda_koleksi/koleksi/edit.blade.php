@@ -8,6 +8,7 @@ Edit Benda Koleksi
 <script src="https://cdn.tiny.cloud/1/mgnx3lcm1bg1v85bmqfw3ogmz9vjtdxolbcs3pmx800uia9e/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
 <style>
     .error-input {
@@ -61,6 +62,13 @@ Edit Benda Koleksi
         margin-top: 0px;
         cursor: pointer;
         font-size: 15px;
+    }
+
+    model-viewer {
+        width: 100%;
+        height: 400px;
+        margin-left: auto;
+        margin-right: auto;
     }
 </style>
 @endsection
@@ -171,6 +179,20 @@ Edit Benda Koleksi
                         @enderror
                     </div>
                     <hr>
+                    <div>
+                        <strong>Upload File 3D</strong>
+                        <model-viewer camera-controls alt="Model" src="{{ $koleksi->link_media3d }}"></model-viewer>
+                        <div class="card my-2">
+                            <label for="imageUpload" class="mb-0 cursor-pointer">
+                                <input type="hidden" name="old_link_media3d" value="{{ $koleksi->link_media3d }}" />
+                            </label>
+                        </div>
+                        <input type='file' name="link_media3d" accept=".glb" />
+                        @error('link_media3d')
+                        <small class="form-text error-input">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <hr>
                 </div>
             </div>
         </div>
@@ -183,7 +205,7 @@ Edit Benda Koleksi
     $(document).ready(function() {
         $('.js-example-basic-single').select2();
     });
-    
+
     var useDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
     tinymce.init({
         selector: 'textarea#content-news',

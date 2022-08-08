@@ -11,7 +11,11 @@ class AdminLoginController extends Controller
 {
     public function index()
     {
-        return view('auth.login');
+        if (Auth::user()) {
+            return redirect()->intended(route('home'));
+        } else {
+            return view('auth.login');
+        }
     }
 
     public function login(Request $request)

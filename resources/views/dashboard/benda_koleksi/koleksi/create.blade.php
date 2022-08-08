@@ -166,6 +166,16 @@ Tambah Benda Koleksi
                         @enderror
                     </div>
                     <hr>
+                    <div>
+                        <strong>Upload File 3D</strong>
+                        <div class="card my-2">
+                            <input type='file' name="link_media3d" accept=".glb" />
+                        </div>
+                        @error('link_media3d')
+                        <small class="form-text error-input">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <hr>
                 </div>
             </div>
         </div>

@@ -24,7 +24,7 @@
                         <ul class="dropdown-menu drop_1" role="menu">
                             @foreach(getProfil() as $key => $profil)
                             @if($key == 3)
-                            <li><a href="{{ route('homepage.benda_koleksi.index') }}">Ruang Koleksi</a></li>
+                            <li><a href="{{ route('homepage.benda_koleksi.index') }}">Benda Koleksi</a></li>
                             <li><a href="{{ route('homepage.profil.detail', $profil->slug)}}">{{ $profil->submenu }}</a></li>
                             @else
                             <li><a href="{{ route('homepage.profil.detail', $profil->slug)}}">{{ $profil->submenu }}</a></li>
