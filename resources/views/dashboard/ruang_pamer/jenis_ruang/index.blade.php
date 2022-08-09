@@ -38,6 +38,7 @@ Management Jenis Ruang
                     <tr>
                         <th>No</th>
                         <th>Jenis Ruang</th>
+                        <th>Deskripsi</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -45,6 +46,7 @@ Management Jenis Ruang
                     <tr>
                         <th>No</th>
                         <th>Jenis Ruang</th>
+                        <th>Deskripsi</th>
                         <th>Aksi</th>
                     </tr>
                 </tfoot>
@@ -53,7 +55,11 @@ Management Jenis Ruang
                     <tr>
                         <td>{{ ++$key }}</td>
                         <td>{{ $item->nama_jenis }}</td>
+                        <td>{!! shrinkText($item->deskripsi) !!}</td>
                         <td class="text-center">
+                        <a href="{{ route('dashboard.jenis_ruang.show', $item->id) }}" class="btn btn-info btn-circle btn-sm">
+                                <i class="fas fa-eye"></i>
+                            </a>
                             <a href="{{ route('dashboard.jenis_ruang.edit', $item->id) }}" class="btn btn-warning btn-circle btn-sm">
                                 <i class="fas fa-pencil-alt"></i>
                             </a>

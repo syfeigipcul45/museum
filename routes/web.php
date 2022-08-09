@@ -108,7 +108,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::prefix('management-ruang')->group(function () {
         Route::get('jenis-ruang', [JenisRuangController::class, 'index'])->name('dashboard.jenis_ruang.index');
         Route::get('jenis-ruang/create', [JenisRuangController::class, 'create'])->name('dashboard.jenis_ruang.create');
-        Route::post('jenis-ruang', [JenisRuangController::class, 'store'])->name('dashboard.jenis_ruang.store');
+        Route::post('jenis-ruang', [JenisRuangController::class, 'store'])->name('dashboard.jenis_ruang.store');        
+        Route::get('jenis-ruang/{id}/show', [JenisRuangController::class, 'show'])->name('dashboard.jenis_ruang.show');
         Route::get('jenis-ruang/{id}/edit', [JenisRuangController::class, 'edit'])->name('dashboard.jenis_ruang.edit');
         Route::post('jenis-ruang/{id}/update', [JenisRuangController::class, 'update'])->name('dashboard.jenis_ruang.update');
         Route::post('jenis-ruang/{id}', [JenisRuangController::class, 'destroy'])->name('dashboard.jenis_ruang.destroy');

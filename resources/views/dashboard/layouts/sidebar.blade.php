@@ -71,7 +71,7 @@
     <div id="collapsePamer" class="collapse {{ Request::is('management-ruang*') ? 'show' : '' }}" aria-labelledby="headingPages" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="{{ route('dashboard.jenis_ruang.index') }}">Jenis Ruang</a>
-            <a class="collapse-item" href="{{ route('dashboard.ruang_pamer.index') }}">Ruang Pamer</a>
+            <!-- <a class="collapse-item" href="{{ route('dashboard.ruang_pamer.index') }}">Ruang Pamer</a> -->
         </div>
     </div>
 </li>

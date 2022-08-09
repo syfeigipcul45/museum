@@ -100,7 +100,7 @@
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <form method="get" action="">
+                                <form method="get" action="{{ route('register') }}">
                                     <button type="submit" class="btn btn-primary btn-block">Register</button>
                                 </form>
                             </li>

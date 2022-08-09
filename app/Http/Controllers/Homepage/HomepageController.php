@@ -87,9 +87,9 @@ class HomepageController extends Controller
     public function getRuangPamer($slug)
     {
         $data['jenis_ruang'] = JenisRuang::where('slug_jenis', '=', $slug)->first();
-        $data['ruang_pamer'] = RuangPamer::join('jenis_ruangs', 'ruang_pamers.jenis_id', '=', 'jenis_ruangs.id')
-        ->where('jenis_ruangs.slug_jenis', '=', $slug)->orderBy('ruang_pamers.name', 'asc')->paginate(12);
-        return view('homepage.layanan.ruang_pamer.ruang_pamer', $data);
+        // $data['ruang_pamer'] = RuangPamer::join('jenis_ruangs', 'ruang_pamers.jenis_id', '=', 'jenis_ruangs.id')
+        // ->where('jenis_ruangs.slug_jenis', '=', $slug)->orderBy('ruang_pamers.name', 'asc')->paginate(12);
+        return view('homepage.layanan.ruang_pamer.detail', $data);
     }
 
     public function getDetailRuangPamer($slug)

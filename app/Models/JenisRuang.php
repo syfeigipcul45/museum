@@ -12,5 +12,7 @@ class JenisRuang extends Model
     protected $fillable = [
         'nama_jenis',
         'slug_jenis',
+        'link_media',
+        'deskripsi'
     ];
 }
