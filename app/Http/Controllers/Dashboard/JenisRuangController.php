@@ -60,7 +60,7 @@ class JenisRuangController extends Controller
             ], [
                 'nama_jenis.required' => 'Jenis ruang harus diisi!',                
                 'deskripsi.required' => 'Deskripsi harus diisi!',
-                'link_media.required' => 'File 3D harus diisi!',
+                'link_media.required' => 'File gambar harus diisi!',
             ]);
 
             if($validator->fails()){

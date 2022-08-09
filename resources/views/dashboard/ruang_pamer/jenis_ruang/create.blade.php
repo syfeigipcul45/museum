@@ -266,7 +266,7 @@ Tambah Jenis Ruang
             <div class="col-sm-3 imgUp">
                 <div class="imagePreview"></div>
                 <label class="btn btn-primary">Pilih
-                    <input type="file" class="uploadFile img" name="link_gambar[]" value="Upload Photo" style="width:0px;height:0px;overflow:hidden;" accept=".png, .jpg, .jpeg"/>
+                    <input type="file" class="uploadFile img" name="link_media[]" value="Upload Photo" style="width:0px;height:0px;overflow:hidden;" accept=".png, .jpg, .jpeg"/>
                 </label>
                 <i class="fa fa-times del"></i>
             </div>
