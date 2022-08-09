@@ -32,15 +32,11 @@ Ruang Pamer
                         <h1 class="text-center">Ruang Pamer</h1>
                         <br>
                         <p style="margin-top: 20px;">
-                            @if(Auth()->user())
                             @foreach($jenis_ruangs as $key => $jenis_ruang)
                             <a href="{{ route('homepage.layanan.ruang_pamer', $jenis_ruang->slug_jenis) }}" style="color: black;">
                                 <span style="font-size: 12pt; font-weight: bold;">{{ ++$key }}. &emsp;&emsp;{{ $jenis_ruang->nama_jenis }}</span><br>
                             </a>
                             @endforeach
-                            @else
-                            <span style="font-size: 12pt; font-weight: bold;">Anda harus login</span>
-                            @endif
                         </p>
                     </div>
                 </div>
