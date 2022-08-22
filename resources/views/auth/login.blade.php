@@ -78,6 +78,13 @@
                                             </span>
                                             @enderror
                                         </div>
+                                        <div class="form-group">
+                                            @if (Route::has('password.request'))
+                                            <a class="btn btn-link" href="{{ route('password.request') }}">
+                                                {{ __('Lupa Password?') }}
+                                            </a>
+                                            @endif
+                                        </div>
                                         <button type="submit" class="btn btn-primary btn-user btn-block">
                                             {{ __('Login') }}
                                         </button>

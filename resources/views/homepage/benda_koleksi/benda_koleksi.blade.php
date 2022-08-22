@@ -6,7 +6,6 @@
 
 @section('extra-css')
 <style>
-
     /* figure.effect-koleksi figcaption::before {
         position: absolute;
         top: 0;
@@ -119,8 +118,23 @@
             <div class="gallery clearfix">
                 @if(Auth()->user())
                 <h1 class="text-center">{{ $kategori->name }}</h1>
+
+                <div class="row">
+                    <div class="col-sm-4">
+                        <form class="navbar-form navbar-left" action="" method="GET" role="search">
+                            <div class="input-group">
+                                <input type="text" name="keyword" class="form-control" placeholder="Masukkan nama" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-success" type="submit">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
                 <div class="gallery_inner clearfix">
-                    @foreach($koleksi as $item)
+                    @forelse($koleksi as $item)
                     <div class="col-sm-4">
                         <div class="gallery_inner_1">
                             <div class="grid clearfix">
@@ -137,7 +151,16 @@
                             </div>
                         </div>
                     </div>
-                    @endforeach
+                    @empty
+                    <div class="col-sm-12">
+                        <div class="gallery_inner_1">
+                            <div class="text-center">
+                                <br>
+                                <span style="font-size: 14pt; font-weight: bold;">Data tidak ditemukan</span>
+                            </div>
+                        </div>
+                    </div>
+                    @endforelse
                 </div>
                 <div class="paginate clearfix text-center">
                     <ul class="pagination">
