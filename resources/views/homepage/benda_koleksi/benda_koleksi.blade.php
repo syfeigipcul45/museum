@@ -123,7 +123,7 @@
                     <div class="col-sm-4">
                         <form class="navbar-form navbar-left" action="" method="GET" role="search">
                             <div class="input-group">
-                                <input type="text" name="keyword" class="form-control" placeholder="Masukkan nama" />
+                                <input type="text" name="keyword" class="form-control" placeholder="Masukkan nama benda" />
                                 <span class="input-group-btn">
                                     <button class="btn btn-success" type="submit">
                                         <i class="fa fa-search"></i>

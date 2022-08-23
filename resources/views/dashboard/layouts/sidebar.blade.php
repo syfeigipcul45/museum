@@ -22,6 +22,13 @@
     Main Menu
 </div>
 
+<li class="nav-item {{ Request::is('management-comments*') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ route('dashboard.comment.index') }}">
+        <i class="fas fa-comments"></i>
+        <span>Komentar</span>
+    </a>
+</li>
+
 <li class="nav-item {{ Request::is('management-events*') ? 'active' : '' }}">
     <a class="nav-link" href="{{ route('dashboard.event.index') }}">
         <i class="fas fa-calendar-alt"></i>

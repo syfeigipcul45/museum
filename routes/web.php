@@ -11,6 +11,7 @@ use App\Http\Controllers\Dashboard\GuestController;
 use App\Http\Controllers\Dashboard\HeroImageController;
 use App\Http\Controllers\Dashboard\JenisRuangController;
 use App\Http\Controllers\Dashboard\KategoriKoleksiController;
+use App\Http\Controllers\Dashboard\KomentarController;
 use App\Http\Controllers\Dashboard\PengaturanController;
 use App\Http\Controllers\Dashboard\ProfilController;
 use App\Http\Controllers\Dashboard\RuangPamerController;
@@ -73,6 +74,11 @@ Route::post('storeForm', [HomepageController::class, 'storeForm'])->name('homepa
 // dashboard
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', [DashboardController::class, 'index'])->name('beranda');
+
+    Route::prefix('management-comments')->group(function (){
+        Route::get('', [KomentarController::class, 'index'])->name('dashboard.comment.index');
+        Route::get('{id}/show', [KomentarController::class, 'show'])->name('dashboard.comment.show');
+    });
 
     Route::prefix('management-event')->group(function (){
         Route::get('', [AgendaController::class, 'index'])->name('dashboard.event.index');
