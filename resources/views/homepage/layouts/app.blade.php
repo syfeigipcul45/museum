@@ -39,7 +39,7 @@
 
 </head>
 
-<body>
+<body onmousedown="return false" onselectstart="return false">
     @include('homepage.layouts.header')
 
     @yield('content')
@@ -52,7 +52,11 @@
     <script>
         AOS.init({
             duration: 1200,
-        })
+        });
+        
+        $("body").on("contextmenu", function(e) {
+            return false;
+        });
     </script>
     @yield('extra-js')
 </body>
