@@ -69,11 +69,11 @@
                             <li>
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <form class="form" role="form" method="post" action="{{ route('login.submit') }}" accept-charset="UTF-8" id="login-nav">
+                                        <!-- <form class="form" role="form" method="post" action="{{ route('login.submit') }}" accept-charset="UTF-8" id="login-nav">
                                             @csrf
                                             <div class="form-group">
                                                 <label class="sr-only" for="exampleInputEmail2">Email address</label>
-                                                <input type="email" class="form-control form-control-user @error('email') is-invalid @enderror" name="email" id="exampleInputEmail" aria-describedby="emailHelp" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Enter Email Address..." required>
+                                                <input type="email" class="form-control form-control-user" name="email" value="{{ old('email') }}" autocomplete="email" autofocus placeholder="Enter Email Address..." required>
                                                 @error('email')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -82,7 +82,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label class="sr-only" for="exampleInputPassword2">Password</label>
-                                                <input type="password" class="form-control form-control-user @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" id="exampleInputPassword" placeholder="Password">
+                                                <input type="password" class="form-control form-control-user" name="password" required autocomplete="current-password" id="exampleInputPassword" placeholder="Password">
                                                 @error('password')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -94,6 +94,9 @@
                                                     Log In
                                                 </button>
                                             </div>
+                                        </form> -->
+                                        <form method="get" action="{{ route('login') }}">
+                                            <button type="submit" class="btn btn-success btn-block">Login</button>
                                         </form>
                                     </div>
                                 </div>
