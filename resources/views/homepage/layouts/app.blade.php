@@ -39,7 +39,7 @@
 
 </head>
 
-<body onmousedown="return false" onselectstart="return false">
+<body onselectstart="return false">
     @include('homepage.layouts.header')
 
     @yield('content')

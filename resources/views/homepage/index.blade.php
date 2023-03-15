@@ -174,7 +174,7 @@ Beranda
                             <div class="panel-body">
                                 @foreach($berita as $item)
                                 <div class="row" style="margin-left: 10px; margin-right: 10px;">
-                                    <span style="font-weight: bold;">{{ date('d M Y', strtotime($item->created_at)); }}</span><br>
+                                    <span style="font-weight: bold;">{{ $item->created_at; }}</span><br>
                                     <a href="{{ route('homepage.berita.detail', $item->slug) }}" target="_blank"><i class="fa fa-arrow-right"></i> {{ $item->title }}</a>
                                 </div>
                                 @endforeach
